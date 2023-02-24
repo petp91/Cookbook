@@ -1,43 +1,15 @@
 [
   {
-    "name": "a",
-    "lastName": "b",
-    "email": "c@aa.cz"
+    "Title": "Title",
+    "TitleFoto": "TitleFoto",
+    "Description": "Description",
+    "DefaultServings": "DefaultServings"
   },
+
   {
-    "name": "Petr",
-    "lastName": "b",
-    "email": "asd@asdas.ca"
-  },
-  {},
-  {
-    "name": "a",
-    "lastName": "b",
-    "email": "c@ss.ca"
-  },
-  {
-    "name": "asa",
-    "lastName": "qeweqwe",
-    "email": "qweqw@dasdasd.cc"
-  },
-  {
-    "name": "c",
-    "lastName": "q",
-    "email": "qweqwe@adasd.ca"
-  },
-  {
-    "name": "ja",
-    "lastName": "ty",
-    "email": "ona@ono.ca"
-  },
-  {
-    "name": "a",
-    "lastName": "w",
-    "email": "eqweqasdasd@dasd.ca"
-  },
-  {
-    "name": "a",
-    "lastName": "c",
-    "email": "qweqw@dasdasd.cc"
+    "Title": "Title",
+    "TitleFoto": "TitleFoto",
+    "Description": "Description",
+    "DefaultServings": "DefaultServings"
   }
 ]
