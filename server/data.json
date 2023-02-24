@@ -1,28 +1,15 @@
 [
   {
-    "name": "a",
-    "lastName": "b",
-    "email": "c@aa.cz"
+    "Title": "Title",
+    "TitleFoto": "TitleFoto",
+    "Description": "Description",
+    "DefaultServings": "DefaultServings"
   },
+
   {
-    "name": "Petr",
-    "lastName": "b",
-    "email": "asd@asdas.ca"
-  },
-  {},
-  {
-    "name": "a",
-    "lastName": "b",
-    "email": "c@ss.ca"
-  },
-  {
-    "name": "asa",
-    "lastName": "qeweqwe",
-    "email": "qweqw@dasdasd.cc"
-  },
-  {
-    "name": "Karel",
-    "lastName": "Novak",
-    "email": "karel.novak@test.cz"
+    "Title": "Title",
+    "TitleFoto": "TitleFoto",
+    "Description": "Description",
+    "DefaultServings": "DefaultServings"
   }
 ]
