@@ -1,15 +1,17 @@
-import Container from 'react-bootstrap/esm/Container';
+import { Container, Row, Col, Image } from 'react-bootstrap';
 import Menu from '../components/Menu'
-import logo from '../assets/logo-400px.png'
+import logo from '../assets/logo-512px.png'
 
 const HomePage = () => {
     return (
         <div>
             <Menu />
-            <h1>Home Page</h1>
-            <p>Sem přijde menu a logo</p>
             <Container className='d-flex justify-content-center'>
-                <img src={logo} alt='logo'></img>
+                <Row className='justify-content-center pt-5'>
+                    <Col xs='8'>
+                        <Image src={logo} fluid='true'></Image>
+                    </Col>
+                </Row>
             </Container>
 
         </div>
