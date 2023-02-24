@@ -1,13 +1,18 @@
-import React from 'react';
-import { Container } from 'react-bootstrap';
-import InfoCard from "../components/InfoCard";
-
+import Container from 'react-bootstrap/esm/Container';
+import Menu from '../components/Menu'
+import logo from '../assets/logo-400px.png'
 
 const HomePage = () => {
     return (
-        <Container className="d-flex justify-content-center align-items-center mt-5">
-            <InfoCard />
-        </Container>
+        <div>
+            <Menu />
+            <h1>Home Page</h1>
+            <p>Sem přijde menu a logo</p>
+            <Container className='d-flex justify-content-center'>
+                <img src={logo} alt='logo'></img>
+            </Container>
+
+        </div>
     );
 };
 
