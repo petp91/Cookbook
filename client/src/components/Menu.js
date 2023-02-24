@@ -1,18 +1,6 @@
-import React from 'react';
-import { Navbar, Container, Nav, Form, FormControl, Button, Row, Col } from 'react-bootstrap';
+import { Navbar, Container, Nav, Form, FormControl, Button, InputGroup } from 'react-bootstrap';
 
 const Menu = () => {
-    let favNumStyle = {
-        height: '25px',
-        width: '25px',
-        backgroundColor: 'blue',
-        display: 'inline-block',
-        borderRadius: '50%',
-        textAlign: 'center',
-        position: 'absolute',
-        right: 0,
-        top: 14
-    }
   return (
     <Navbar variant='dark' bg='dark'>
       <Container>
@@ -21,24 +9,16 @@ const Menu = () => {
           <Nav.Link href='/recipe'>Recipes</Nav.Link>
           <Nav.Link href='/about'>About</Nav.Link>
         </Nav>
-        <Row className='ml-auto'>
-            <Col>
-                <a href='/favorites' style={{textDecoration: 'none', color: 'white', position: 'relative'}}>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="rgb(204, 0, 0)" className="bi bi-suit-heart-fill" viewBox="0 0 16 16">
-                        <path d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1z"/>
-        	        </svg>
-                    <span style={favNumStyle}>1</span>
-                </a>
-            </Col>
-          <Col md={8}>
-            <Form inline>
-              <FormControl type='text' placeholder='....' className='mr-sm-2' />
-            </Form>
-          </Col>
-          <Col md={2}>
-            <Button variant='outline-success'>Hledat</Button>
-          </Col>
-        </Row>
+        <Form>
+            <InputGroup>
+                <FormControl type='text' placeholder='Search for recipe' />
+                <Button className='pt-0'>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                    </svg>
+                </Button>
+            </InputGroup>
+        </Form>
       </Container>
     </Navbar>
   );
