@@ -1,13 +1,14 @@
 import { Navbar, Container, Nav, Form, FormControl, Button, InputGroup } from 'react-bootstrap';
+import { NavLink } from 'react-router-dom';
 
 const Menu = () => {
   return (
     <Navbar variant='dark' bg='dark'>
       <Container>
         <Nav>
-          <Nav.Link href='/'>Home</Nav.Link>
-          <Nav.Link href='/recipe'>Recipes</Nav.Link>
-          <Nav.Link href='/about'>About</Nav.Link>
+          <NavLink to='/' className='nav-link'>Home</NavLink>
+          <NavLink to='/recipe' className='nav-link'>Recipes</NavLink>
+          <NavLink to='/about' className='nav-link'>About</NavLink>
         </Nav>
         <Form>
             <InputGroup>
