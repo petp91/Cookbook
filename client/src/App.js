@@ -3,6 +3,7 @@ import RecipePage from "./pages/RecipePage";
 import {Route, Routes} from "react-router-dom";
 import AboutPage from "./pages/AboutPage";
 
+
 const App = () => {
     return (
         <Routes>
