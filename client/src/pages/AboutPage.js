@@ -1,8 +1,8 @@
+
 const AboutPage = () => {
     return (
         <div>
-            <h1>About Page</h1>
-            <p>Popis stránky</p>
+            <h1></h1>
         </div>
     );
 };

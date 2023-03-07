@@ -1,4 +1,7 @@
+
+import RecipeModal from "../components/RecipeModal";
 import AddRecipe from "../components/AddRecipe";
+
 
 
 const RecipePage = () => {
