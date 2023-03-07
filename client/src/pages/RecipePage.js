@@ -1,3 +1,5 @@
+import RecipeModal from "../components/RecipeModal";
+
 const RecipePage = () => {
     return (
         <div>
