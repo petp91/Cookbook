@@ -497,7 +497,7 @@ const ingredientsExport = () => {
             id: "MISC008L",
             displayName: "champignon",
             type: "misc-mushrooms",
-            amount: "300",
+            amount: 300,
             unit: "gram(s)",
             description: "",
         },

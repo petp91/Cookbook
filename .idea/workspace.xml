@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="975ae921-027f-48ac-96a0-bf1cb93f563f" name="Changes" comment="">
+    <list default="true" id="975ae921-027f-48ac-96a0-bf1cb93f563f" name="Changes" comment="připojení k mongoDB a vytvoření databáze receptů">
 
       <change afterPath="$PROJECT_DIR$/client/src/assets/Data.js" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/client/src/components/Buttons.js" afterDir="false" />
@@ -15,12 +15,8 @@
       <change afterPath="$PROJECT_DIR$/server/.env" afterDir="false" />
 
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/AddRecipe.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/AddRecipe.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/pages/RecipePage.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/RecipePage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/Recipes.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/Recipes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/server/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/server/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/Ingredients.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/Ingredients.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/data.json" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,7 +26,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="petr" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -53,12 +49,12 @@
               <option name="branches">
                 <list>
                   <RecentBranch>
-                    <option name="branchName" value="petr" />
-                    <option name="lastUsedInstant" value="1678452466" />
+                    <option name="branchName" value="main" />
+                    <option name="lastUsedInstant" value="1678455798" />
                   </RecentBranch>
                   <RecentBranch>
-                    <option name="branchName" value="main" />
-                    <option name="lastUsedInstant" value="1678210620" />
+                    <option name="branchName" value="petr" />
+                    <option name="lastUsedInstant" value="1678452466" />
                   </RecentBranch>
                 </list>
               </option>
@@ -124,9 +120,17 @@
       <workItem from="1677864515168" duration="459000" />
       <workItem from="1678210595778" duration="260000" />
       <workItem from="1678212457713" duration="389000" />
-      <workItem from="1678452440237" duration="2598000" />
+      <workItem from="1678452440237" duration="7679000" />
+    </task>
+    <task id="LOCAL-00001" summary="připojení k mongoDB a vytvoření databáze receptů">
+      <created>1678455715436</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1678455715436</updated>
 
     </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -142,5 +146,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="připojení k mongoDB a vytvoření databáze receptů" />
+    <option name="LAST_COMMIT_MESSAGE" value="připojení k mongoDB a vytvoření databáze receptů" />
   </component>
 </project>
