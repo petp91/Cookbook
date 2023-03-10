@@ -1,8 +1,8 @@
 import React from "react";
-import '../layout/MenuCard-style.css'
-import 'react-bootstrap/dist/css/bootstrap.css';
-import 'react-bootstrap/dist/css/bootstrap.min.css
 
+import '../layout/MenuCard-style.css';
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Card = ({ item }) => {
     return (
