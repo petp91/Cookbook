@@ -1,4 +1,5 @@
-import RecipeModal from "../components/RecipeModal";
+
+import RecipeModal from "../components/RecipeCard";
 import AddRecipe from "../components/AddRecipe";
 
 import MenuCardsOutput from "../components/MenuCardsFilter";
