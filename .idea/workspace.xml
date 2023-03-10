@@ -4,9 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
+
     <list default="true" id="975ae921-027f-48ac-96a0-bf1cb93f563f" name="Changes" comment="RecipeCards, basic filtering,">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/MenuCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/MenuCard.js" afterDir="false" />
+
+    <list default="true" id="975ae921-027f-48ac-96a0-bf1cb93f563f" name="Changes" comment="připojení k mongoDB a vytvoření databáze receptů">
+
+      <change afterPath="$PROJECT_DIR$/client/src/assets/Data.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/components/Buttons.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/components/MenuCard.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/components/MenuCardsFilter.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/layout/MenuCard-style.css" afterDir="false" />
+
+      <change afterPath="$PROJECT_DIR$/server/.env" afterDir="false" />
+
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/Ingredients.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/Ingredients.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/data.json" beforeDir="false" />
+
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -14,14 +30,46 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="petr" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+
   <component name="GithubPullRequestsUISettings">
     <option name="selectedUrlAndAccountId">
       <UrlAndAccount>
         <option name="accountId" value="76c52075-1eb8-4579-9e5e-a07b8f822911" />
         <option name="url" value="https://github.com/petp91/Cookbook.git" />
       </UrlAndAccount>
+
+  <component name="GitToolBoxStore">
+    <option name="projectConfigVersion" value="5" />
+    <option name="recentBranches">
+      <RecentBranches>
+        <option name="branchesForRepo">
+          <list>
+            <RecentBranchesForRepo>
+              <option name="branches">
+                <list>
+                  <RecentBranch>
+                    <option name="branchName" value="main" />
+                    <option name="lastUsedInstant" value="1678455798" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="petr" />
+                    <option name="lastUsedInstant" value="1678452466" />
+                  </RecentBranch>
+                </list>
+              </option>
+              <option name="repositoryRootUrl" value="file://$PROJECT_DIR$" />
+            </RecentBranchesForRepo>
+          </list>
+        </option>
+      </RecentBranches>
+
     </option>
   </component>
   <component name="MarkdownSettingsMigration">
@@ -38,7 +86,11 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+
     &quot;last_opened_file_path&quot;: &quot;C:/Users/jmrkvica/Documents/GitHub/cookbook&quot;,
+
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/jmrkvica/Desktop&quot;,
+
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -61,8 +113,10 @@
       <option name="presentableId" value="Default" />
       <updated>1677178573034</updated>
       <workItem from="1677178574897" duration="11173000" />
+
       <workItem from="1678453086806" duration="945000" />
       <workItem from="1678454049278" duration="11525000" />
+
       <workItem from="1678466795607" duration="4303000" />
       <workItem from="1678472918489" duration="1245000" />
     </task>
@@ -72,6 +126,27 @@
       <option name="presentableId" value="LOCAL-00001" />
       <option name="project" value="LOCAL" />
       <updated>1678467321468</updated>
+
+
+      <workItem from="1677263480936" duration="394000" />
+      <workItem from="1677263878646" duration="4000" />
+      <workItem from="1677264062718" duration="569000" />
+      <workItem from="1677265145543" duration="2537000" />
+      <workItem from="1677606056617" duration="561000" />
+      <workItem from="1677862668419" duration="455000" />
+      <workItem from="1677864515168" duration="459000" />
+      <workItem from="1678210595778" duration="260000" />
+      <workItem from="1678212457713" duration="389000" />
+      <workItem from="1678452440237" duration="7679000" />
+    </task>
+    <task id="LOCAL-00001" summary="připojení k mongoDB a vytvoření databáze receptů">
+      <created>1678455715436</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1678455715436</updated>
+
+
     </task>
     <option name="localTasksCounter" value="2" />
     <servers />
@@ -91,7 +166,12 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+
     <MESSAGE value="RecipeCards, basic filtering," />
     <option name="LAST_COMMIT_MESSAGE" value="RecipeCards, basic filtering," />
+
+    <MESSAGE value="připojení k mongoDB a vytvoření databáze receptů" />
+    <option name="LAST_COMMIT_MESSAGE" value="připojení k mongoDB a vytvoření databáze receptů" />
+
   </component>
 </project>
