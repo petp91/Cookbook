@@ -4,15 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="975ae921-027f-48ac-96a0-bf1cb93f563f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/client/src/assets/Data.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/Buttons.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/MenuCard.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/MenuCardsFilter.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/layout/MenuCard-style.css" afterDir="false" />
+    <list default="true" id="975ae921-027f-48ac-96a0-bf1cb93f563f" name="Changes" comment="RecipeCards, basic filtering,">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/AddRecipe.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/AddRecipe.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/pages/RecipePage.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/RecipePage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/MenuCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/MenuCard.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,7 +63,17 @@
       <workItem from="1677178574897" duration="11173000" />
       <workItem from="1678453086806" duration="945000" />
       <workItem from="1678454049278" duration="11525000" />
+      <workItem from="1678466795607" duration="4303000" />
+      <workItem from="1678472918489" duration="1245000" />
     </task>
+    <task id="LOCAL-00001" summary="RecipeCards, basic filtering,">
+      <created>1678467321468</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1678467321468</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -85,5 +89,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="RecipeCards, basic filtering," />
+    <option name="LAST_COMMIT_MESSAGE" value="RecipeCards, basic filtering," />
   </component>
 </project>
