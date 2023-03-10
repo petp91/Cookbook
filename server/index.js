@@ -1,60 +1,54 @@
+require('dotenv').config(); // načtení .env souboru
 const express = require('express');
-const fs = require('fs');
-const path = require('path');
-const bodyParser = require('body-parser');
-const cors = require('cors');
+const mongoose = require('mongoose');
+
 
 const app = express();
-const PORT = 8080;
+const port = process.env.PORT || 8080;
 
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+const Recipe = require('./Recipes').Recipe;
+const pizzaRecipes = require('./Recipes').pizzaRecipes;
 
-app.use(cors());
+// Připojení k MongoDB Atlas databázi
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
-// Endpoint pro získání dat z data.json
-app.get('/data', (req, res) => {
-    const filePath = path.join(__dirname, 'data.json');
-    fs.readFile(filePath, 'utf-8', (err, data) => {
-        if (err) {
-            console.error(err);
-            res.status(500).send('An error occurred while reading the data.');
-        } else {
-            res.json(JSON.parse(data));
-        }
-    });
+const db = mongoose.connection;
+
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', () => {
+    console.log('Connected to database...');
+//jednorázové nahrání receptů do DB
+  /*  Recipe.insertMany(pizzaRecipes)
+        .then(() => console.log('Pizza recipes were successfully added to the database.'))
+        .catch((err) => console.error(err)); */
 });
 
-// Endpoint pro ukládání dat z formuláře
-app.post('/data', (req, res) => {
-    const { name, lastName, email } = req.body;
-    const data = { name, lastName, email };
-    const filePath = path.join(__dirname, 'data.json');
+// Middleware pro zpracování požadavků ve formátu JSON
+app.use(express.json());
 
-    fs.readFile(filePath, 'utf-8', (err, fileData) => {
-        if (err) {
-            console.error(err);
-            res.status(500).send('An error occurred while reading the data.');
-        } else {
-            let json = [];
-            if (fileData) {
-                json = JSON.parse(fileData);
-            }
-            console.log(json)
-            json.push(data);
-
-            fs.writeFile(filePath, JSON.stringify(json, null, 2), (err) => {
-                if (err) {
-                    console.error(err);
-                    res.status(500).send('An error occurred while saving the data.');
-                } else {
-                    res.status(200).send('Data saved successfully.');
-                }
-            });
-        }
-    });
+// API pro získání seznamu všech receptů
+app.get('/recipes', async (req, res) => {
+    try {
+        const recipes = await Recipe.find();
+        res.json(recipes);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Server error');
+    }
 });
 
-app.listen(PORT, () => {
-    console.log(`Server is listening on port ${PORT}`);
+// API pro vytvoření nového receptu
+app.post('/recipes', async (req, res) => {
+    try {
+        const recipe = new Recipe(req.body);
+        await recipe.save();
+        res.json(recipe);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Server error');
+    }
+});
+
+app.listen(port, () => {
+    console.log(`Server is listening on port ${port}...`);
 });
