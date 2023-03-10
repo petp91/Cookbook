@@ -23,8 +23,8 @@ function AdddRecipe() {
 
     return (
         <Form onSubmit={handleSubmit(onSubmit)}>
-            <div className="position-absolute top-50 start-50 translate-middle">
-                <Button variant="primary" size="lg" onClick={handleShow}>
+            <div className>
+                <Button variant="btn btn-outline-success" size="lg" style={{float: 'right'}} onClick={handleShow}>
                     Přidat recept
                 </Button>
             </div>
