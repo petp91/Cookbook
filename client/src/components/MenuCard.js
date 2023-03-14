@@ -2,40 +2,39 @@ import React from "react";
 import '../layout/MenuCard-style.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import CardPicture from '../assets/CardPicture.jpg'
 
-
-const Card = ({ item }) => {
+const RecipeMenuCard = ({ item }) => {
     return (
-        <>
-            <div className='card text-center shadow'>
-                <div className='row'>
-                    {item.map((Val) => {
-                        return (
-                            <div
-                                className="col-md-4 col-sm-6 card my-2 py-3 card text-center"
-                                key={Val.id}
-                            >
-                                <div className="overflow">
-                                    <img src={Val.displayImage} alt={Val.displayName} className="card-img-top" />
-                                </div>
-                                <div className="card-body text-dark">
-                                    <div className="card-text text-secondary">
-                                        {Val.displayName}
-                                        {Val.size}
-                                    </div>
-                                    <div className="card-text">{Val.description}</div>
-                                </div>
-                                <a href="#" className="btn btn-outline-success">
-                                    Detail
-                                </a>
-                            </div>
-
-                        );
-                    })}
-                </div>
-            </div>
-        </>
+        <Container style={{
+            padding: '20px'
+            }}
+        >
+            <Row xs={{ cols: 1 }} md={{ cols: 3 }} className="g-5">
+                {item.map((Val) => {
+                    return (
+                        <card className="text-center"  style={{
+                            width: '20rem'
+                            }}>
+                            <Card.Img src={CardPicture} alt={Val.displayName}/>
+                            <Card.Body>
+                                <Card.Title>{Val.displayName}</Card.Title>
+                                <Card.Text>
+                                    {Val.description}
+                                </Card.Text>
+                                <Button variant="btn btn-outline-success">Detail receptu
+                                </Button>
+                            </Card.Body>
+                        </card>
+                    );
+                })}
+            </Row>
+        </Container>
     );
 };
 
-export default Card;
+export default RecipeMenuCard;
