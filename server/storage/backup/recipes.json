@@ -1,0 +1,17 @@
+[
+  {
+    "name": "Example Pizza",
+    "description": "",
+    "imageId": "b2fe36e4880a25b9",
+    "preparationLength": 60,
+    "finalAmount": 1,
+    "ingredients": [
+      {
+        "id": "81cd3249b00b165d",
+        "amount": 20,
+        "units": "g"
+      }
+    ],
+    "_id": "68d47c9fd2d8339d"
+  }
+]

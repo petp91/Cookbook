@@ -4,6 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
+
     <list default="true" id="975ae921-027f-48ac-96a0-bf1cb93f563f" name="Changes" comment="RecipeCards, basic filtering,">
       <change afterPath="$PROJECT_DIR$/.idea/cookbook.iml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
@@ -526,14 +527,46 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="petr" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+
   <component name="GithubPullRequestsUISettings">
     <option name="selectedUrlAndAccountId">
       <UrlAndAccount>
         <option name="accountId" value="76c52075-1eb8-4579-9e5e-a07b8f822911" />
         <option name="url" value="https://github.com/petp91/Cookbook.git" />
       </UrlAndAccount>
+
+  <component name="GitToolBoxStore">
+    <option name="projectConfigVersion" value="5" />
+    <option name="recentBranches">
+      <RecentBranches>
+        <option name="branchesForRepo">
+          <list>
+            <RecentBranchesForRepo>
+              <option name="branches">
+                <list>
+                  <RecentBranch>
+                    <option name="branchName" value="main" />
+                    <option name="lastUsedInstant" value="1678455798" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="petr" />
+                    <option name="lastUsedInstant" value="1678452466" />
+                  </RecentBranch>
+                </list>
+              </option>
+              <option name="repositoryRootUrl" value="file://$PROJECT_DIR$" />
+            </RecentBranchesForRepo>
+          </list>
+        </option>
+      </RecentBranches>
+
     </option>
   </component>
   <component name="MarkdownSettingsMigration">
@@ -573,8 +606,10 @@
       <option name="presentableId" value="Default" />
       <updated>1677178573034</updated>
       <workItem from="1677178574897" duration="11173000" />
+
       <workItem from="1678453086806" duration="945000" />
       <workItem from="1678454049278" duration="11525000" />
+
       <workItem from="1678466795607" duration="4303000" />
       <workItem from="1678472918489" duration="3035000" />
       <workItem from="1678536762150" duration="1117000" />
@@ -591,6 +626,27 @@
       <option name="presentableId" value="LOCAL-00001" />
       <option name="project" value="LOCAL" />
       <updated>1678467321468</updated>
+
+
+      <workItem from="1677263480936" duration="394000" />
+      <workItem from="1677263878646" duration="4000" />
+      <workItem from="1677264062718" duration="569000" />
+      <workItem from="1677265145543" duration="2537000" />
+      <workItem from="1677606056617" duration="561000" />
+      <workItem from="1677862668419" duration="455000" />
+      <workItem from="1677864515168" duration="459000" />
+      <workItem from="1678210595778" duration="260000" />
+      <workItem from="1678212457713" duration="389000" />
+      <workItem from="1678452440237" duration="7679000" />
+    </task>
+    <task id="LOCAL-00001" summary="připojení k mongoDB a vytvoření databáze receptů">
+      <created>1678455715436</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1678455715436</updated>
+
+
     </task>
     <task id="LOCAL-00002" summary="RecipeCards, basic filtering,">
       <created>1678474338021</created>
@@ -617,7 +673,12 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+
     <MESSAGE value="RecipeCards, basic filtering," />
     <option name="LAST_COMMIT_MESSAGE" value="RecipeCards, basic filtering," />
+
+    <MESSAGE value="připojení k mongoDB a vytvoření databáze receptů" />
+    <option name="LAST_COMMIT_MESSAGE" value="připojení k mongoDB a vytvoření databáze receptů" />
+
   </component>
 </project>
