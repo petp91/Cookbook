@@ -1,8 +1,10 @@
 require('dotenv').config(); // načtení .env souboru
 const express = require('express');
+const cors = require('cors');
 const mongoose = require('mongoose');
 
 const recipeRouter = require('./controller/recipe-controller');
+const imageRouter = require('./controller/image-controller');
 
 const app = express();
 const PORT = process.env.PORT || 8080;
@@ -17,10 +19,11 @@ db.once('open', () => {
 });*/
 
 
-// Middleware pro zpracování požadavků ve formátu JSON
-app.use(express.json());
+app.use(cors());
+app.use(express.json()); // Middleware pro zpracování požadavků ve formátu JSON
 
 app.use('/api/recipes', recipeRouter);
+app.use('/api/images', imageRouter);
 
 app.listen(PORT, () => {
     console.log(`Server is listening on port ${PORT}`);
