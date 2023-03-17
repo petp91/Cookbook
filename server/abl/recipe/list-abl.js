@@ -3,7 +3,7 @@ const recipeDao = require('../../dao/file_storage/recipe-dao');
 async function ListAbl(req, res) {
     try {
         let query = req.query.q;
-        if (typeof query == 'string') {
+        if (typeof query === 'string') {
             let filteredRecipes = await recipeDao.getFilteredRecipes(query);
             res.send(filteredRecipes);
         } else {
