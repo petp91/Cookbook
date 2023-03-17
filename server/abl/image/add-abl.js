@@ -7,7 +7,7 @@ async function AddAbl(req, res) {
 
         let { buffer, mimetype } = req.file;
         let imageObj = await imageDao.addImage({ data: buffer, contentType: mimetype});
-        res.send({ _id: imageObj._id });
+        res.status(201).send({ _id: imageObj._id });
     } catch (e) {
         console.error(e);
         res.status(500).send(e.message);
