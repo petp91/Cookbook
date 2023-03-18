@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import { useSearchParams } from "react-router-dom";
-import RecipeModal from "../components/RecipeCard";
 import AddRecipe from "../components/AddRecipe";
 import AdvancedSearch from "../components/AdvancedSearch";
 import MenuCardsOutput from "../components/MenuCardsFilter";
@@ -32,7 +31,6 @@ const RecipePage = () => {
             <AdvancedSearch show={showSearch} defaultQuery={query} />
             {query && <h2>Results for "{query}"</h2>}
 
-            <RecipeModal />
             <AddRecipe />
             <MenuCardsOutput />
         </div>

@@ -7,6 +7,8 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import CardPicture from '../assets/CardPicture.jpg'
 
+import RecipeCard from './RecipeCard'
+
 const RecipeMenuCard = ({ item }) => {
     return (
         <Container
@@ -21,8 +23,7 @@ const RecipeMenuCard = ({ item }) => {
                                 <Card.Text>
                                     {Val.description}
                                 </Card.Text>
-                                <Button variant="btn btn-outline-success">Detail receptu
-                                </Button>
+                                <RecipeCard />
                             </Card.Body>
                         </Card>
                     );
