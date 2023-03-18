@@ -14,7 +14,7 @@ const RecipeMenuCard = ({ item }) => {
             <Row xs={{ cols: 1 }} md={{ cols: 3 }} className="g-6">
                 {item.map((Val) => {
                     return (
-                        <Card className="text-center m-4 " key={Val._id}>
+                        <Card className="recipeCard text-center m-4" key={Val._id}>
                             <Card.Img src={CardPicture} alt={Val.name} />
                             <Card.Body>
                                 <Card.Title>{Val.name}</Card.Title>

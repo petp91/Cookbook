@@ -1,10 +1,10 @@
-* {
+/** {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
     font-family: 'Roboto', sans-serif
-}
-.card-text{
+}*/
+.recipeCard .card-text{
     font-size: 0.8rem;
     padding: 0.4rem ;
     align-content: space-between;
@@ -12,7 +12,7 @@
     overflow: hidden;
 }
 
-.card-title{
+.recipeCard .card-title{
     font-size: 0.9rem;
     font-weight: bold;
     padding: 0.5rem;
@@ -21,7 +21,7 @@
     overflow: hidden;
 }
 
-.card {
+.recipeCard {
     width: 270px;
     height: 380px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -33,17 +33,17 @@
     overflow: hidden
 }
 
-.card:hover {
+.recipeCard:hover {
     transform: scale(1.11);
     transition: all 0.3s ease;
 }
 
-.card-body {
+.recipeCard .card-body {
     display: flex;
     flex-direction: column;
     padding: 1rem 0 !important
 }
 
-button.btn {
+/*button.btn {
     margin-top: auto;
-}
+}*/
