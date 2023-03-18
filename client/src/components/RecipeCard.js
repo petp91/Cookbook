@@ -10,9 +10,7 @@ function RecipeModal() {
 
     return (
         <>
-        <div className="position-absolute translate-middle">
-            <Button variant="primary" size="lg" onClick={handleShow}>Details</Button>
-            </div>
+            <Button variant="outline-success" onClick={handleShow}>Details</Button>
 
 
     {show === false? "": <Card  style={{ width: '60rem', position: 'absolute', marginTop:'5%', marginLeft:'25%', zIndex: '1' }} show={show} onHide={handleShow}> 
