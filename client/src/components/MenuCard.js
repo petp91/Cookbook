@@ -9,26 +9,22 @@ import CardPicture from '../assets/CardPicture.jpg'
 
 const RecipeMenuCard = ({ item }) => {
     return (
-        <Container style={{
-            padding: '20px'
-            }}
+        <Container
         >
-            <Row xs={{ cols: 1 }} md={{ cols: 3 }} className="g-5">
+            <Row xs={{ cols: 1 }} md={{ cols: 3 }} className="g-6">
                 {item.map((Val) => {
                     return (
-                        <card className="text-center"  style={{
-                            width: '20rem'
-                            }}>
-                            <Card.Img src={CardPicture} alt={Val.displayName}/>
+                        <Card className="text-center m-4 " key={Val._id}>
+                            <Card.Img src={CardPicture} alt={Val.name} />
                             <Card.Body>
-                                <Card.Title>{Val.displayName}</Card.Title>
+                                <Card.Title>{Val.name}</Card.Title>
                                 <Card.Text>
                                     {Val.description}
                                 </Card.Text>
                                 <Button variant="btn btn-outline-success">Detail receptu
                                 </Button>
                             </Card.Body>
-                        </card>
+                        </Card>
                     );
                 })}
             </Row>

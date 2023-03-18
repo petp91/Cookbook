@@ -5,6 +5,7 @@ import Row from 'react-bootstrap/Row';
 import Modal from 'react-bootstrap/Modal';
 import Col from 'react-bootstrap/Col';
 import { useForm } from "react-hook-form";
+import axios from "axios";
 
 function AdddRecipe() {
     const [show, setShow] = useState(false);
@@ -18,19 +19,32 @@ function AdddRecipe() {
     } = useForm();
 
     const onSubmit = (data) => {
+        axios.post('http://localhost:8080/api/recipes', {
+            name: data.recipeName,
+            description: data.recipe,
+            imageId: "",
+            preparationLength: 60,
+            finalAmount: 1,
+            ingredients: [
+                {
+                    id: "",
+                    amount: 10,
+                    units: "g"
+                }
+            ]
+        })
         console.log(data);
     };
 
     return (
         <Form onSubmit={handleSubmit(onSubmit)}>
-            <div className>
+            <div>
                 <Button variant="btn btn-outline-success" size="lg" style={{float: 'right'}} onClick={handleShow}>
                     Přidat recept
                 </Button>
             </div>
 
             <Modal
-
                 show={show}
                 size="xl"
                 onHide={() => setShow(false)}
