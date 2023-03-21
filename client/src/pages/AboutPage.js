@@ -28,6 +28,7 @@ const RecipeCard = () => {
 
 const RecipeDetails = () => {
     const [show, setShow] = useState(false);
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
     return (
         <>
             <Button onClick={() => setShow(!show)}>Details</Button>
@@ -36,11 +37,30 @@ const RecipeDetails = () => {
                     <Modal.Title>Example pizza</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    Lorem ipsum
+                    <div>
+                        Lorem ipsum
+                    </div>
+
+                    <Button onClick={() => setShowDeleteModal(true)}>Delete</Button>
+                    <ConfirmationDialog
+                        show={showDeleteModal}
+                        onConfirm={() => { alert('Confirmed!'); setShowDeleteModal(false); }}
+                        onCancel={() => setShowDeleteModal(false)}
+                    >
+                        Are you sure you want to delete this recipe?
+                    </ConfirmationDialog>
                 </Modal.Body>
             </Modal>
         </>
     )
+}
+
+const ConfirmationDialog = ({show, onCancel, children}) => {
+    return <Modal show={show} onHide={onCancel}>
+        <Modal.Body>
+            {children}
+        </Modal.Body>
+    </Modal>
 }
 
 export default AboutPage;

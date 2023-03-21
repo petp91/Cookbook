@@ -5,7 +5,7 @@ import SearchInputGroup from "./SearchInputGroup";
 
 const AdvancedSearch = ({ show, defaultQuery }) => {
     const navigate = useNavigate();
-    const [searchInput, setSearchInput] = useState(defaultQuery);
+    const [searchInput, setSearchInput] = useState(defaultQuery || '');
 
     const submitHandler = (event) => {
         event.preventDefault();
