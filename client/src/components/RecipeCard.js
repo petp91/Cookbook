@@ -10,11 +10,7 @@ function RecipeCard() {
 
     return (
         <>
-        {/*<div className="position-absolute translate-middle">
-            <Button variant="primary" size="lg" onClick={handleShow}>Details</Button>
-            </div>
-
-
+        {/*
                 {show === false? "": <Card  style={{ width: '60rem', position: 'absolute', marginTop:'5%', marginLeft:'25%', zIndex: '1' }} show={show} onHide={handleShow}> 
     <Card.Header><Button variant="primary" style={{float: 'right', backgroundColor: '#EEEEEE', borderColor: '#EEEEEE', color:'#000000'}} onClick={handleShow}>X</Button></Card.Header>
       <Card.Body>

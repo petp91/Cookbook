@@ -13,7 +13,7 @@ function RecipeModal() {
 
     return (
         <>
-        <div className="position-absolute translate-middle">
+        <div className="position-absolute top-50 translate-middle">
             <Button variant="primary" size="lg" onClick={handleShow}>Details</Button>
             </div>
 

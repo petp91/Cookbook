@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test - Image</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+</head>
+<body>
+    <script>
+        function upload(event) {
+            event.preventDefault();
+            axios.postForm('http://localhost:8080/api/images', {
+                image: document.getElementById('file').files[0]
+            }).then(res => {
+                document.getElementById('info').innerHTML = res.data._id;
+                document.getElementById('img').src = 'http://localhost:8080/api/images/'+res.data._id;
+            }).catch(error => {
+                document.getElementById('info').innerHTML = error.message;
+            });
+        }
+    </script>
+    <form onsubmit="upload(event)">
+        <input id="file" type="file" />
+        <button>Upload</button>
+    </form>
+    <p id="info"></p>
+    <img id="img"/>
+</body>
+</html>
