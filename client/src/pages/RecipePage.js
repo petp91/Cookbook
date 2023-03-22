@@ -1,7 +1,7 @@
 
-import RecipeModal from "../components/RecipeCard";
+//import RecipeCard from "../components/RecipeCard";
 import AddRecipe from "../components/AddRecipe";
-
+import RecipeModal from "../components/RecipeModal";
 import MenuCardsOutput from "../components/MenuCardsFilter";
 import background from '../assets/background.jpg'
 

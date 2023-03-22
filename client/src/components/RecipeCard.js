@@ -3,19 +3,19 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Card from 'react-bootstrap/Card';
 
-function RecipeModal() {
+function RecipeCard() {
     const [show, setShow] = useState(false);
 
     const handleShow = () => setShow(!show);
 
     return (
         <>
-        <div className="position-absolute translate-middle">
+        {/*<div className="position-absolute translate-middle">
             <Button variant="primary" size="lg" onClick={handleShow}>Details</Button>
             </div>
 
 
-    {show === false? "": <Card  style={{ width: '60rem', position: 'absolute', marginTop:'5%', marginLeft:'25%', zIndex: '1' }} show={show} onHide={handleShow}> 
+                {show === false? "": <Card  style={{ width: '60rem', position: 'absolute', marginTop:'5%', marginLeft:'25%', zIndex: '1' }} show={show} onHide={handleShow}> 
     <Card.Header><Button variant="primary" style={{float: 'right', backgroundColor: '#EEEEEE', borderColor: '#EEEEEE', color:'#000000'}} onClick={handleShow}>X</Button></Card.Header>
       <Card.Body>
         <div style={{ display: 'flex', flexDirection: 'row'}}>
@@ -46,12 +46,12 @@ function RecipeModal() {
         </div>
       </Card.Body>
     </Card>
-    }
+    } */}
         </>
     );
 }
 
-export default RecipeModal;
+export default RecipeCard;
 
 
 
