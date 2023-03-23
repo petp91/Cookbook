@@ -1,15 +1,32 @@
 import { useState } from "react";
-import { Container, Card, Modal, Button } from "react-bootstrap";
+import { Card, Modal, Button } from "react-bootstrap";
 import picture from '../assets/CardPicture.jpg';
 
+import RecipeEditor from "../components/RecipeEditor";
+
 const AboutPage = () => {
+    const ingredients = [
+        {
+            _id: "1",
+            name: "Ingredience 1"
+        },
+        {
+            _id: "2",
+            name: "Test ingredience"
+        }
+    ];
+
     return (
-        <Container className="mt-4">
-            <RecipeCard />
-        </Container>
+        <div className="m-5 w-75">
+            <RecipeEditor ingredients={ingredients} />
+        </div>
     );
 };
 
+
+
+
+// eslint-disable-next-line
 const RecipeCard = () => {
     return (
         <Card style={{width: '18rem'}}>
