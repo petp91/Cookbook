@@ -1,14 +1,9 @@
-/** {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    font-family: 'Roboto', sans-serif
-}*/
+
 .recipeCard .card-text{
     font-size: 0.8rem;
     padding: 0.4rem ;
     align-content: space-between;
-    height: 8rem;
+    height: 6.8rem;
     overflow: hidden;
 }
 
@@ -22,8 +17,8 @@
 }
 
 .recipeCard {
-    width: 270px;
-    height: 380px;
+    width: 250px;
+    height: 350px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     background: #fff;
     transition: all 0.5s ease;
@@ -34,16 +29,6 @@
 }
 
 .recipeCard:hover {
-    transform: scale(1.11);
+    transform: scale(1.1);
     transition: all 0.3s ease;
 }
-
-.recipeCard .card-body {
-    display: flex;
-    flex-direction: column;
-    padding: 1rem 0 !important
-}
-
-/*button.btn {
-    margin-top: auto;
-}*/

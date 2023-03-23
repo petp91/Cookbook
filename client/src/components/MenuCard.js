@@ -1,35 +1,23 @@
 import React from "react";
-
 import '../layout/MenuCard-style.css';
-import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
 import CardPicture from '../assets/CardPicture.jpg'
-
 import RecipeCard from './RecipeCard'
 
-const RecipeMenuCard = ({ item }) => {
+const RecipeMenuCard = ({ recipe }) => {
     return (
-        <Container
-        >
-            <Row xs={{ cols: 1 }} md={{ cols: 3 }} className="g-6">
-                {item.map((Val) => {
-                    return (
-                        <Card className="recipeCard text-center m-4" key={Val._id}>
-                            <Card.Img src={CardPicture} alt={Val.name} />
-                            <Card.Body>
-                                <Card.Title>{Val.name}</Card.Title>
-                                <Card.Text>
-                                    {Val.description}
-                                </Card.Text>
-                                <RecipeCard />
-                            </Card.Body>
-                        </Card>
-                    );
-                })}
-            </Row>
-        </Container>
+
+        <Card className="recipeCard text-center m-4" key={recipe._id}>
+            <Card.Img variant="top" src={CardPicture} alt={recipe.name} />
+            <Card.Body>
+                <Card.Title>{recipe.name}</Card.Title>
+                <Card.Text>
+                    {recipe.description}
+                </Card.Text>
+                <RecipeCard />
+            </Card.Body>
+        </Card>
+
     );
 };
 
