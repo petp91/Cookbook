@@ -7,7 +7,7 @@ import RecipeModal from './RecipeModal'
 const RecipeMenuCard = ({ recipe }) => {
     return (
 
-        <Card className="recipeCard text-center m-4" key={recipe._id}>
+        <Card className="recipeCard text-center m-4">
             <Card.Img variant="top" src={CardPicture} alt={recipe.name} />
             <Card.Body>
                 <Card.Title>{recipe.name}</Card.Title>

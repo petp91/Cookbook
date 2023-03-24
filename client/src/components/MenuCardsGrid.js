@@ -17,12 +17,11 @@ const MenuCardsOutput = () => {
     }, [])
     return (
         <>
-            <Container  // todo last row align
-            >
+            <Container>
                 <Row>
                     {item.map((recipe) => {
                         return (
-                            <Col class='d-flex justify-content-center'>
+                            <Col key={recipe._id} className='d-flex justify-content-center' md={6} lg={4} xl={4} xxl={3}>
                                 <RecipeMenuCard recipe={recipe}/>
                             </Col>
                         )
