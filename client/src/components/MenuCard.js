@@ -2,7 +2,7 @@ import React from "react";
 import '../layout/MenuCard-style.css';
 import Card from 'react-bootstrap/Card';
 import CardPicture from '../assets/CardPicture.jpg'
-import RecipeCard from './RecipeCard'
+import RecipeModal from './RecipeModal'
 
 const RecipeMenuCard = ({ recipe }) => {
     return (
@@ -14,7 +14,7 @@ const RecipeMenuCard = ({ recipe }) => {
                 <Card.Text>
                     {recipe.description}
                 </Card.Text>
-                <RecipeCard />
+                <RecipeModal />
             </Card.Body>
         </Card>
 

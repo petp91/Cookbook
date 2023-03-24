@@ -70,7 +70,7 @@ const MenuAccount = () => {
                                 type='text'
                                 placeholder='Enter username'
                                 value={loginFormData.username}
-                                onChange={e => setLoginFormData({...loginFormData, username: e.target.value})}
+                                setValue={val => setLoginFormData({...loginFormData, username: val})}
                             />
                             <FormGroup
                                 controlId='formBasicPassword'
@@ -78,7 +78,7 @@ const MenuAccount = () => {
                                 type='password'
                                 placeholder='Enter password'
                                 value={loginFormData.password}
-                                onChange={e => setLoginFormData({...loginFormData, password: e.target.value})}
+                                setValue={val => setLoginFormData({...loginFormData, password: val})}
                             />
                     </Modal.Body>
                     <Modal.Footer>
@@ -99,7 +99,7 @@ const MenuAccount = () => {
                                 type='text'
                                 placeholder='Enter username'
                                 value={registerFormData.username}
-                                onChange={e => setRegisterFormData({...registerFormData, username: e.target.value})}
+                                setValue={val => setLoginFormData({...loginFormData, username: val})}
                             />
                             <FormGroup
                                 controlId='formBasicEmail'
@@ -107,7 +107,7 @@ const MenuAccount = () => {
                                 type='email'
                                 placeholder='Enter email'
                                 value={registerFormData.email}
-                                onChange={e => setRegisterFormData({...registerFormData, email: e.target.value})}
+                                setValue={val => setLoginFormData({...loginFormData, email: val})}
                             />
                             <FormGroup
                                 controlId='formBasicPassword'
@@ -115,7 +115,7 @@ const MenuAccount = () => {
                                 type='password'
                                 placeholder='Enter password'
                                 value={registerFormData.password}
-                                onChange={e => setRegisterFormData({...registerFormData, password: e.target.value})}
+                                setValue={val => setLoginFormData({...loginFormData, password: val})}
                             />
                     </Modal.Body>
                     <Modal.Footer>
