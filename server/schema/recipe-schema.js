@@ -4,11 +4,11 @@ const ajv = new Ajv();
 const schema = {
     type: 'object',
     properties: {
-        name: { type: 'string' },
+        name: { type: 'string', minLength: 1 },
         description: { type: 'string' },
         imageId: { type: 'string' },
-        preparationLength: { type: 'number' },
-        finalAmount: { type: 'number' },
+        preparationLength: { type: 'number', minimum: 1 },
+        finalAmount: { type: 'number', minimum: 1 },
         ingredients: {
             type: 'array',
             minItems: 1,
@@ -16,7 +16,7 @@ const schema = {
                 type: 'object',
                 properties: {
                     id: { type: 'string' },
-                    amount: { type: 'number' },
+                    amount: { type: 'number', minimum: 1 },
                     units: { type: 'string' }
                 },
                 required: [ 'id', 'amount', 'units' ]
