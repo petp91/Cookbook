@@ -1,9 +1,10 @@
-import { useState } from 'react';
-import { Button, Form, Row, Col, CloseButton } from 'react-bootstrap';
+import React, { useState } from 'react';
+import {Button, Form, Row, Col, CloseButton, FormLabel} from 'react-bootstrap';
 import { Typeahead, TypeaheadMenu } from 'react-bootstrap-typeahead';
 import FormGroup from './FormGroup';
-
 import 'react-bootstrap-typeahead/css/Typeahead.css';
+import Modal from "react-bootstrap/Modal";
+import axios from "axios";
 
 const units = ['test', 'test2'];
 const newIngredientRowObj = () => {
@@ -15,7 +16,7 @@ const newIngredientRowObj = () => {
     }
 };
 
-const RecipeEditor = ({ ingredients }) => {
+const RecipeEditor = ({ ingredients, show, onHide }) => {
     const [formState, setFormState] = useState({
         name: '',
         description: '',
@@ -23,56 +24,115 @@ const RecipeEditor = ({ ingredients }) => {
         finalAmount: '',
         ingredientRows: [ newIngredientRowObj() ]
     });
-    
+
     const addIngredient = () => {
         formState.ingredientRows.push(newIngredientRowObj());
         setFormState({...formState});
     };
 
-    console.clear();
+    const onSubmit = (event) => {
+        event.preventDefault()
+        axios.post('http://localhost:8080/api/recipes',
+        {
+            name: formState.name,
+                description: formState.description,
+            imageId: "",
+            preparationLength: parseInt(formState.preparationLength),
+            finalAmount: parseInt(formState.finalAmount),
+            ingredients: [
+            {
+                id: "",
+                amount: 10,
+                units: "g"
+            }
+        ]
+        })
+    };
+
+  //  console.clear();
     console.log(JSON.stringify(formState, null, 4));
 
     return (
-        <Form>
-            <FormGroup
-                label='Recipe name'
-                type='text'
-                placeholder='Recipe name'
-                value={formState.name}
-                setValue={val => setFormState({...formState, name: val})}
-            />
-            <FormGroup
-                label='Description'
-                as='textarea'
-                placeholder='Description'
-                rows={5}
-                value={formState.description}
-                setValue={val => setFormState({...formState, description: val})}
-            />
 
-            {/* Ingredients */}
-            <div>
-                <IngredientLabels />
-                {formState.ingredientRows.map((rowState, index) => (
-                    <IngredientRow
-                        key={rowState.key}
-                        ingredients={ingredients}
-                        state={rowState}
-                        setState={(newState) => {
-                            formState.ingredientRows[index] = newState;
-                            // TODO: if the ingredient is new, add it to ingredients array (after actually creating it via network request)
-                            setFormState({...formState});
-                        }}
-                        onRemove={() => {
-                            formState.ingredientRows.splice(index, 1);
-                            setFormState({...formState});
-                        }}
-                        removeBtnDisabled={formState.ingredientRows.length === 1}
+        <Modal
+               size="xl"
+               show={show}
+               onHide={onHide}
+               backdrop="static"
+        >
+            <Modal.Header closeButton>
+                <Modal.Title>
+                    Add new recipe
+                </Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                <form onSubmit={onSubmit}>
+                    <FormGroup
+                        label='Recipe name'
+                        type='text'
+                        placeholder='Recipe name'
+                        value={formState.name}
+                        setValue={val => setFormState({...formState, name: val})}
                     />
-                ))}
-                <Button className='mt-2' onClick={addIngredient}>Add ingredient</Button>
-            </div>
-        </Form>
+                    <FormGroup
+                        label='Description'
+                        as='textarea'
+                        placeholder='Description'
+                        rows={5}
+                        value={formState.description}
+                        setValue={val => setFormState({...formState, description: val})}
+                    />
+                    <div className="mt-3">
+                        <Row className='gx-1'>
+                            <Col className='ps-0' xs={7}>
+                                <FormGroup
+                                    label='Preparation length (minutes)'
+                                    type='number'
+                                    placeholder='Preparation length in minutes'
+                                    value={formState.preparationLength}
+                                    setValue={val => setFormState({...formState, preparationLength: val})}
+                                />
+                            </Col>
+                            <Col className xs={5}>
+                                <FormGroup
+                                    label='Final amount (servings)'
+                                    type='number'
+                                    placeholder='Final amount in servings'
+                                    value={formState.finalAmount}
+                                    setValue={val => setFormState({...formState, finalAmount: val})}
+                                />
+                            </Col>
+                        </Row>
+                    </div>
+
+                    {/* Ingredients */}
+                    <div>
+                        <IngredientLabels />
+                        {formState.ingredientRows.map((rowState, index) => (
+                            <IngredientRow
+                                key={rowState.key}
+                                ingredients={ingredients}
+                                state={rowState}
+                                setState={(newState) => {
+                                    formState.ingredientRows[index] = newState;
+                                    // TODO: if the ingredient is new, add it to ingredients array (after actually creating it via network request)
+                                    setFormState({...formState});
+                                }}
+                                onRemove={() => {
+                                    formState.ingredientRows.splice(index, 1);
+                                    setFormState({...formState});
+                                }}
+                                removeBtnDisabled={formState.ingredientRows.length === 1}
+                            />
+                        ))}
+                        <Button className='mt-4' onClick={addIngredient}>Add ingredient</Button>
+                        <Button className='mt-4 float-end' variant={"success"} type="submit" >Save recipe</Button>
+                    </div>
+                </form>
+
+            </Modal.Body>
+
+        </Modal>
     )
 }
 
@@ -116,7 +176,7 @@ const IngredientRow = ({ingredients, state, setState, onRemove, removeBtnDisable
                             text={props.text}
                             newSelectionPrefix='New: '
                         />
-                      )}
+                    )}
                 />
             </Col>
             <Col>
