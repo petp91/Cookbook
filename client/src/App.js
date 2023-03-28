@@ -5,6 +5,7 @@ import RecipePage from "./pages/RecipePage";
 import AboutPage from "./pages/AboutPage";
 import NotFound from "./pages/NotFound";
 
+import './layout/nested_modals_fix.css';
 
 const App = () => {
     return (
