@@ -19,6 +19,11 @@ db.once('open', () => {
 });*/
 
 
+// Middleware for simulating delay
+app.use((req, res, next) => {
+    setTimeout(next, 1000);
+});
+
 app.use(cors());
 app.use(express.json()); // Middleware pro zpracování požadavků ve formátu JSON
 
