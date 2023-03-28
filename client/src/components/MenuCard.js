@@ -14,7 +14,7 @@ const RecipeMenuCard = ({ recipe }) => {
                 <Card.Text>
                     {recipe.description}
                 </Card.Text>
-                <RecipeModal />
+                <RecipeModal recipe={recipe} />
             </Card.Body>
         </Card>
 

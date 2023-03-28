@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-
+import ConfirmationDialog from './ConfirmationDialog';
 
 function RecipeModal({ recipe }) {
     const [show, setShow] = useState(false);
@@ -42,16 +42,9 @@ function RecipeModal({ recipe }) {
                         show={showDeleteModal}
                         onConfirm={() => { alert('Confirmed!'); setShowDeleteModal(false); }}
                         onCancel={() => setShowDeleteModal(false)}
+                        title='Confirm delete'
                     >
-                        <div style={{ display: 'flex', flexDirection: 'column', textAlign: "center"}}>
-                            <div>
-                            Are you sure you want to delete this recipe?
-                            </div>
-                        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: "space-around"}}>    
-                        <Button variant="primary" style={{marginTop: '2%',  marginBottom: '2%'}} onClick={() => setShowDeleteModal(false)}>Ano</Button>
-                        <Button variant="primary" style={{marginTop: '2%',  marginBottom: '2%'}} onClick={() => setShowDeleteModal(false)}>Ne</Button>  
-                        </div>
-                        </div>
+                        Are you sure you want to delete this recipe?
                     </ConfirmationDialog>
 
                     <Button variant="primary" style={{marginTop: '2%', marginLeft:'15%', marginBottom: '2%'}}>Like</Button>
@@ -65,14 +58,6 @@ function RecipeModal({ recipe }) {
             
         </>
     );
-}
-
-const ConfirmationDialog = ({show, onCancel, children}) => {
-    return <Modal show={show} onHide={onCancel}>
-        <Modal.Body>
-            {children}
-        </Modal.Body>
-    </Modal>
 }
 
 export default RecipeModal;
