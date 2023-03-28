@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Button, Form, Modal, Nav, NavDropdown, Dropdown } from 'react-bootstrap'
+import { Button, Form, Modal, Nav, NavDropdown, Dropdown, NavItem, NavLink } from 'react-bootstrap'
 import FormGroup from './FormGroup';
 
 const MenuAccount = () => {
@@ -42,20 +42,20 @@ const MenuAccount = () => {
     return (
         <>
             { loggedInUsername ? (
-                <Nav className='d-inline-block ms-3'>
-                    <Dropdown className='nav-item'>
-                        {/* This dropdown is made in a special way, so that we can use <b></b> tags in the dropdown title */}
-                        <Dropdown.Toggle as='a' className='nav-link' role='button' tabIndex={0} href='#'>Logged in as <b>{loggedInUsername}</b></Dropdown.Toggle>
+                <Nav className='ms-lg-3 align-items-center mt-2 mb-1 mt-lg-0 mb-lg-0'>
+                    <Dropdown as={NavItem}>
+                        <Dropdown.Toggle as={NavLink}>Logged in as <b>{loggedInUsername}</b></Dropdown.Toggle>
+                        {/* old Dropdown.Toggle attributes: as='a' className='nav-link' role='button' tabIndex={0} href='#' */}
                         <Dropdown.Menu>
                             <NavDropdown.Item onClick={logoutHandler}>Logout</NavDropdown.Item>
                         </Dropdown.Menu>
                     </Dropdown>
                 </Nav>
             ) : (
-                <>
-                    <Button className='ms-3' onClick={() => setShowLogin(true)}>Login</Button>
+                <div className='d-flex justify-content-center mt-3 mb-2 mt-lg-0 mb-lg-0'>
+                    <Button className='ms-lg-3' onClick={() => setShowLogin(true)}>Login</Button>
                     <Button variant='secondary' className='ms-2' onClick={() => setShowRegister(true)}>Register</Button>
-                </>
+                </div>
             )}
 
             <Modal show={showLogin} onHide={() => setShowLogin(false)}>
