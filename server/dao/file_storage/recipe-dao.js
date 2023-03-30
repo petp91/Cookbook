@@ -39,9 +39,23 @@ async function _write(data) {
     await writeFile(JSON_FILE_PATH, json);
 }
 
+async function deleteRecipes(id) {
+    let recipes = await getAllRecipes();
+    recipes = recipes.filter( (recipe) => { if (id === recipe._id){ return false} else {return true}})
+    await _write(recipes);
+}
+
+async function getRecipe(id) {
+    let recipe = await getAllRecipes();
+    recipe = recipe.find((recipe) => {if (id === recipe._id){return true} else{return false}})
+    return recipe
+}
+
 
 module.exports = {
     addRecipe,
     getAllRecipes,
-    getFilteredRecipes
+    getFilteredRecipes,
+    deleteRecipes,
+    getRecipe
 }
