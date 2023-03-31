@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {Button, Form, Row, Col, CloseButton, FormLabel} from 'react-bootstrap';
+import { Button, Form, Row, Col, CloseButton } from 'react-bootstrap';
 import { Typeahead, TypeaheadMenu } from 'react-bootstrap-typeahead';
 import FormGroup from './FormGroup';
 import 'react-bootstrap-typeahead/css/Typeahead.css';
@@ -16,7 +16,7 @@ const newIngredientRowObj = () => {
     }
 };
 
-const RecipeEditor = ({ ingredients, show, onHide }) => {
+const RecipeEditor = ({ ingredients, recipe, show, onHide }) => {
     const [formState, setFormState] = useState({
         name: '',
         description: '',
@@ -66,7 +66,7 @@ const RecipeEditor = ({ ingredients, show, onHide }) => {
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <form onSubmit={onSubmit}>
+                <Form onSubmit={onSubmit}>
                     <FormGroup
                         label='Recipe name'
                         type='text'
@@ -128,13 +128,25 @@ const RecipeEditor = ({ ingredients, show, onHide }) => {
                         <Button className='mt-4' onClick={addIngredient}>Add ingredient</Button>
                         <Button className='mt-4 float-end' variant={"success"} type="submit" >Save recipe</Button>
                     </div>
-                </form>
+                </Form>
 
             </Modal.Body>
 
         </Modal>
     )
 }
+
+function recipeToState(recipe) {
+    return {};
+}
+
+function recipeFromState(formState) {
+    return {};
+}
+
+
+
+/* Components */
 
 const IngredientLabels = () => {
     return (
