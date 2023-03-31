@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import ConfirmationDialog from './ConfirmationDialog';
+import axios from 'axios';
 
 function RecipeModal({ recipe }) {
     const [show, setShow] = useState(false);
@@ -40,7 +41,10 @@ function RecipeModal({ recipe }) {
                     <Button variant="primary" style={{marginTop: '2%', marginLeft:'15%', marginBottom: '2%'}} onClick={() => setShowDeleteModal(true)}>Delete</Button>
                     <ConfirmationDialog
                         show={showDeleteModal}
-                        onConfirm={() => { alert('Confirmed!'); setShowDeleteModal(false); }}
+                        onConfirm={() => {
+                        axios.delete(`http://localhost:8080/api/recipes/${recipe._id}`).then(() => {setShow(false); setShowDeleteModal(false);});
+                    }}
+
                         onCancel={() => setShowDeleteModal(false)}
                         title='Confirm delete'
                     >
