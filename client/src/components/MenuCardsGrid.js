@@ -56,7 +56,6 @@ const MenuCardsOutput = () => {
                 return (
                     <div className="text-center">
                        <button className="btn btn-danger" type="button">
-                          <span className="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
                           ...server not responding...
                       </button>
                     </div>
