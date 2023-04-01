@@ -8,7 +8,7 @@ import Col from 'react-bootstrap/Col';
 const MenuCardsOutput = () => {
     const [item, setItem] = useState([]);
 
-    const [ServerCall, setServerCall] = useState({
+    const [serverCall, setServerCall] = useState({
         state: "pending",
     });
 
@@ -25,7 +25,7 @@ const MenuCardsOutput = () => {
     }, [])
 
     function serverResponseState() {
-        switch (ServerCall.state) {
+        switch (serverCall.state) {
             case "pending":
                 return (
                     <div className="text-center">
