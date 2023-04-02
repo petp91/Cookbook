@@ -5,6 +5,7 @@ import FormGroup from './FormGroup';
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 import Modal from "react-bootstrap/Modal";
 import axios from "axios";
+import AddRecipeConfirmDialog from "./AddRecipeConfirmDialog";
 
 const units = ['test', 'test2'];
 const newIngredientRowObj = () => {
@@ -17,6 +18,17 @@ const newIngredientRowObj = () => {
 };
 
 const RecipeEditor = ({ ingredients, recipe, show, onHide }) => {
+
+    const [ serverReply, setServerReply] = useState({
+        state: "pending",
+    })
+
+    const [ showAddRecipeConfirmDialog, setShowAddRecipeConfirmDialog] = useState(false)
+
+    function refreshPage() {  // todo ? JM refresh page to get new recipe and clear add form
+        window.location.reload();
+    }
+
     const [formState, setFormState] = useState({
         name: '',
         description: '',
@@ -47,6 +59,14 @@ const RecipeEditor = ({ ingredients, recipe, show, onHide }) => {
             }
         ]
         })
+            .then((response)=> {
+                setServerReply({ state: "success"});
+                console.log('success');
+            })
+            .catch(function (error) {
+                setServerReply({ state: "error"});
+                console.log('error');
+            });
     };
 
   //  console.clear();
@@ -126,7 +146,17 @@ const RecipeEditor = ({ ingredients, recipe, show, onHide }) => {
                             />
                         ))}
                         <Button className='mt-4' onClick={addIngredient}>Add ingredient</Button>
-                        <Button className='mt-4 float-end' variant={"success"} type="submit" >Save recipe</Button>
+
+                        <Button className='mt-4 float-end' variant={"success"} type="submit" onClick={() => setShowAddRecipeConfirmDialog(true)} >Save recipe</Button>
+
+                        <AddRecipeConfirmDialog
+                            show={showAddRecipeConfirmDialog}
+                            onCancel={() => {setShowAddRecipeConfirmDialog(false); setServerReply({ state: "pending"})}}
+                            title={serverReply.state}
+                            onSuccess={() => {setShowAddRecipeConfirmDialog(false);onHide(true); refreshPage() ; setServerReply({ state: "pending"})}}
+
+                        >
+                        </AddRecipeConfirmDialog>
                     </div>
                 </Form>
 

@@ -29,10 +29,8 @@ const MenuCardsOutput = () => {
             case "pending":
                 return (
                     <div className="text-center">
-                        <button className="btn btn-success" type="button" disabled>
                             <span className="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
                             ...loading...
-                        </button>
                     </div>
 
                 );
