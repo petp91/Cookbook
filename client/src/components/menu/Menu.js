@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Navbar, Container, Nav, Form } from 'react-bootstrap';
 import { NavLink, useNavigate } from 'react-router-dom';
-import SearchInputGroup from './SearchInputGroup';
+import SearchInputGroup from '../SearchInputGroup';
 import MenuAccount from './MenuAccount';
 
 const expandedNavLinkStyle = {
