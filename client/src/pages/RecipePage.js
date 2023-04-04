@@ -46,7 +46,6 @@ const RecipePage = () => {
             </Button>
             <AdvancedSearch show={showSearch} defaultQuery={query} />
             {query && <h2>Results for "{query}"</h2>}
-            <AddRecipe/>
             <div>
                 <Button
                     variant="btn btn-success"
