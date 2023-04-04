@@ -2,7 +2,7 @@ import {Modal, Button, Container, ModalHeader} from "react-bootstrap";
 
 const AddRecipeConfirmDialog = (props) => {
     function serverResponseState() {
-        switch (props.title) {
+        switch (props.stateOfServer) {
             case "pending":
                 return (
                     <Modal backdrop="static" show={props.show} onHide={props.onCancel}>
@@ -28,7 +28,7 @@ const AddRecipeConfirmDialog = (props) => {
                             <Modal.Body>
                                 <div className="text-center text-success">
                                     <h3>
-                                        Recipe was successfully saved
+                                        Recipe was successfully uploaded
                                     </h3>
                                 </div>
                             </Modal.Body>
@@ -48,7 +48,7 @@ const AddRecipeConfirmDialog = (props) => {
                                        Server not responding
                                     </h3>
                                     <h3>
-                                        Recipe was not saved !
+                                        Recipe was not uploaded !
                                     </h3>
                                 </div>
                             </Modal.Body>

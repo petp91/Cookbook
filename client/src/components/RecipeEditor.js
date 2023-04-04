@@ -25,7 +25,7 @@ const RecipeEditor = ({ ingredients, recipe, show, onHide }) => {
 
     const [ showAddRecipeConfirmDialog, setShowAddRecipeConfirmDialog] = useState(false)
 
-    function refreshPage() {  // todo ? JM refresh page to get new recipe and clear add form
+    function refreshPage() {  // todo ? JM refresh page to get new recipe on page and clear add form
         window.location.reload();
     }
 
@@ -152,9 +152,8 @@ const RecipeEditor = ({ ingredients, recipe, show, onHide }) => {
                         <AddRecipeConfirmDialog
                             show={showAddRecipeConfirmDialog}
                             onCancel={() => {setShowAddRecipeConfirmDialog(false); setServerReply({ state: "pending"})}}
-                            title={serverReply.state}
+                            stateOfServer={serverReply.state}
                             onSuccess={() => {setShowAddRecipeConfirmDialog(false);onHide(true); refreshPage() ; setServerReply({ state: "pending"})}}
-
                         >
                         </AddRecipeConfirmDialog>
                     </div>
