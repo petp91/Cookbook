@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Button, Form, Modal, Nav, NavDropdown, Dropdown, NavItem, NavLink } from 'react-bootstrap'
-import FormGroup from './FormGroup';
+import FormGroup from '../FormGroup';
 
 const MenuAccount = () => {
     const [loggedInUsername, setLoggedInUsername] = useState(null);
