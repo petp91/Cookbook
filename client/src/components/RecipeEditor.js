@@ -86,12 +86,12 @@ const RecipeEditor = ({ ingredients, recipe, show, onHide }) => {
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <Form onSubmit={onSubmit}>
+                <Form  onSubmit={onSubmit}>
                     <FormGroup
                         label='Recipe name'
                         type='text'
                         placeholder='Recipe name'
-                        value={formState.name}
+                        value={formState.name} required
                         setValue={val => setFormState({...formState, name: val})}
                     />
                     <FormGroup
@@ -99,7 +99,7 @@ const RecipeEditor = ({ ingredients, recipe, show, onHide }) => {
                         as='textarea'
                         placeholder='Description'
                         rows={5}
-                        value={formState.description}
+                        value={formState.description} required
                         setValue={val => setFormState({...formState, description: val})}
                     />
                     <div className="mt-3">
@@ -147,7 +147,11 @@ const RecipeEditor = ({ ingredients, recipe, show, onHide }) => {
                         ))}
                         <Button className='mt-4' onClick={addIngredient}>Add ingredient</Button>
 
-                        <Button className='mt-4 float-end' variant={"success"} type="submit" onClick={() => setShowAddRecipeConfirmDialog(true)} >Save recipe</Button>
+                        <Button className='mt-4 float-end'
+                                variant={"success"}
+                                type="submit"
+                                disabled={formState.name === "" || formState.description === ""}
+                                onClick={() => setShowAddRecipeConfirmDialog(true)}>Save recipe</Button>
 
                         <AddRecipeConfirmDialog
                             show={showAddRecipeConfirmDialog}

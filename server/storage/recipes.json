@@ -15,51 +15,6 @@
     "_id": "38a73de27cb69722"
   },
   {
-    "name": "běží to",
-    "description": "???",
-    "imageId": "",
-    "preparationLength": 60,
-    "finalAmount": 1,
-    "ingredients": [
-      {
-        "id": "",
-        "amount": 10,
-        "units": "g"
-      }
-    ],
-    "_id": "0227dd2ab70acd91"
-  },
-  {
-    "name": "asdad",
-    "description": "jdslkdnksld",
-    "imageId": "",
-    "preparationLength": 60,
-    "finalAmount": 1,
-    "ingredients": [
-      {
-        "id": "",
-        "amount": 10,
-        "units": "g"
-      }
-    ],
-    "_id": "fbea36c2b4ac39f1"
-  },
-  {
-    "name": "asdad",
-    "description": "jdslkdnksld",
-    "imageId": "",
-    "preparationLength": 60,
-    "finalAmount": 1,
-    "ingredients": [
-      {
-        "id": "",
-        "amount": 10,
-        "units": "g"
-      }
-    ],
-    "_id": "95855dd2e4ece7a0"
-  },
-  {
     "name": "jídlo",
     "description": "připrav jídlo",
     "imageId": "",
@@ -943,5 +898,35 @@
       }
     ],
     "_id": "992039051502fe26"
+  },
+  {
+    "name": "g",
+    "description": "n",
+    "imageId": "",
+    "preparationLength": 1,
+    "finalAmount": 1,
+    "ingredients": [
+      {
+        "id": "",
+        "amount": 10,
+        "units": "g"
+      }
+    ],
+    "_id": "efcfb9e44520893f"
+  },
+  {
+    "name": "l",
+    "description": "g",
+    "imageId": "",
+    "preparationLength": 1,
+    "finalAmount": 1,
+    "ingredients": [
+      {
+        "id": "",
+        "amount": 10,
+        "units": "g"
+      }
+    ],
+    "_id": "d2220b857bfe44c4"
   }
 ]
