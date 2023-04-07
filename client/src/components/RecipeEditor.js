@@ -82,7 +82,7 @@ const RecipeEditor = ({ ingredients, recipe, show, onHide }) => {
         >
             <Modal.Header closeButton>
                 <Modal.Title>
-                    Add new recipe
+                    Recipe
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
@@ -109,7 +109,7 @@ const RecipeEditor = ({ ingredients, recipe, show, onHide }) => {
                                     label='Preparation length (minutes)'
                                     type='number'
                                     placeholder='Preparation length in minutes'
-                                    value={formState.preparationLength} required
+                                    value={formState.preparationLength} required min={1}
                                     setValue={val => setFormState({...formState, preparationLength: val})}
                                 />
                             </Col>
@@ -118,7 +118,7 @@ const RecipeEditor = ({ ingredients, recipe, show, onHide }) => {
                                     label='Final amount (servings)'
                                     type='number'
                                     placeholder='Final amount in servings'
-                                    value={formState.finalAmount} required
+                                    value={formState.finalAmount} required min={1}
                                     setValue={val => setFormState({...formState, finalAmount: val})}
                                 />
                             </Col>
