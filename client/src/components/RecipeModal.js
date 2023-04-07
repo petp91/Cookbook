@@ -1,13 +1,24 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import ConfirmationDialog from './ConfirmationDialog';
 import axios from 'axios';
+import AddRecipeConfirmDialog from "./AddRecipeConfirmDialog";
 
 function RecipeModal({ recipe }) {
     const [show, setShow] = useState(false);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const handleShow = () => setShow(!show);
+
+    const [ showAddRecipeConfirmDialog, setShowAddRecipeConfirmDialog] = useState(false)
+
+    function refreshPage() {  // todo ? JM refresh page to get new recipe on page and clear add form
+        window.location.reload();
+    }
+
+    const [serverReply, setServerReply] = useState({
+        state: "pending",
+    });
 
     return (
         <>
@@ -37,19 +48,38 @@ function RecipeModal({ recipe }) {
 
                     <Button variant="primary" style={{marginTop: '2%', marginLeft:'15%', marginBottom: '2%'}}>Edit Recipe</Button>
 
-                    
                     <Button variant="primary" style={{marginTop: '2%', marginLeft:'15%', marginBottom: '2%'}} onClick={() => setShowDeleteModal(true)}>Delete</Button>
                     <ConfirmationDialog
                         show={showDeleteModal}
                         onConfirm={() => {
-                        axios.delete(`http://localhost:8080/api/recipes/${recipe._id}`).then(() => {setShow(false); setShowDeleteModal(false);});
+                        axios.delete(`http://localhost:8080/api/recipes/${recipe._id}`)
+                            .then(() => {
+                                setShow(true);
+                                setShowDeleteModal(true);
+                                setServerReply({ state: "success"})
+                            })
+                            .catch(function (error) {
+                                setServerReply({ state: "error"});
+                            });
+
+                        setShowAddRecipeConfirmDialog(true)
+
                     }}
 
                         onCancel={() => setShowDeleteModal(false)}
                         title='Confirm delete'
                     >
                         Are you sure you want to delete this recipe?
+
                     </ConfirmationDialog>
+
+                        <AddRecipeConfirmDialog
+                            show={showAddRecipeConfirmDialog}
+                            onCancel={() => {setShowAddRecipeConfirmDialog(false); setServerReply({ state: "pending"})}}
+                            stateOfServer={serverReply.state}
+                            onSuccess={() => {setShowAddRecipeConfirmDialog(false); refreshPage() ; setServerReply({ state: "pending"})}}
+                        >
+                        </AddRecipeConfirmDialog>
 
                     <Button variant="primary" style={{marginTop: '2%', marginLeft:'15%', marginBottom: '2%'}}>Like</Button>
                         
