@@ -4,11 +4,14 @@ import Modal from 'react-bootstrap/Modal';
 import ConfirmationDialog from './ConfirmationDialog';
 import axios from 'axios';
 import AddRecipeConfirmDialog from "./AddRecipeConfirmDialog";
+import RecipeEditor from './RecipeEditor';
 
-function RecipeModal({ recipe }) {
+function RecipeModal({ recipe, ingredients }) {
     const [show, setShow] = useState(false);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const handleShow = () => setShow(!show);
+
+    const [openAddRecipeModal, setOpenModal] = useState(false);
 
     const [ showAddRecipeConfirmDialog, setShowAddRecipeConfirmDialog] = useState(false)
 
@@ -30,8 +33,8 @@ function RecipeModal({ recipe }) {
                 </Modal.Header>
                 <Modal.Body>
                     <div style={{ display: 'flex', flexDirection: 'row'}}>
-                        <div style={{ flex: '1 1 150rem' , backgroundColor: 'blue'}}></div>
-                        <div style={{ marginLeft: '5px', backgroundColor:'#FFFFFF'}}>
+                        <div style={{ flex: '1' , backgroundColor: 'blue', width: '33%'}}></div>
+                        <div style={{ marginLeft: '5px', backgroundColor:'#FFFFFF', width:'66%'}}>
                             <h1 style={{textAlign: "center"}}>{recipe.name}</h1>
                             <ul>
                                 <li>Lorem</li>
@@ -46,9 +49,10 @@ function RecipeModal({ recipe }) {
                     </div>
                     <div style={{ display: 'flex', flexDirection: 'row'}}>
 
-                    <Button variant="primary" style={{marginTop: '2%', marginLeft:'15%', marginBottom: '2%'}}>Edit Recipe</Button>
+                    <Button variant="primary" style={{marginTop: '2%', marginLeft:'25%', marginBottom: '2%'}} onClick={() => setOpenModal(true)}>Edit Recipe</Button>
+                    <RecipeEditor show={openAddRecipeModal} recipe={recipe} ingredients={ingredients} onHide={()=> {setOpenModal(false);}}/>
 
-                    <Button variant="primary" style={{marginTop: '2%', marginLeft:'15%', marginBottom: '2%'}} onClick={() => setShowDeleteModal(true)}>Delete</Button>
+                    <Button variant="primary" style={{marginTop: '2%', marginLeft:'25%', marginBottom: '2%'}} onClick={() => setShowDeleteModal(true)}>Delete</Button>
                     <ConfirmationDialog
                         show={showDeleteModal}
                         onConfirm={() => {
@@ -81,7 +85,6 @@ function RecipeModal({ recipe }) {
                         >
                         </AddRecipeConfirmDialog>
 
-                    <Button variant="primary" style={{marginTop: '2%', marginLeft:'15%', marginBottom: '2%'}}>Like</Button>
                         
                    </div>
                 </Modal.Body>

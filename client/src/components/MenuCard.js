@@ -4,7 +4,7 @@ import Card from 'react-bootstrap/Card';
 import CardPicture from '../assets/CardPicture.jpg'
 import RecipeModal from './RecipeModal'
 
-const RecipeMenuCard = ({ recipe }) => {
+const RecipeMenuCard = ({ recipe, ingredients }) => {
     return (
 
         <Card className="recipeCard text-center m-4">
@@ -14,7 +14,7 @@ const RecipeMenuCard = ({ recipe }) => {
                 <Card.Text>
                     {recipe.description}
                 </Card.Text>
-                <RecipeModal recipe={recipe} />
+                <RecipeModal recipe={ recipe } ingredients={ingredients}/>
             </Card.Body>
         </Card>
 
