@@ -29,13 +29,41 @@ const RecipeEditor = ({ ingredients, recipe, show, onHide }) => {
         window.location.reload();
     }
 
-    const [formState, setFormState] = useState({
-        name: '',
-        description: '',
-        preparationLength: '',
-        finalAmount: '',
-        ingredientRows: [ newIngredientRowObj() ]
-    });
+    const [formState, setFormState] = useState(recipeToState(recipe));
+
+
+    function recipeToState(recipe) {
+
+        let recipeState;
+
+            if(recipe === undefined) {
+
+                recipeState = {
+                    name: '',
+                    description: '',
+                    preparationLength: '',
+                    finalAmount: '',
+                    ingredientRows: [ newIngredientRowObj() ]
+                    }
+
+            } else {
+
+                recipeState = {
+                    name: recipe.name,
+                    description: recipe.description,
+                    preparationLength: recipe.preparationLength.toString(),
+                    finalAmount: recipe.finalAmount.toString(),
+                    ingredientRows: [ newIngredientRowObj() ]
+                }
+            }
+
+
+        return recipeState;
+    }
+
+    function recipeFromState(formState) {
+        return {};
+    }
 
     const addIngredient = () => {
         formState.ingredientRows.push(newIngredientRowObj());
@@ -169,13 +197,6 @@ const RecipeEditor = ({ ingredients, recipe, show, onHide }) => {
     )
 }
 
-function recipeToState(recipe) {
-    return {};
-}
-
-function recipeFromState(formState) {
-    return {};
-}
 
 
 

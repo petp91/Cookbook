@@ -5,7 +5,7 @@ import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 
-const MenuCardsOutput = () => {
+const MenuCardsOutput = ({ ingredients }) => {
     const [item, setItem] = useState([]);
 
     const [serverCall, setServerCall] = useState({
@@ -42,7 +42,7 @@ const MenuCardsOutput = () => {
                                 {item.map((recipe) => {
                                     return (
                                         <Col key={recipe._id} className='d-flex justify-content-center' md={6} lg={4} xl={4} xxl={3}>
-                                            <RecipeMenuCard recipe={recipe}/>
+                                            <RecipeMenuCard recipe={recipe}  ingredients={ingredients}/>
                                         </Col>
                                     )
                                 })}

@@ -58,7 +58,7 @@ const RecipePage = () => {
                 </Button>
                 <RecipeEditor show={openAddRecipeModal} ingredients={ingredients} onHide={()=> {
                     setOpenModal(false);}}/>
-                <MenuCardsOutput />
+                <MenuCardsOutput ingredients={ingredients}/>
             </div>
 
         </div>
