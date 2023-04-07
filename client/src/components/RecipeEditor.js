@@ -86,7 +86,7 @@ const RecipeEditor = ({ ingredients, recipe, show, onHide }) => {
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <Form  onSubmit={onSubmit}>
+                <Form validated={true} onSubmit={onSubmit}>
                     <FormGroup
                         label='Recipe name'
                         type='text'
@@ -109,7 +109,7 @@ const RecipeEditor = ({ ingredients, recipe, show, onHide }) => {
                                     label='Preparation length (minutes)'
                                     type='number'
                                     placeholder='Preparation length in minutes'
-                                    value={formState.preparationLength}
+                                    value={formState.preparationLength} required
                                     setValue={val => setFormState({...formState, preparationLength: val})}
                                 />
                             </Col>
@@ -118,7 +118,7 @@ const RecipeEditor = ({ ingredients, recipe, show, onHide }) => {
                                     label='Final amount (servings)'
                                     type='number'
                                     placeholder='Final amount in servings'
-                                    value={formState.finalAmount}
+                                    value={formState.finalAmount} required
                                     setValue={val => setFormState({...formState, finalAmount: val})}
                                 />
                             </Col>
@@ -150,7 +150,7 @@ const RecipeEditor = ({ ingredients, recipe, show, onHide }) => {
                         <Button className='mt-4 float-end'
                                 variant={"success"}
                                 type="submit"
-                                disabled={formState.name === "" || formState.description === ""}
+                                disabled={formState.name === "" || formState.description === "" || formState.preparationLength <1 || formState.finalAmount <1}
                                 onClick={() => setShowAddRecipeConfirmDialog(true)}>Save recipe</Button>
 
                         <AddRecipeConfirmDialog
