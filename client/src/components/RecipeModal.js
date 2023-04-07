@@ -55,7 +55,6 @@ function RecipeModal({ recipe }) {
                         axios.delete(`http://localhost:8080/api/recipes/${recipe._id}`)
                             .then(() => {
                                 setShow(true);
-                                setShowDeleteModal(true);
                                 setServerReply({ state: "success"})
                             })
                             .catch(function (error) {
@@ -63,6 +62,7 @@ function RecipeModal({ recipe }) {
                             });
 
                         setShowAddRecipeConfirmDialog(true)
+                            setShowDeleteModal(false);
 
                     }}
 
