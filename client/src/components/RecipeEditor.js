@@ -13,7 +13,7 @@ const units = ['unit1', 'unit2', 'unit3', 'unit4', 'unit5'];
 const newIngredientRowObj = (recipe, ingredients) => {
 
     return {
-        key: crypto.randomUUID(),
+        key: Math.floor(Math.random()*10e12),
         selected: [],
         isLoading: false,
         name: '',
@@ -71,7 +71,7 @@ const RecipeEditor = ({ ingredients, recipe, show, onHide }) => {
 
 
                     ingredientRows.push({
-                        key: crypto.randomUUID(),
+                        key: Math.floor(Math.random()*10e12),
                         selected: [ingredientid],
                         isLoading: false,
                         amount: ingredient.amount.toString(),
@@ -132,6 +132,7 @@ const RecipeEditor = ({ ingredients, recipe, show, onHide }) => {
     return (
         <Modal
                size="xl"
+               fullscreen='lg-down'
                show={show}
                onHide={onHide}
                backdrop="static"
@@ -258,9 +259,9 @@ const RecipeEditor = ({ ingredients, recipe, show, onHide }) => {
 const IngredientLabels = () => {
     return (
         <Row className='gx-1'>
-            <Col xs={7}>Ingredient</Col>
-            <Col>Amount</Col>
-            <Col>Units</Col>
+            <Col md={7} xs>Ingredient</Col>
+            <Col md xs={3}>Amount</Col>
+            <Col md xs={4}>Units</Col>
             <Col style={{flex: '0 0 30px'}}></Col>
         </Row>
     )
@@ -274,7 +275,7 @@ const IngredientRow = ({ingredients, state, setState, isLoading, onRemove, isRem
     };
     return (
         <Row className='gx-1 mt-2 justify-content-center align-items-center'>
-            <Col xs={7}>
+            <Col md={7} xs>
                 <Typeahead
                     ref={typeaheadRef}
                     style={{flexGrow: '1'}}
@@ -303,11 +304,10 @@ const IngredientRow = ({ingredients, state, setState, isLoading, onRemove, isRem
                     )}
                 />
             </Col>
-            <Col>
+            <Col md xs={3}>
                 <Form.Control type='number' min={0} value={state.amount} onChange={(event) => setState({...state, amount: event.target.value})} />
             </Col>
-            <Col>
-                    
+            <Col md xs={4}>
                 <Form.Select value={state.units} onChange={(event) => setState({...state, units: event.target.value})}>
                     {units.map(unit => <option key={unit} value={unit}>{unit}</option>)}
                 </Form.Select>
