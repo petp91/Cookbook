@@ -6,7 +6,7 @@ import FormGroup from './FormGroup';
 import AddRecipeConfirmDialog from "./AddRecipeConfirmDialog";
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 
-const units = ['test', 'test2'];
+const units = ['unit1', 'unit2', 'unit3', 'unit4', 'unit5'];
 const newIngredientRowObj = () => {
     return {
         key: crypto.randomUUID(),
