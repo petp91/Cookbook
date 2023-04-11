@@ -6,14 +6,19 @@ import FormGroup from './FormGroup';
 import AddRecipeConfirmDialog from "./AddRecipeConfirmDialog";
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 
+
+
 const units = ['unit1', 'unit2', 'unit3', 'unit4', 'unit5'];
-const newIngredientRowObj = () => {
+
+const newIngredientRowObj = (recipe, ingredients) => {
+
     return {
         key: crypto.randomUUID(),
         selected: [],
         isLoading: false,
+        name: '',
         amount: '0',
-        units: units[0]
+        units: units[3]
     }
 };
 
@@ -34,9 +39,12 @@ const RecipeEditor = ({ ingredients, recipe, show, onHide }) => {
     }
 
 
+
+
     function recipeToState(recipe) {
 
         let recipeState;
+
 
             if(recipe === undefined) {
 
@@ -50,12 +58,34 @@ const RecipeEditor = ({ ingredients, recipe, show, onHide }) => {
 
             } else {
 
+                
+                console.log(recipe.ingredients[0]);
+
+                let ingredientRows = [];
+
+                recipe.ingredients.forEach(ingredient => {
+                    console.log(ingredient);
+
+                    let ingredientid = ingredients.find(e => e._id == ingredient.id);
+
+
+
+                    ingredientRows.push({
+                        key: crypto.randomUUID(),
+                        selected: [ingredientid],
+                        isLoading: false,
+                        amount: ingredient.amount.toString(),
+                        units:  ingredient.units
+                    })
+                });
+
+
                 recipeState = {
                     name: recipe.name,
                     description: recipe.description,
                     preparationLength: recipe.preparationLength.toString(),
                     finalAmount: recipe.finalAmount.toString(),
-                    ingredientRows: [ newIngredientRowObj() ]
+                    ingredientRows: ingredientRows
                 }
             }
 
@@ -277,7 +307,8 @@ const IngredientRow = ({ingredients, state, setState, isLoading, onRemove, isRem
                 <Form.Control type='number' min={0} value={state.amount} onChange={(event) => setState({...state, amount: event.target.value})} />
             </Col>
             <Col>
-                <Form.Select onChange={(event) => setState({...state, units: event.target.value})}>
+                    
+                <Form.Select value={state.units} onChange={(event) => setState({...state, units: event.target.value})}>
                     {units.map(unit => <option key={unit} value={unit}>{unit}</option>)}
                 </Form.Select>
             </Col>
