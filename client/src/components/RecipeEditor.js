@@ -1,23 +1,27 @@
-import React, { useState } from 'react';
-import { Button, Form, Row, Col, CloseButton } from 'react-bootstrap';
+import { useState, useRef } from 'react';
+import { Modal, Form, Row, Col, Button, CloseButton } from 'react-bootstrap';
 import { Typeahead, TypeaheadMenu } from 'react-bootstrap-typeahead';
-import FormGroup from './FormGroup';
-import 'react-bootstrap-typeahead/css/Typeahead.css';
-import Modal from "react-bootstrap/Modal";
 import axios from "axios";
+import FormGroup from './FormGroup';
 import AddRecipeConfirmDialog from "./AddRecipeConfirmDialog";
+import 'react-bootstrap-typeahead/css/Typeahead.css';
 
 const units = ['test', 'test2'];
 const newIngredientRowObj = () => {
     return {
         key: crypto.randomUUID(),
-        selected: [''],
+        selected: [],
+        isLoading: false,
         amount: '0',
         units: units[0]
     }
 };
 
 const RecipeEditor = ({ ingredients, recipe, show, onHide }) => {
+    const [formState, setFormState] = useState(recipeToState(recipe));
+    const [ingredientsState, setIngredientsState] = useState(ingredients);
+
+    console.log(JSON.stringify(formState, null, 4));
 
     const [ serverReply, setServerReply] = useState({
         state: "pending",
@@ -28,8 +32,6 @@ const RecipeEditor = ({ ingredients, recipe, show, onHide }) => {
     function refreshPage() {  // todo ? JM refresh page to get new recipe on page and clear add form
         window.location.reload();
     }
-
-    const [formState, setFormState] = useState(recipeToState(recipe));
 
 
     function recipeToState(recipe) {
@@ -97,11 +99,7 @@ const RecipeEditor = ({ ingredients, recipe, show, onHide }) => {
             });
     };
 
-  //  console.clear();
-    console.log(JSON.stringify(formState, null, 4));
-
     return (
-
         <Modal
                size="xl"
                show={show}
@@ -159,18 +157,43 @@ const RecipeEditor = ({ ingredients, recipe, show, onHide }) => {
                         {formState.ingredientRows.map((rowState, index) => (
                             <IngredientRow
                                 key={rowState.key}
-                                ingredients={ingredients}
+                                ingredients={ingredientsState}
                                 state={rowState}
                                 setState={(newState) => {
-                                    formState.ingredientRows[index] = newState;
-                                    // TODO: if the ingredient is new, add it to ingredients array (after actually creating it via network request)
-                                    setFormState({...formState});
+                                    // if the ingredient is new
+                                    if (newState.selected[0]?.customOption) {
+                                        // select a placeholder ingredient and set isLoading to true
+                                        let newIngredient = { _id: '0', name: newState.selected[0].name };
+                                        newState.selected = [ newIngredient ];
+                                        newState.isLoading = true;
+                            
+                                        // call the API to create a new ingredient
+                                        // TODO: replace setTimeout with an actual API call
+                                        setTimeout(() => {
+                                            // add the new ingredient to the ingredient list
+                                            setIngredientsState((prevIngredients) => [...prevIngredients, newIngredient]);
+                                            // select the newly created ingredient
+                                            updateState({ selected: [ newIngredient ], isLoading: false});
+                                        }, 1000);
+                                    }
+
+                                    updateState(newState);
+
+                                    function updateState(updates) {
+                                        setFormState((prevFormState) => {
+                                            prevFormState = {...prevFormState};
+                                            let prevRowState = prevFormState.ingredientRows[index];
+                                            prevFormState.ingredientRows[index] = {...prevRowState, ...updates};
+                                            return prevFormState;
+                                        });
+                                    }
                                 }}
+                                isLoading={rowState.isLoading}
                                 onRemove={() => {
                                     formState.ingredientRows.splice(index, 1);
                                     setFormState({...formState});
                                 }}
-                                removeBtnDisabled={formState.ingredientRows.length === 1}
+                                isRemoveBtnDisabled={formState.ingredientRows.length === 1}
                             />
                         ))}
                         <Button className='mt-4' onClick={addIngredient}>Add ingredient</Button>
@@ -205,15 +228,16 @@ const RecipeEditor = ({ ingredients, recipe, show, onHide }) => {
 const IngredientLabels = () => {
     return (
         <Row className='gx-1'>
-            <Col className='ps-2' xs={7}>Ingredient</Col>
-            <Col className='ps-2'>Amount</Col>
-            <Col className='ps-2'>Units</Col>
+            <Col xs={7}>Ingredient</Col>
+            <Col>Amount</Col>
+            <Col>Units</Col>
             <Col style={{flex: '0 0 30px'}}></Col>
         </Row>
     )
 }
 
-const IngredientRow = ({ingredients, state, setState, onRemove, removeBtnDisabled}) => {
+const IngredientRow = ({ingredients, state, setState, isLoading, onRemove, isRemoveBtnDisabled}) => {
+    const typeaheadRef = useRef();
     const setSelected = (selected) => {
         state.selected = selected;
         setState(state);
@@ -222,15 +246,19 @@ const IngredientRow = ({ingredients, state, setState, onRemove, removeBtnDisable
         <Row className='gx-1 mt-2 justify-content-center align-items-center'>
             <Col xs={7}>
                 <Typeahead
+                    ref={typeaheadRef}
                     style={{flexGrow: '1'}}
                     id='ingredient-typeahead'
                     placeholder='Ingredient'
                     allowNew
+                    flip
                     labelKey='name'
                     options={ingredients}
                     onChange={setSelected}
                     selected={state.selected}
-                    onBlur={() => {!state.selected[0] && setSelected([''])}}
+                    onBlur={() => { !state.selected[0] && typeaheadRef.current.clear(); }}
+                    isLoading={isLoading}
+                    disabled={isLoading}
                     // isInvalid={!state.selected[0]}
 
                     // re-implemented renderMenu function, just so that we can change the newSelectionPrefix
@@ -254,7 +282,7 @@ const IngredientRow = ({ingredients, state, setState, onRemove, removeBtnDisable
                 </Form.Select>
             </Col>
             <Col className='d-flex justify-content-center align-items-center' style={{flex: '0 0 30px'}}>
-                <CloseButton onClick={onRemove} disabled={removeBtnDisabled} />
+                <CloseButton onClick={onRemove} disabled={isRemoveBtnDisabled || isLoading} />
             </Col>
         </Row>
     )
