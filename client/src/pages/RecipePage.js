@@ -6,19 +6,14 @@ import { mdiFilter } from '@mdi/js';
 import AdvancedSearch from "../components/AdvancedSearch";
 import MenuCardsOutput from "../components/MenuCardsGrid";
 import RecipeEditor from "../components/RecipeEditor";
-import AddRecipe from "../components/AddRecipe";
 
-
-    const ingredients = [
-        {
-            _id: "1",
-            name: "Ingredience 1"
-        },
-        {
-            _id: "2",
-            name: "Test ingredience"
-        }
-    ];
+const mockIngredients = [
+    {_id: "1", name: "ingredient1"},
+    {_id: "2", name: "ingredient2"},
+    {_id: "3", name: "ingredient3"},
+    {_id: "4", name: "ingredient4"},
+    {_id: "5", name: "ingredient5"}
+];
 
 const RecipePage = () => {
 
@@ -56,9 +51,9 @@ const RecipePage = () => {
                     }}
                 >Add recipe
                 </Button>
-                <RecipeEditor show={openAddRecipeModal} ingredients={ingredients} onHide={()=> {
+                <RecipeEditor show={openAddRecipeModal} ingredients={mockIngredients} onHide={()=> {
                     setOpenModal(false);}}/>
-                <MenuCardsOutput ingredients={ingredients}/>
+                <MenuCardsOutput ingredients={mockIngredients}/>
             </div>
 
         </div>
