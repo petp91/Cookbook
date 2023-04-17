@@ -93,8 +93,26 @@ const RecipeEditor = ({ ingredients, recipe, show, onHide }) => {
         return recipeState;
     }
 
-    function recipeFromState(formState) {
-        return {};
+    function recipeFromState () {
+
+        let ingredientArray = [];
+        for (let x in formState.ingredientRows) {
+            formState.ingredientRows[x].id = formState.ingredientRows[x].selected[0]._id;
+            formState.ingredientRows[x].amount = + formState.ingredientRows[x].amount;
+            ingredientArray[x] = {
+                id:  formState.ingredientRows[x].id,
+                amount:  formState.ingredientRows[x].amount,
+                units: formState.ingredientRows[x].units
+            };
+        }
+        return({
+            "name": (formState.name),
+            "description": (formState.description),
+            "imageId": "",
+            "preparationLength": (+ formState.preparationLength),
+            "finalAmount": (+ formState.finalAmount),
+            "ingredients": (ingredientArray)
+        });
     }
 
     const addIngredient = () => {
@@ -104,21 +122,7 @@ const RecipeEditor = ({ ingredients, recipe, show, onHide }) => {
 
     const onSubmit = (event) => {
         event.preventDefault()
-        axios.post('http://localhost:8080/api/recipes',
-        {
-            name: formState.name,
-                description: formState.description,
-            imageId: "",
-            preparationLength: parseInt(formState.preparationLength),
-            finalAmount: parseInt(formState.finalAmount),
-            ingredients: [
-            {
-                id: "",
-                amount: 10,
-                units: "g"
-            }
-        ]
-        })
+        axios.post('http://localhost:8080/api/recipes', recipeFromState(formState))
             .then((response)=> {
                 setServerReply({ state: "success"});
                 console.log('success');
@@ -138,7 +142,7 @@ const RecipeEditor = ({ ingredients, recipe, show, onHide }) => {
         >
             <Modal.Header closeButton>
                 <Modal.Title>
-                    Add new recipe
+                    Recipe
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
@@ -165,7 +169,7 @@ const RecipeEditor = ({ ingredients, recipe, show, onHide }) => {
                                     label='Preparation length (minutes)'
                                     type='number'
                                     placeholder='Preparation length in minutes'
-                                    value={formState.preparationLength} required
+                                    value={formState.preparationLength} required min={1}
                                     setValue={val => setFormState({...formState, preparationLength: val})}
                                 />
                             </Col>
@@ -174,7 +178,7 @@ const RecipeEditor = ({ ingredients, recipe, show, onHide }) => {
                                     label='Final amount (servings)'
                                     type='number'
                                     placeholder='Final amount in servings'
-                                    value={formState.finalAmount} required
+                                    value={formState.finalAmount} required min={1}
                                     setValue={val => setFormState({...formState, finalAmount: val})}
                                 />
                             </Col>
