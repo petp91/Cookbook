@@ -3,12 +3,12 @@
     "name": "Recept s ingrediencemi",
     "description": "Příprava trvá 60 minut a počet porcí je 5. Recept má 3 ingredience.",
     "imageId": "",
-    "preparationLength": 60,
+    "preparationLength": 15,
     "finalAmount": 5,
     "ingredients": [
       {
         "id": "1",
-        "amount": 100,
+        "amount": 50,
         "units": "unit1"
       },
       {
@@ -28,7 +28,7 @@
     "name": "jídlo",
     "description": "připrav jídlo",
     "imageId": "",
-    "preparationLength": 60,
+    "preparationLength": 1,
     "finalAmount": 1,
     "ingredients": [
       {
