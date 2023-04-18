@@ -51,11 +51,23 @@ async function getRecipe(id) {
     return recipe
 }
 
+async function editRecipe(id, editedRecipe) {
+    let recipes = await getAllRecipes();
+
+    let recipe = recipes.find((recipe) => id === recipe._id);
+
+    Object.assign(recipe, editedRecipe);
+
+    await _write(recipes);
+    return recipe;
+}
+
 
 module.exports = {
     addRecipe,
     getAllRecipes,
     getFilteredRecipes,
     deleteRecipes,
-    getRecipe
+    getRecipe,
+    editRecipe
 }

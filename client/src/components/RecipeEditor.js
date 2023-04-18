@@ -57,8 +57,7 @@ const RecipeEditor = ({ ingredients, recipe, show, onHide }) => {
                     }
 
             } else {
-
-
+                
                 let ingredientRows = [];
 
                 recipe.ingredients.forEach(ingredient => {
@@ -85,10 +84,9 @@ const RecipeEditor = ({ ingredients, recipe, show, onHide }) => {
                     finalAmount: recipe.finalAmount.toString(),
                     ingredientRows: ingredientRows
                 }
-
             }
 
-        
+
         return recipeState;
     }
 
@@ -121,6 +119,21 @@ const RecipeEditor = ({ ingredients, recipe, show, onHide }) => {
 
     const onSubmit = (event) => {
         event.preventDefault()
+        if (recipe != undefined) {
+            
+           axios.put(`http://localhost:8080/api/recipes/${recipe._id}`, recipeFromState(formState))
+                .then((response)=> {
+                    setServerReply({ state: "success"});
+                    console.log('success');
+                })
+                .catch(function (error) {
+                    setServerReply({ state: "error"});
+                    console.log('error');
+                });
+
+
+        } else {
+        
         axios.post('http://localhost:8080/api/recipes', recipeFromState(formState))
             .then((response)=> {
                 setServerReply({ state: "success"});
@@ -131,6 +144,7 @@ const RecipeEditor = ({ ingredients, recipe, show, onHide }) => {
                 console.log('error');
             });
     };
+}
 
     return (
         <Modal
