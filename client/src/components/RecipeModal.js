@@ -5,6 +5,7 @@ import ConfirmationDialog from './ConfirmationDialog';
 import axios from 'axios';
 import AddRecipeConfirmDialog from "./AddRecipeConfirmDialog";
 import RecipeEditor from './RecipeEditor';
+import { ListGroup, ListGroupItem } from 'react-bootstrap';
 
 function RecipeModal({ recipe, ingredients }) {
     const [show, setShow] = useState(false);
@@ -23,6 +24,38 @@ function RecipeModal({ recipe, ingredients }) {
         state: "pending",
     });
 
+    let ingredientRows = [];
+
+    recipe.ingredients.forEach(ingredient => {
+
+            let ingredientid = ingredients.find(e => e._id == ingredient.id);
+
+
+
+            ingredientRows.push({
+                key: crypto.randomUUID(),
+                selected: [ingredientid],
+                isLoading: false,
+                amount: ingredient.amount.toString(),
+                units:  ingredient.units
+            }
+            )
+        }
+        );
+        
+    function returnList (ingredientRows) {
+
+        let returnListArray = [];
+
+        for (let i = 0; i < ingredientRows.length; i++) {
+            returnListArray.push(<ListGroup.Item as="li">{ingredients[i].name + "\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0" + ingredientRows[i].amount.toString() + "" + ingredientRows[i].units}</ListGroup.Item>);
+        }
+
+
+        return returnListArray;
+        
+    }
+
     return (
         <>
             <Button className='w-100' variant='outline-success' onClick={handleShow}>Details</Button>
@@ -36,15 +69,10 @@ function RecipeModal({ recipe, ingredients }) {
                         <div style={{ flex: '1' , backgroundColor: 'blue', width: '33%'}}></div>
                         <div style={{ marginLeft: '5px', backgroundColor:'#FFFFFF', width:'66%'}}>
                             <h1 style={{textAlign: "center"}}>{recipe.name}</h1>
-                            <ul>
-                                <li>Lorem</li>
-                                <li>ipsum</li>
-                                <li>Lorem</li>
-                                <li>ipsum</li>                                
-                                <li>ipsum</li>
-
-                            </ul>
-                            {recipe.description}
+                            <ListGroup as="ul" style={{marginTop: '5%'}}>
+                                {returnList(ingredientRows)}
+                            </ListGroup>
+                            <p style={{marginTop: '5%'}}>{recipe.description}</p>
                             </div>
                     </div>
                     <div style={{ display: 'flex', flexDirection: 'row'}}>
