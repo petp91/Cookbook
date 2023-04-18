@@ -58,8 +58,6 @@ const RecipeEditor = ({ ingredients, recipe, show, onHide }) => {
 
             } else {
 
-                
-                console.log(recipe.ingredients[0]);
 
                 let ingredientRows = [];
 
@@ -87,9 +85,10 @@ const RecipeEditor = ({ ingredients, recipe, show, onHide }) => {
                     finalAmount: recipe.finalAmount.toString(),
                     ingredientRows: ingredientRows
                 }
+
             }
 
-
+        
         return recipeState;
     }
 
