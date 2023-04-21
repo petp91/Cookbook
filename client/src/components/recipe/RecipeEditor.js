@@ -2,11 +2,9 @@ import { useState, useRef } from 'react';
 import { Modal, Form, Row, Col, Button, CloseButton } from 'react-bootstrap';
 import { Typeahead, TypeaheadMenu } from 'react-bootstrap-typeahead';
 import axios from "axios";
-import FormGroup from './FormGroup';
-import AddRecipeConfirmDialog from "./AddRecipeConfirmDialog";
+import FormGroup from '../FormGroup';
+import CallStatusDialog from "./CallStatusDialog";
 import 'react-bootstrap-typeahead/css/Typeahead.css';
-
-
 
 const units = ['unit1', 'unit2', 'unit3', 'unit4', 'unit5'];
 
@@ -22,7 +20,7 @@ const newIngredientRowObj = (recipe, ingredients) => {
     }
 };
 
-const RecipeEditor = ({ ingredients, recipe, show, onHide }) => {
+const RecipeEditor = ({ ingredients, recipe, show, onHide, reload }) => {
     const [formState, setFormState] = useState(recipeToState(recipe));
     const [ingredientsState, setIngredientsState] = useState(ingredients);
 
@@ -34,17 +32,10 @@ const RecipeEditor = ({ ingredients, recipe, show, onHide }) => {
 
     const [ showAddRecipeConfirmDialog, setShowAddRecipeConfirmDialog] = useState(false)
 
-    function refreshPage() {  // todo ? JM refresh page to get new recipe on page and clear add form
-        window.location.reload();
-    }
-
-
-
 
     function recipeToState(recipe) {
 
         let recipeState;
-
 
             if(recipe === undefined) {
 
@@ -64,8 +55,6 @@ const RecipeEditor = ({ ingredients, recipe, show, onHide }) => {
                     console.log(ingredient);
 
                     let ingredientid = ingredients.find(e => e._id == ingredient.id);
-
-
 
                     ingredientRows.push({
                         key: Math.floor(Math.random()*10e12),
@@ -252,13 +241,13 @@ const RecipeEditor = ({ ingredients, recipe, show, onHide }) => {
                                 disabled={formState.name === "" || formState.description === "" || formState.preparationLength <1 || formState.finalAmount <1}
                                 onClick={() => setShowAddRecipeConfirmDialog(true)}>Save recipe</Button>
 
-                        <AddRecipeConfirmDialog
+                        <CallStatusDialog
                             show={showAddRecipeConfirmDialog}
                             onCancel={() => {setShowAddRecipeConfirmDialog(false); setServerReply({ state: "pending"})}}
                             stateOfServer={serverReply.state}
-                            onSuccess={() => {setShowAddRecipeConfirmDialog(false);onHide(true); refreshPage() ; setServerReply({ state: "pending"})}}
+                            onSuccess={() => {setShowAddRecipeConfirmDialog(false);onHide(true); reload() ; setServerReply({ state: "pending"})}}
                         >
-                        </AddRecipeConfirmDialog>
+                        </CallStatusDialog>
                     </div>
                 </Form>
 

@@ -1,6 +1,6 @@
 import {Modal, Button, Spinner} from "react-bootstrap";
 
-const AddRecipeConfirmDialog = (props) => {
+const CallStatusDialog = (props) => {
     function serverResponseState() {
         switch (props.stateOfServer) {
             case "pending":
@@ -56,4 +56,4 @@ const AddRecipeConfirmDialog = (props) => {
 
     return <div>{serverResponseState()}</div>;
 }
-export default AddRecipeConfirmDialog;
+export default CallStatusDialog;

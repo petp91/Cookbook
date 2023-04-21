@@ -3,11 +3,11 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import ConfirmationDialog from './ConfirmationDialog';
 import axios from 'axios';
-import AddRecipeConfirmDialog from "./AddRecipeConfirmDialog";
-import RecipeEditor from './RecipeEditor';
+import CallStatusDialog from "./recipe/CallStatusDialog";
+import RecipeEditor from './recipe/RecipeEditor';
 import { ListGroup, ListGroupItem } from 'react-bootstrap';
 
-function RecipeModal({ recipe, ingredients }) {
+function RecipeModal({ recipe, ingredients, reload }) {
     const [show, setShow] = useState(false);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const handleShow = () => setShow(!show);
@@ -15,10 +15,6 @@ function RecipeModal({ recipe, ingredients }) {
     const [openAddRecipeModal, setOpenModal] = useState(false);
 
     const [ showAddRecipeConfirmDialog, setShowAddRecipeConfirmDialog] = useState(false)
-
-    function refreshPage() {  // todo ? JM refresh page to get new recipe on page and clear add form
-        window.location.reload();
-    }
 
     const [serverReply, setServerReply] = useState({
         state: "pending",
@@ -78,7 +74,7 @@ function RecipeModal({ recipe, ingredients }) {
                     <div style={{ display: 'flex', flexDirection: 'row'}}>
 
                     <Button variant="primary" style={{marginTop: '2%', marginLeft:'25%', marginBottom: '2%'}} onClick={() => setOpenModal(true)}>Edit Recipe</Button>
-                    <RecipeEditor show={openAddRecipeModal} recipe={recipe} ingredients={ingredients} onHide={()=> {setOpenModal(false);}}/>
+                    <RecipeEditor reload={reload} show={openAddRecipeModal} recipe={recipe} ingredients={ingredients} onHide={()=> {setOpenModal(false);}}/>
 
                     <Button variant="primary" style={{marginTop: '2%', marginLeft:'25%', marginBottom: '2%'}} onClick={() => setShowDeleteModal(true)}>Delete</Button>
                     <ConfirmationDialog
@@ -105,13 +101,13 @@ function RecipeModal({ recipe, ingredients }) {
 
                     </ConfirmationDialog>
 
-                        <AddRecipeConfirmDialog
+                        <CallStatusDialog
                             show={showAddRecipeConfirmDialog}
                             onCancel={() => {setShowAddRecipeConfirmDialog(false); setServerReply({ state: "pending"})}}
                             stateOfServer={serverReply.state}
-                            onSuccess={() => {setShowAddRecipeConfirmDialog(false); refreshPage() ; setServerReply({ state: "pending"})}}
+                            onSuccess={() => {setShowAddRecipeConfirmDialog(false); setShow(false); reload(); setServerReply({ state: "pending"})}}
                         >
-                        </AddRecipeConfirmDialog>
+                        </CallStatusDialog>
 
                         
                    </div>

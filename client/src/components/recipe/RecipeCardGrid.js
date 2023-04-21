@@ -1,28 +1,10 @@
-import React, {useEffect, useState} from "react";
-import axios from "axios";
-import RecipeMenuCard from "../components/MenuCard";
+import React from "react";
+import RecipeCard from "./RecipeCard";
 import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 
-const MenuCardsOutput = ({ ingredients }) => {
-    const [item, setItem] = useState([]);
-
-    const [serverCall, setServerCall] = useState({
-        state: "pending",
-    });
-
-    useEffect(()=> {
-        axios.get('http://localhost:8080/api/recipes')
-            .then((response)=> {
-                console.log(response);
-                setItem(response.data);
-                setServerCall({ state: "success"});
-            })
-            .catch(function (error) {
-                setServerCall({ state: "error"});
-            });
-    }, [])
+const RecipeCardGrid = ({ ingredients, serverCall, reload }) => {
 
     function serverResponseState() {
         switch (serverCall.state) {
@@ -39,10 +21,10 @@ const MenuCardsOutput = ({ ingredients }) => {
                     <>
                         <Container>
                             <Row>
-                                {item.map((recipe) => {
+                                {serverCall.data.map((recipe) => {
                                     return (
                                         <Col key={recipe._id} className='d-flex justify-content-center' md={6} lg={4} xl={4} xxl={3}>
-                                            <RecipeMenuCard recipe={recipe}  ingredients={ingredients}/>
+                                            <RecipeCard reload={reload} recipe={recipe} ingredients={ingredients}/>
                                         </Col>
                                     )
                                 })}
@@ -66,4 +48,4 @@ const MenuCardsOutput = ({ ingredients }) => {
     return <div>{serverResponseState()}</div>;
 }
 
-export default MenuCardsOutput;
+export default RecipeCardGrid;

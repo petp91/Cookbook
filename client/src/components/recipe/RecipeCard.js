@@ -1,8 +1,8 @@
 import React from "react";
-import '../layout/MenuCard-style.css';
+import '../../layout/MenuCard-style.css';
 import Card from 'react-bootstrap/Card';
-import CardPicture from '../assets/CardPicture.jpg'
-import RecipeModal from './RecipeModal'
+import CardPicture from '../../assets/CardPicture.jpg'
+import RecipeModal from '../RecipeModal'
 
 const mockIngredients = [
     {_id: "1", name: "ingredient1"},
@@ -12,7 +12,7 @@ const mockIngredients = [
     {_id: "5", name: "ingredient5"}
 ];
 
-const RecipeMenuCard = ({ recipe, ingredients }) => {
+const RecipeCard = ({ recipe, ingredients, reload }) => {
     return (
 
         <Card className="recipeCard text-center m-4">
@@ -22,11 +22,11 @@ const RecipeMenuCard = ({ recipe, ingredients }) => {
                 <Card.Text>
                     {recipe.description}
                 </Card.Text>
-                <RecipeModal recipe={recipe} ingredients={mockIngredients}/> {/* Tady si to pak přepište zpět na ingredients a smažte const mockIngredients */}
+                <RecipeModal reload={reload} recipe={recipe} ingredients={mockIngredients}/> {/* Tady si to pak přepište zpět na ingredients a smažte const mockIngredients */}
             </Card.Body>
         </Card>
 
     );
 };
 
-export default RecipeMenuCard;
+export default RecipeCard;

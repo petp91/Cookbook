@@ -4,8 +4,10 @@ import { useSearchParams } from "react-router-dom";
 import Icon from '@mdi/react';
 import { mdiFilter } from '@mdi/js';
 import AdvancedSearch from "../components/AdvancedSearch";
-import MenuCardsOutput from "../components/MenuCardsGrid";
-import RecipeEditor from "../components/RecipeEditor";
+import RecipeCardGrid from "../components/recipe/RecipeCardGrid";
+import RecipeEditor from "../components/recipe/RecipeEditor";
+import axios from "axios";
+import RecipeModal from "../components/RecipeModal";
 
 const mockIngredients = [
     {_id: "1", name: "ingredient1"},
@@ -15,9 +17,32 @@ const mockIngredients = [
     {_id: "5", name: "ingredient5"}
 ];
 
-
-
 const RecipePage = () => {
+
+    const [serverCall, setServerCall] = useState({
+        state: "pending",data: {}
+    });
+
+    function reload () {
+
+        setServerCall({ state: "pending", data: {}})
+
+        axios.get('http://localhost:8080/api/recipes')
+            .then((response)=> {
+                console.log(response);
+                setServerCall({ state: "success", data: response.data});
+            })
+            .catch(function (error) {
+                setServerCall({ state: "error", data: error?.response?.data});
+                console.log(error?.response?.data)
+            });
+    }
+
+    useEffect(()=> {
+        reload()
+
+    }, [])
+
 
     const [openAddRecipeModal, setOpenModal] = useState(false);
 
@@ -53,9 +78,9 @@ const RecipePage = () => {
                     }}
                 >Add recipe
                 </Button>
-                <RecipeEditor show={openAddRecipeModal} ingredients={mockIngredients} onHide={()=> {
+                <RecipeEditor show={openAddRecipeModal} ingredients={mockIngredients} reload={reload} onHide={()=> {
                     setOpenModal(false);}}/>
-                <MenuCardsOutput ingredients={mockIngredients}/>
+                <RecipeCardGrid reload={reload} ingredients={mockIngredients} serverCall={serverCall}/>
             </div>
 
         </div>
