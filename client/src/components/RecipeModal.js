@@ -3,8 +3,8 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import ConfirmationDialog from './ConfirmationDialog';
 import axios from 'axios';
-import AddRecipeConfirmDialog from "./AddRecipeConfirmDialog";
-import RecipeEditor from './RecipeEditor';
+import CallStatusDialog from "./recipe/CallStatusDialog";
+import RecipeEditor from './recipe/RecipeEditor';
 import { ListGroup, ListGroupItem } from 'react-bootstrap';
 
 function RecipeModal({ recipe, ingredients, reload }) {
@@ -101,13 +101,13 @@ function RecipeModal({ recipe, ingredients, reload }) {
 
                     </ConfirmationDialog>
 
-                        <AddRecipeConfirmDialog
+                        <CallStatusDialog
                             show={showAddRecipeConfirmDialog}
                             onCancel={() => {setShowAddRecipeConfirmDialog(false); setServerReply({ state: "pending"})}}
                             stateOfServer={serverReply.state}
                             onSuccess={() => {setShowAddRecipeConfirmDialog(false); setShow(false); reload(); setServerReply({ state: "pending"})}}
                         >
-                        </AddRecipeConfirmDialog>
+                        </CallStatusDialog>
 
                         
                    </div>

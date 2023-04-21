@@ -1,10 +1,10 @@
 import React from "react";
-import RecipeMenuCard from "../components/MenuCard";
+import RecipeCard from "./RecipeCard";
 import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 
-const MenuCardsOutput = ({ ingredients, serverCall, reload }) => {
+const RecipeCardGrid = ({ ingredients, serverCall, reload }) => {
 
     function serverResponseState() {
         switch (serverCall.state) {
@@ -24,7 +24,7 @@ const MenuCardsOutput = ({ ingredients, serverCall, reload }) => {
                                 {serverCall.data.map((recipe) => {
                                     return (
                                         <Col key={recipe._id} className='d-flex justify-content-center' md={6} lg={4} xl={4} xxl={3}>
-                                            <RecipeMenuCard reload={reload} recipe={recipe}  ingredients={ingredients}/>
+                                            <RecipeCard reload={reload} recipe={recipe} ingredients={ingredients}/>
                                         </Col>
                                     )
                                 })}
@@ -48,4 +48,4 @@ const MenuCardsOutput = ({ ingredients, serverCall, reload }) => {
     return <div>{serverResponseState()}</div>;
 }
 
-export default MenuCardsOutput;
+export default RecipeCardGrid;

@@ -4,8 +4,8 @@ import { useSearchParams } from "react-router-dom";
 import Icon from '@mdi/react';
 import { mdiFilter } from '@mdi/js';
 import AdvancedSearch from "../components/AdvancedSearch";
-import MenuCardsOutput from "../components/MenuCardsGrid";
-import RecipeEditor from "../components/RecipeEditor";
+import RecipeCardGrid from "../components/recipe/RecipeCardGrid";
+import RecipeEditor from "../components/recipe/RecipeEditor";
 import axios from "axios";
 import RecipeModal from "../components/RecipeModal";
 
@@ -80,7 +80,7 @@ const RecipePage = () => {
                 </Button>
                 <RecipeEditor show={openAddRecipeModal} ingredients={mockIngredients} reload={reload} onHide={()=> {
                     setOpenModal(false);}}/>
-                <MenuCardsOutput reload={reload} ingredients={mockIngredients} serverCall={serverCall}/>
+                <RecipeCardGrid reload={reload} ingredients={mockIngredients} serverCall={serverCall}/>
             </div>
 
         </div>
