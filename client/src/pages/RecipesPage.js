@@ -4,7 +4,7 @@ import { useSearchParams } from "react-router-dom";
 import Icon from '@mdi/react';
 import { mdiFilter } from '@mdi/js';
 import AdvancedSearch from "../components/AdvancedSearch";
-import RecipeCardGrid from "../components/recipe/RecipeCardGrid";
+import RecipeCardsGrid from "../components/recipe/RecipeCardsGrid";
 import RecipeEditor from "../components/recipe/RecipeEditor";
 import axios from "axios";
 import RecipeModal from "../components/RecipeModal";
@@ -17,7 +17,7 @@ const mockIngredients = [
     {_id: "5", name: "ingredient5"}
 ];
 
-const RecipePage = () => {
+const RecipesPage = () => {
 
     const [serverCall, setServerCall] = useState({
         state: "pending",data: {}
@@ -80,7 +80,7 @@ const RecipePage = () => {
                 </Button>
                 <RecipeEditor show={openAddRecipeModal} ingredients={mockIngredients} reload={reload} onHide={()=> {
                     setOpenModal(false);}}/>
-                <RecipeCardGrid reload={reload} ingredients={mockIngredients} serverCall={serverCall}/>
+                <RecipeCardsGrid reload={reload} ingredients={mockIngredients} serverCall={serverCall}/>
             </div>
 
         </div>
@@ -88,4 +88,4 @@ const RecipePage = () => {
     );
 };
 
-export default RecipePage;
+export default RecipesPage;

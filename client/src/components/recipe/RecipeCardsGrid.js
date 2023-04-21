@@ -4,7 +4,7 @@ import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 
-const RecipeCardGrid = ({ ingredients, serverCall, reload }) => {
+const RecipeCardsGrid = ({ ingredients, serverCall, reload }) => {
 
     function serverResponseState() {
         switch (serverCall.state) {
@@ -48,4 +48,4 @@ const RecipeCardGrid = ({ ingredients, serverCall, reload }) => {
     return <div>{serverResponseState()}</div>;
 }
 
-export default RecipeCardGrid;
+export default RecipeCardsGrid;

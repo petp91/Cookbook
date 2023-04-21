@@ -1,6 +1,6 @@
 import {Modal, Button, Spinner} from "react-bootstrap";
 
-const CallStatusDialog = (props) => {
+const CallStateModal = (props) => {
     function serverResponseState() {
         switch (props.stateOfServer) {
             case "pending":
@@ -56,4 +56,4 @@ const CallStatusDialog = (props) => {
 
     return <div>{serverResponseState()}</div>;
 }
-export default CallStatusDialog;
+export default CallStateModal;
