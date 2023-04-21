@@ -12,7 +12,7 @@ const mockIngredients = [
     {_id: "5", name: "ingredient5"}
 ];
 
-const RecipeMenuCard = ({ recipe, ingredients }) => {
+const RecipeMenuCard = ({ recipe, ingredients, reload }) => {
     return (
 
         <Card className="recipeCard text-center m-4">
@@ -22,7 +22,7 @@ const RecipeMenuCard = ({ recipe, ingredients }) => {
                 <Card.Text>
                     {recipe.description}
                 </Card.Text>
-                <RecipeModal recipe={recipe} ingredients={mockIngredients}/> {/* Tady si to pak přepište zpět na ingredients a smažte const mockIngredients */}
+                <RecipeModal reload={reload} recipe={recipe} ingredients={mockIngredients}/> {/* Tady si to pak přepište zpět na ingredients a smažte const mockIngredients */}
             </Card.Body>
         </Card>
 
