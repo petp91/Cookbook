@@ -14,7 +14,7 @@ const newIngredientRowObj = () => {
         selected: [],
         isLoading: false,
         name: '',
-        amount: '0',
+        amount: '1',
         units: units[0]
     }
 };
@@ -354,7 +354,7 @@ const IngredientRow = ({ingredients, state, setState, isLoading, onRemove, isRem
                 />
             </Col>
             <Col md xs={3}>
-                <Form.Control type='number' min={0} value={state.amount} onChange={(event) => setState({...state, amount: event.target.value})} />
+                <Form.Control type='number' min={1} required value={state.amount} onChange={(event) => setState({...state, amount: event.target.value})} />
             </Col>
             <Col md xs={4}>
                 <Form.Select value={state.units} onChange={(event) => setState({...state, units: event.target.value})}>
