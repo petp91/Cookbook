@@ -19,7 +19,6 @@ const RecipeCardsGrid = ({ ingredients, serverCall, reload }) => {
             case "success":
                 return (
                     <>
-                        <Container>
                             <Row>
                                 {serverCall.data.map((recipe) => {
                                     return (
@@ -29,7 +28,6 @@ const RecipeCardsGrid = ({ ingredients, serverCall, reload }) => {
                                     )
                                 })}
                             </Row>
-                        </Container>
                     </>
                 );
             case "error":
