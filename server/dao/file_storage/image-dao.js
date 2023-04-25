@@ -6,6 +6,19 @@ const STORAGE_DIR_PATH = process.env.STORAGE_PATH || path.join(__dirname, '../..
 const JSON_FILE_PATH = path.resolve(STORAGE_DIR_PATH, 'images.json');
 
 
+async function getAllImageIds() {
+    let images = await _read();
+    return images.map(image => { return { _id: image._id }; });
+}
+
+async function getImage(id) {
+    let images = await _read();
+    let image = images.find(image => image._id === id);
+    if (!image) return undefined;
+    let { _id, base64, contentType } = image;
+    return { _id, data: Buffer.from(base64, 'base64'), contentType };
+}
+
 async function addImage(image) {
     let { data, contentType } = image;
     let _id = crypto.randomBytes(8).toString('hex');
@@ -28,19 +41,6 @@ async function updateImage(image) {
     imageObj.contentType = contentType;
     await _write(images);
     return { _id, data, contentType };
-}
-
-async function getImage(id) {
-    let images = await _read();
-    let image = images.find(image => image._id === id);
-    if (!image) return undefined;
-    let { _id, base64, contentType } = image;
-    return { _id, data: Buffer.from(base64, 'base64'), contentType };
-}
-
-async function getAllImageIds() {
-    let images = await _read();
-    return images.map(image => { return { _id: image._id }; });
 }
 
 async function deleteImage(id) {
@@ -70,9 +70,9 @@ async function _write(data) {
 
 
 module.exports = {
+    getAllImageIds,
+    getImage,
     addImage,
     updateImage,
-    getImage,
-    getAllImageIds,
     deleteImage
 }
