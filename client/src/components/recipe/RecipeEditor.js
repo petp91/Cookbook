@@ -140,7 +140,10 @@ const RecipeEditor = ({ ingredients, recipe, show, onHide, reload }) => {
                size="xl"
                fullscreen='lg-down'
                show={show}
-               onHide={onHide}
+               onHide={() => {
+                   onHide()
+                   setFormState(recipeToState(recipe))
+               }}
                backdrop="static"
         >
             <Modal.Header closeButton>

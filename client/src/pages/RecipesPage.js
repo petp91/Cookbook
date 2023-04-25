@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Button } from "react-bootstrap";
+import {Button, Container} from "react-bootstrap";
 import { useSearchParams } from "react-router-dom";
 import Icon from '@mdi/react';
 import { mdiFilter } from '@mdi/js';
@@ -61,27 +61,30 @@ const RecipesPage = () => {
 
     return (
         <div>
-            <h1 className='container-fluid d-flex justify-content-center'>Recipe Page</h1>
+            <Container>
+                <h1 className='container-fluid d-flex justify-content-center'>Recipe Page</h1>
 
-            <Button onClick={() => {setShowSearch(!showSearch)}} className='pt-1 float-end'>
-                <Icon path={mdiFilter} size={1} />
-            </Button>
-            <AdvancedSearch show={showSearch} defaultQuery={query} />
-            {query && <h2>Results for "{query}"</h2>}
-            <div>
-                <Button
-                    variant="btn btn-success"
-                    size="lg"
-                    className="openModalButton"
-                    onClick={()=> {
-                        setOpenModal(true);
-                    }}
-                >Add recipe
-                </Button>
-                <RecipeEditor show={openAddRecipeModal} ingredients={mockIngredients} reload={reload} onHide={()=> {
-                    setOpenModal(false);}}/>
-                <RecipeCardsGrid reload={reload} ingredients={mockIngredients} serverCall={serverCall}/>
-            </div>
+                <div className="m-4">
+                    <Button
+                        variant="btn btn-success"
+                        size="lg"
+                        onClick={()=> {
+                            setOpenModal(true);
+                        }}
+                    >Add recipe
+                    </Button>
+                    <Button onClick={() => {setShowSearch(!showSearch)}} className='pt-1 float-end'>
+                        <Icon path={mdiFilter} size={1} />
+                    </Button>
+                    <AdvancedSearch show={showSearch} defaultQuery={query} />
+                    {query && <h2>Results for "{query}"</h2>}
+
+                </div>
+                    <RecipeEditor show={openAddRecipeModal} ingredients={mockIngredients} reload={reload} onHide={()=> {
+                        setOpenModal(false);}}/>
+                    <RecipeCardsGrid reload={reload} ingredients={mockIngredients} serverCall={serverCall}/>
+            </Container>
+
 
         </div>
         
