@@ -1,11 +1,15 @@
 const recipeDao = require('../../dao/file_storage/recipe-dao');
 const recipeSchema = require('../../schema/recipe-schema');
+const helpers = require('../../helper/common-helper');
 
 async function AddAbl(req, res) {
     try {
+        // input validation
         let { valid, errors } = recipeSchema.validate(req.body);
         if (!valid) {
-            res.status(400).send(errors);
+            res.status(400).send({
+                errors: helpers.getValidationErrorMessages(errors)
+            });
             return;
         }
         
@@ -15,7 +19,9 @@ async function AddAbl(req, res) {
         res.status(201).send(recipe);
     } catch (e) {
         console.error(e);
-        res.status(500).send(e.message);
+        res.status(500).send({
+            errors: [ e.message ]
+        });
     }
 }
 

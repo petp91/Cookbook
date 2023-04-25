@@ -1,6 +1,22 @@
 [
   {
-    "_id": "81cd3249b00b165d",
-    "name": "Example Ingredient"
+    "_id": "1",
+    "name": "ingredient1"
+  },
+  {
+    "_id": "2",
+    "name": "ingredient2"
+  },
+  {
+    "_id": "3",
+    "name": "ingredient3"
+  },
+  {
+    "_id": "4",
+    "name": "ingredient4"
+  },
+  {
+    "_id": "5",
+    "name": "ingredient5"
   }
 ]

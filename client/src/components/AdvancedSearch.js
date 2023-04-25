@@ -9,7 +9,7 @@ const AdvancedSearch = ({ show, defaultQuery }) => {
 
     const submitHandler = (event) => {
         event.preventDefault();
-        navigate(`/recipe?q=${searchInput}`);
+        navigate(`/recipes?q=${searchInput}`);
     }
 
     return (

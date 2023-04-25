@@ -16,7 +16,7 @@ const Menu = () => {
   const searchSubmitHandler = (event) => {
     event.preventDefault();
     setSearchInput('');
-    navigate(`/recipe?q=${searchInput}`);
+    navigate(`/recipes?q=${searchInput}`);
   };
 
   return (
@@ -24,7 +24,7 @@ const Menu = () => {
       <Container>
         <Nav className='flex-row'>
           <NavLink to='/' className='nav-link' style={expandedNavLinkStyle}>Home</NavLink>
-          <NavLink to='/recipe' className='nav-link' style={expandedNavLinkStyle}>Recipes</NavLink>
+          <NavLink to='/recipes' className='nav-link' style={expandedNavLinkStyle}>Recipes</NavLink>
           <NavLink to='/about' className='nav-link' style={expandedNavLinkStyle}>About</NavLink>
         </Nav>
         

@@ -1,7 +1,7 @@
 require('dotenv').config(); // načtení .env souboru
 const express = require('express');
 const cors = require('cors');
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
 
 const recipeRouter = require('./controller/recipe-controller');
 const imageRouter = require('./controller/image-controller');
