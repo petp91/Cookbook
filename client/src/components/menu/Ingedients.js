@@ -4,6 +4,7 @@ import Modal from 'react-bootstrap/Modal';
 import ListGroup from 'react-bootstrap/ListGroup';
 import CloseButton from 'react-bootstrap/CloseButton';
 import "./Ingredients.css";
+import { NavDropdown } from 'react-bootstrap';
 
 const Ingredients = () => {
   const [show, setShow] = useState(false);
@@ -19,9 +20,7 @@ const Ingredients = () => {
 
   return (
     <>
-      <Button variant="log menu" className="menuButton" onClick={handleShow}>
-        Show Ingredients
-      </Button>
+      <NavDropdown.Item onClick={()=> handleShow(Ingredients)}>Ingedients</NavDropdown.Item>
       
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
