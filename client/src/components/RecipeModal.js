@@ -5,7 +5,7 @@ import ConfirmationDialog from './ConfirmationDialog';
 import axios from 'axios';
 import CallStateModal from "./CallStateModal";
 import RecipeEditor from './recipe/RecipeEditor';
-import { ListGroup, ListGroupItem } from 'react-bootstrap';
+import { ListGroup, Col } from 'react-bootstrap';
 
 function RecipeModal({ recipe, ingredients, reload }) {
     const [show, setShow] = useState(false);
@@ -20,31 +20,41 @@ function RecipeModal({ recipe, ingredients, reload }) {
         state: "pending",
     });
 
-    let ingredientRows = [];
-
+    let RecipeModalDisplayIngredients = [];
+   
     recipe.ingredients.forEach(ingredient => {
 
-            let ingredientid = ingredients.find(e => e._id == ingredient.id);
+            let ingredientHelp = ingredients.find(e => e._id == ingredient.id);
 
+            if (ingredientHelp === undefined) {
+                return;
+            }
 
-
-            ingredientRows.push({
-                key: crypto.randomUUID(),
-                selected: [ingredientid],
-                isLoading: false,
+            RecipeModalDisplayIngredients.push({
+                name: ingredientHelp.name,
                 amount: ingredient.amount.toString(),
                 units:  ingredient.units
             }
             )
         }
+        
         );
         
-    function returnList (ingredientRows) {
+    function returnList(RecipeModalDisplayIngredients) {
 
         let returnListArray = [];
 
-        for (let i = 0; i < ingredientRows.length; i++) {
-            returnListArray.push(<ListGroup.Item as="li">{ingredients[i].name + "\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0" + ingredientRows[i].amount.toString() + "" + ingredientRows[i].units}</ListGroup.Item>);
+        for (let i = 0; i < RecipeModalDisplayIngredients.length; i++) {
+            returnListArray.push(
+            <ListGroup.Item as="li" key={[i]}>
+                <Col>
+                    {RecipeModalDisplayIngredients[i].name}
+                </Col>
+                <Col>
+                    {RecipeModalDisplayIngredients[i].amount.toString() + "" + RecipeModalDisplayIngredients[i].units}
+                </Col>
+            </ListGroup.Item>
+                );
         }
 
 
@@ -66,7 +76,7 @@ function RecipeModal({ recipe, ingredients, reload }) {
                         <div style={{ marginLeft: '5px', backgroundColor:'#FFFFFF', width:'66%'}}>
                             <h1 style={{textAlign: "center"}}>{recipe.name}</h1>
                             <ListGroup as="ul" style={{marginTop: '5%'}}>
-                                {returnList(ingredientRows)}
+                                {returnList(RecipeModalDisplayIngredients)}
                             </ListGroup>
                             <p style={{marginTop: '5%'}}>{recipe.description}</p>
                             </div>
