@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Form } from "react-bootstrap";
+import { Form, Row, Col, Alert, Collapse } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import SearchInputGroup from "./SearchInputGroup";
 
@@ -13,9 +13,19 @@ const AdvancedSearch = ({ show, defaultQuery }) => {
     }
 
     return (
-        <Form onSubmit={submitHandler} style={{ display: show ? 'block' : 'none' }} className='p-5'>
-            <SearchInputGroup value={searchInput} onChangeHandler={setSearchInput}/>
-        </Form>
+        <div className="pt-3">
+            <Collapse in={show}>
+                <Form onSubmit={submitHandler}>
+                    <Row className='justify-content-center'>
+                        <Col xs={12} lg={10}>
+                            <Alert variant='secondary' className="p-4">
+                                <SearchInputGroup value={searchInput} onChangeHandler={setSearchInput}/>
+                            </Alert>
+                        </Col>
+                    </Row>
+                </Form>
+            </Collapse>
+        </div>
     )
 }
 

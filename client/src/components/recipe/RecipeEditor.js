@@ -202,19 +202,32 @@ const RecipeEditor = ({ ingredients, recipe, show, onHide, reload }) => {
                                 setState={(newState) => {
                                     // if the ingredient is new
                                     if (newState.selected[0]?.customOption) {
+                                        let ingredientName = newState.selected[0].name;
+
                                         // select a placeholder ingredient and set isLoading to true
-                                        let newIngredient = { _id: '0', name: newState.selected[0].name };
-                                        newState.selected = [ newIngredient ];
+                                        newState.selected = [{ _id: '0', name: ingredientName }];
                                         newState.isLoading = true;
                             
                                         // call the API to create a new ingredient
-                                        // TODO: replace setTimeout with an actual API call
-                                        setTimeout(() => {
-                                            // add the new ingredient to the ingredient list
-                                            setIngredientsState((prevIngredients) => [...prevIngredients, newIngredient]);
-                                            // select the newly created ingredient
-                                            updateState({ selected: [ newIngredient ], isLoading: false});
-                                        }, 1000);
+                                        axios.post('http://localhost:8080/api/ingredients', { name: ingredientName })
+                                            .then((response) => {
+                                                let newIngredient = response.data;
+
+                                                // add the new ingredient to the ingredient list
+                                                setIngredientsState((prevIngredients) => [...prevIngredients, newIngredient]);
+
+                                                // select the new ingredient
+                                                updateState({ selected: [ newIngredient ], isLoading: false});
+                                            })
+                                            .catch((error) => {
+                                                console.error(error);
+                                                alert('Unexpected error:\n' +
+                                                    (error.response
+                                                        ? JSON.stringify(error.response.data, null, 2)
+                                                        : error.message)
+                                                );
+                                                updateState({ selected: [], isLoading: false});
+                                            });
                                     }
 
                                     updateState(newState);
