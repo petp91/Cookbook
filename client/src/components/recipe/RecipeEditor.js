@@ -52,9 +52,24 @@ const RecipeEditor = ({ ingredients, recipe, show, onHide, reload }) => {
                 let ingredientRows = [];
 
                 recipe.ingredients.forEach(ingredient => {
-                    console.log(ingredient);
+                    
 
                     let ingredientid = ingredients.find(e => e._id == ingredient.id);
+
+                    if (ingredientid === undefined) {
+
+                        ingredientRows.push({
+                            key: Math.floor(Math.random()*10e12),
+                            selected: [],
+                            isLoading: false,
+                            amount: ingredient.amount.toString(),
+                            units:  ingredient.units
+                        })
+                        console.log(ingredientRows);
+                
+                        return;
+
+                    }
 
                     ingredientRows.push({
                         key: Math.floor(Math.random()*10e12),
