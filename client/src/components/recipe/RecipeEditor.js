@@ -42,6 +42,7 @@ const RecipeEditor = ({ ingredients, recipe, show, onHide, reload }) => {
                 recipeState = {
                     name: '',
                     description: '',
+                    imageUrl: '',
                     preparationLength: '',
                     finalAmount: '',
                     ingredientRows: [ newIngredientRowObj() ]
@@ -84,6 +85,7 @@ const RecipeEditor = ({ ingredients, recipe, show, onHide, reload }) => {
                 recipeState = {
                     name: recipe.name,
                     description: recipe.description,
+                    imageUrl: recipe.imageUrl,
                     preparationLength: recipe.preparationLength.toString(),
                     finalAmount: recipe.finalAmount.toString(),
                     ingredientRows: ingredientRows
@@ -109,7 +111,7 @@ const RecipeEditor = ({ ingredients, recipe, show, onHide, reload }) => {
         return({
             "name": (formState.name),
             "description": (formState.description),
-            "imageId": "",
+            "imageUrl": "",
             "preparationLength": (+ formState.preparationLength),
             "finalAmount": (+ formState.finalAmount),
             "ingredients": (ingredientArray)
