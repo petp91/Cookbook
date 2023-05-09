@@ -4,6 +4,8 @@ import HomePage from "./pages/HomePage";
 import RecipesPage from "./pages/RecipesPage";
 import AboutPage from "./pages/AboutPage";
 import NotFound from "./pages/NotFound";
+import Footer from "./components/Footer"
+import "./layout/Footer.css"
 
 import './layout/nested_modals_fix.css';
 
@@ -18,7 +20,7 @@ const App = () => {
                 <Route path="*" element={ <NotFound /> } />
             </Routes>
             <div>
-                Footer
+                <Footer />
             </div>
         </BrowserRouter>
     );
