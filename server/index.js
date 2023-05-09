@@ -4,7 +4,6 @@ const cors = require('cors');
 // const mongoose = require('mongoose');
 
 const recipeRouter = require('./controller/recipe-controller');
-const imageRouter = require('./controller/image-controller');
 const ingredientsRouter = require('./controller/ingredient-controller');
 
 const app = express();
@@ -29,7 +28,6 @@ app.use(cors());
 app.use(express.json()); // Middleware pro zpracování požadavků ve formátu JSON
 
 app.use('/api/recipes', recipeRouter);
-app.use('/api/images', imageRouter);
 app.use('/api/ingredients', ingredientsRouter);
 
 app.listen(PORT, () => {
