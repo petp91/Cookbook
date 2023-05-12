@@ -111,7 +111,7 @@ const RecipeEditor = ({ ingredients, recipe, show, onHide, reload }) => {
         return({
             "name": (formState.name),
             "description": (formState.description),
-            "imageUrl": "",
+            "imageUrl": (formState.imageUrl),
             "preparationLength": (+ formState.preparationLength),
             "finalAmount": (+ formState.finalAmount),
             "ingredients": (ingredientArray)
@@ -184,7 +184,15 @@ const RecipeEditor = ({ ingredients, recipe, show, onHide, reload }) => {
                         rows={5}
                         value={formState.description} required
                         setValue={val => setFormState({...formState, description: val})}
+                    />      
+                    <FormGroup
+                        label='Image'
+                        type='url'
+                        placeholder='Image url'
+                        value={formState.imageUrl} 
+                        setValue={val => setFormState({...formState, imageUrl: val})}
                     />
+                            
                     <div className="mt-3">
                         <Row className='gx-1'>
                             <Col className='ps-0' xs={7}>
