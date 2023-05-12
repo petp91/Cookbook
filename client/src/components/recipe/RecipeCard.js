@@ -1,5 +1,5 @@
 import Card from 'react-bootstrap/Card';
-import RecipeModal from '../RecipeModal'
+import RecipeModal from './RecipeModal'
 
 import CardPicture from '../../assets/CardPicture.jpg'
 import '../../layout/MenuCard-style.css';

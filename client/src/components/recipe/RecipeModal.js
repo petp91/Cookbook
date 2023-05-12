@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import ConfirmationDialog from './ConfirmationDialog';
+import ConfirmationDialog from '../ConfirmationDialog';
 import axios from 'axios';
-import CallStateModal from "./CallStateModal";
-import RecipeEditor from './recipe/RecipeEditor';
+import CallStateModal from "../CallStateModal";
+import RecipeEditor from './RecipeEditor';
 import { ListGroup, Col } from 'react-bootstrap';
 
 function RecipeModal({ recipe, ingredients, reload }) {
