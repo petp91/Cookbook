@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import ConfirmationDialog from './ConfirmationDialog';
+import ConfirmationDialog from '../ConfirmationDialog';
 import axios from 'axios';
-import CallStateModal from "./CallStateModal";
-import RecipeEditor from './recipe/RecipeEditor';
+import CallStateModal from "../CallStateModal";
+import RecipeEditor from './RecipeEditor';
 import { ListGroup, Col } from 'react-bootstrap';
 
 function RecipeModal({ recipe, ingredients, reload }) {
@@ -91,7 +91,7 @@ function RecipeModal({ recipe, ingredients, reload }) {
                 </Modal.Header>
                 <Modal.Body>
                     <div style={{ display: 'flex', flexDirection: 'row'}}>
-                        <div style={{ flex: '1' , backgroundColor: 'blue', width: '33%'}}></div>
+                    <div><img src={recipe.imageUrl} style={{ flex: '1' , backgroundColor: 'blue', width: '400px', height: '400px'}}></img></div>
                         <div style={{ marginLeft: '5px', backgroundColor:'#FFFFFF', width:'66%'}}>
                             <h1 style={{textAlign: "center"}}>{recipe.name}</h1>
                             <ListGroup as="ul" style={{marginTop: '5%'}}>
