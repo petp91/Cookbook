@@ -6,7 +6,7 @@ const schema = {
     properties: {
         name: { type: 'string', minLength: 1 },
         description: { type: 'string', minLength: 1 },
-        imageId: { type: 'string' },
+        imageUrl: { type: 'string' },
         preparationLength: { type: 'number', minimum: 1 },
         finalAmount: { type: 'number', minimum: 1 },
         ingredients: {
@@ -24,7 +24,7 @@ const schema = {
             }
         }
     },
-    required: [ 'name', 'description', 'imageId', 'preparationLength', 'finalAmount', 'ingredients' ],
+    required: [ 'name', 'description', 'imageUrl', 'preparationLength', 'finalAmount', 'ingredients' ],
     additionalProperties: false
 };
 

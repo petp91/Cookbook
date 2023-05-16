@@ -2,7 +2,7 @@
   {
     "name": "Recept s ingrediencemi 121",
     "description": "Příprava trvá 60 minut a počet porcí je 5. Recept má 3 ingredience.",
-    "imageId": "",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg",
     "preparationLength": 15,
     "finalAmount": 5,
     "ingredients": [
@@ -30,16 +30,16 @@
     "_id": "b2c89236fd16523d"
   },
   {
-    "name": "jídlo",
-    "description": "připrav jídlo",
-    "imageId": "",
+    "name": "Druhý recept s obrázkem",
+    "description": "",
+    "imageUrl": "https://kauveryhospital.com/blog/wp-content/uploads/2021/04/pizza-5179939_960_720-1200x545_c.jpg",
     "preparationLength": 1,
-    "finalAmount": 1,
+    "finalAmount": 2,
     "ingredients": [
       {
-        "id": "",
-        "amount": 10,
-        "units": "g"
+        "id": "3",
+        "amount": 200,
+        "units": "unit1"
       }
     ],
     "_id": "4426d58b81734da2"
@@ -47,7 +47,7 @@
   {
     "name": "jirka",
     "description": "jirkův recept",
-    "imageId": "",
+    "imageUrl": "",
     "preparationLength": 60,
     "finalAmount": 1,
     "ingredients": [
@@ -62,7 +62,7 @@
   {
     "name": "já to testuji",
     "description": "tady je ten recept",
-    "imageId": "",
+    "imageUrl": "",
     "preparationLength": 60,
     "finalAmount": 1,
     "ingredients": [
@@ -77,7 +77,7 @@
   {
     "name": "halééjkkhaskjhs",
     "description": "sA ,SHAhs.A H",
-    "imageId": "",
+    "imageUrl": "",
     "preparationLength": 60,
     "finalAmount": 1,
     "ingredients": [
@@ -92,7 +92,7 @@
   {
     "name": "halééjkkhaskjhsDSDSDS",
     "description": "sA ,SHAhs.A HDSDSDSD",
-    "imageId": "",
+    "imageUrl": "",
     "preparationLength": 60,
     "finalAmount": 1,
     "ingredients": [
@@ -107,7 +107,7 @@
   {
     "name": "SVÍČKOVÁ NA HOUBÁCH",
     "description": "V mase na několika místech úzkým nožem prořízneme kapsy, do kterých vsuneme namražené špalíčky špeku. Maso důkladně osolíme a opepříme čerstvě mletým pepřem ze všech stran. V kastrolu na vyšším ohni rozpálíme sádlo a maso na něm opečeme ze všech stran dohněda. Maso vyndáme na čistý talíř.\n3Snížíme oheň pod polovinu, do kastrolu přidáme máslo a případně špek, který zbyl ze špikování masa. Přidáme mrkev, celer a petržel a za častého míchání je orestujeme dozlatova. Přidáme cibuli a orestujeme ji dozlatova. Přidáme jablko a i to orestujeme dozlatova. Často mícháme.\n4Přidáme cukr, zamícháme a necháme ho rozpustit. Přidáme hořčici a pytlíček koření. Promícháme. Přilijeme ocet a necháme ho zcela vyvařit, takže na dně kastrolu zbude opět jen tuk. Žádná tekutina. Zalijeme vínem, které necháme odvařit na polovinu objemu. Vložíme maso a zalijeme ho horkou vodou, tak aby bylo téměř ponořené. Přidáme 1 lžičku soli.",
-    "imageId": "",
+    "imageUrl": "",
     "preparationLength": 60,
     "finalAmount": 1,
     "ingredients": [
@@ -122,7 +122,7 @@
   {
     "name": "Houby na houbách",
     "description": "Přidáme cukr, zamícháme a necháme ho rozpustit. Přidáme hořčici a pytlíček koření. Promícháme. Přilijeme ocet a necháme ho zcela vyvařit, takže na dně kastrolu zbude opět jen tuk. Žádná tekutina. Zalijeme vínem, které necháme odvařit na polovinu objemu. Vložíme maso a zalijeme ho horkou vodou, tak aby bylo téměř ponořené. Přidáme 1 lžičku soli.\n5Přivedeme k varu, stáhneme oheň na minimum, přiklopíme poklicí a necháme pomalu dusit 2,5 hodiny nebo než bude maso zcela měkké. Poté vyjmeme sáček s kořením a maso, které dáme stranou na teplé místo.\n6Na jemném struhadle nastrouháme žlutou část kůry z poloviny omytého citronu a přidáme ji do omáčky společně",
-    "imageId": "",
+    "imageUrl": "",
     "preparationLength": 60,
     "finalAmount": 1,
     "ingredients": [
@@ -137,7 +137,7 @@
   {
     "name": "Nový recept",
     "description": "Být dobrým manažerem je úloha poměrně složitá. Pro jednoduchost si tuto úlohu dekomponujeme na dílčí činnosti, které manažer během své práce v týmu vykonává. Existuje mnoho možností, jak jednotlivé manažerské dovednosti rozvíjet. Co je však pro úspěšný rozvoj manažera nezbytné, je umět jednotlivé dovednosti v rámci jedné osobnosti vzájemně integrovat. Pokud například získáte zkušenosti v oblasti hodnocení a motivace, přemýšlejte, jak tyto zkušenosti propojit se zkušenostmi z oblastí ostatních dovedností a naopak.",
-    "imageId": "",
+    "imageUrl": "",
     "preparationLength": 60,
     "finalAmount": 1,
     "ingredients": [
@@ -152,7 +152,7 @@
   {
     "name": "Jirka test",
     "description": "tady",
-    "imageId": "",
+    "imageUrl": "",
     "preparationLength": 60,
     "finalAmount": 1,
     "ingredients": [
@@ -167,7 +167,7 @@
   {
     "name": "Burger",
     "description": "Výroba Houska atd",
-    "imageId": "",
+    "imageUrl": "",
     "preparationLength": 10,
     "finalAmount": 1,
     "ingredients": [
@@ -182,7 +182,7 @@
   {
     "name": "recept recept",
     "description": "jojojojo",
-    "imageId": "",
+    "imageUrl": "",
     "preparationLength": 60,
     "finalAmount": 1,
     "ingredients": [
@@ -197,7 +197,7 @@
   {
     "name": "e nedělní polévk",
     "description": "ová zelňačka, jejíž příprava zabere 30 minut, sice může posloužit jako všednodenní snadná večeře, ale mnohem víc jí bude slušet role nedělní polévky. Aniž by přesun na neděli jakkoli zvýšil její pracnost.\n\nNedělní polévku z ní dělá jen a pouze to, že jinak obyčejná polévka typu zelňačka nabere během vaření trochu jinou, nezvyklou podobu.\n\nUrčitě si říkáte, jak se to stane, že se obyčejná zelňačka na talíři takhle zvrtne. Stane se to tak, že ",
-    "imageId": "",
+    "imageUrl": "",
     "preparationLength": 60,
     "finalAmount": 1,
     "ingredients": [
@@ -212,7 +212,7 @@
   {
     "name": "nn",
     "description": "bbv",
-    "imageId": "",
+    "imageUrl": "",
     "preparationLength": 60,
     "finalAmount": 1,
     "ingredients": [
@@ -227,7 +227,7 @@
   {
     "name": "jfgjfjfg",
     "description": "gfjfjvcchfddhd",
-    "imageId": "",
+    "imageUrl": "",
     "preparationLength": 60,
     "finalAmount": 1,
     "ingredients": [
@@ -242,7 +242,7 @@
   {
     "name": "cscsc",
     "description": "dsgsdgsdg",
-    "imageId": "",
+    "imageUrl": "",
     "preparationLength": 60,
     "finalAmount": 1,
     "ingredients": [
@@ -257,7 +257,7 @@
   {
     "name": "\\ycy\\c",
     "description": "cxyvxyvxyv",
-    "imageId": "",
+    "imageUrl": "",
     "preparationLength": 60,
     "finalAmount": 1,
     "ingredients": [
@@ -272,7 +272,7 @@
   {
     "name": "fdfs",
     "description": "sdfsdgdsgs",
-    "imageId": "",
+    "imageUrl": "",
     "preparationLength": 60,
     "finalAmount": 1,
     "ingredients": [
@@ -287,7 +287,7 @@
   {
     "name": "cxvcv",
     "description": "xsdsdsdsdsd",
-    "imageId": "",
+    "imageUrl": "",
     "preparationLength": 60,
     "finalAmount": 1,
     "ingredients": [
@@ -302,7 +302,7 @@
   {
     "name": "bb",
     "description": "123",
-    "imageId": "",
+    "imageUrl": "",
     "preparationLength": 60,
     "finalAmount": 1,
     "ingredients": [
@@ -317,7 +317,7 @@
   {
     "name": "hbn",
     "description": "nm    bbbb",
-    "imageId": "",
+    "imageUrl": "",
     "preparationLength": 60,
     "finalAmount": 1,
     "ingredients": [
@@ -332,7 +332,7 @@
   {
     "name": "",
     "description": "",
-    "imageId": "",
+    "imageUrl": "",
     "preparationLength": 60,
     "finalAmount": 1,
     "ingredients": [
@@ -347,7 +347,7 @@
   {
     "name": "hgh",
     "description": "ghgh",
-    "imageId": "",
+    "imageUrl": "",
     "preparationLength": 60,
     "finalAmount": 1,
     "ingredients": [
@@ -362,7 +362,7 @@
   {
     "name": "trrrrrrrrrrrrrrrrrrrrrrrr",
     "description": "sdsadd",
-    "imageId": "",
+    "imageUrl": "",
     "preparationLength": 10,
     "finalAmount": 2,
     "ingredients": [
@@ -377,7 +377,7 @@
   {
     "name": "trrrrrrrrrrrrrrrrrrrrrrrr",
     "description": "sdsadd",
-    "imageId": "",
+    "imageUrl": "",
     "preparationLength": 10,
     "finalAmount": 2,
     "ingredients": [
@@ -392,7 +392,7 @@
   {
     "name": "1",
     "description": "2",
-    "imageId": "",
+    "imageUrl": "",
     "preparationLength": 3,
     "finalAmount": 4,
     "ingredients": [
@@ -407,7 +407,7 @@
   {
     "name": "test",
     "description": "12",
-    "imageId": "",
+    "imageUrl": "",
     "preparationLength": 1,
     "finalAmount": 1,
     "ingredients": [
@@ -422,7 +422,7 @@
   {
     "name": "h",
     "description": "k",
-    "imageId": "",
+    "imageUrl": "",
     "preparationLength": 1,
     "finalAmount": 1,
     "ingredients": [
@@ -437,7 +437,7 @@
   {
     "name": "f",
     "description": "d",
-    "imageId": "",
+    "imageUrl": "",
     "preparationLength": 1,
     "finalAmount": 1,
     "ingredients": [
@@ -452,7 +452,7 @@
   {
     "name": "s",
     "description": "f",
-    "imageId": "",
+    "imageUrl": "",
     "preparationLength": 1,
     "finalAmount": 1,
     "ingredients": [
@@ -467,7 +467,7 @@
   {
     "name": "f",
     "description": "g",
-    "imageId": "",
+    "imageUrl": "",
     "preparationLength": 1,
     "finalAmount": 1,
     "ingredients": [
@@ -482,7 +482,7 @@
   {
     "name": "m",
     "description": "h",
-    "imageId": "",
+    "imageUrl": "",
     "preparationLength": 1,
     "finalAmount": 5,
     "ingredients": [
@@ -497,7 +497,7 @@
   {
     "name": "u",
     "description": "ž",
-    "imageId": "",
+    "imageUrl": "",
     "preparationLength": 1,
     "finalAmount": 1,
     "ingredients": [
@@ -512,7 +512,7 @@
   {
     "name": "l",
     "description": "k",
-    "imageId": "",
+    "imageUrl": "",
     "preparationLength": 1,
     "finalAmount": 1,
     "ingredients": [
@@ -527,7 +527,7 @@
   {
     "name": "o",
     "description": "i",
-    "imageId": "",
+    "imageUrl": "",
     "preparationLength": 1,
     "finalAmount": 1,
     "ingredients": [
@@ -542,7 +542,7 @@
   {
     "name": "k",
     "description": "ů",
-    "imageId": "",
+    "imageUrl": "",
     "preparationLength": 1,
     "finalAmount": 1,
     "ingredients": [
@@ -557,7 +557,7 @@
   {
     "name": "u",
     "description": "o",
-    "imageId": "",
+    "imageUrl": "",
     "preparationLength": 1,
     "finalAmount": 1,
     "ingredients": [
@@ -572,7 +572,7 @@
   {
     "name": "d",
     "description": "s",
-    "imageId": "",
+    "imageUrl": "",
     "preparationLength": 1,
     "finalAmount": 1,
     "ingredients": [
@@ -587,7 +587,7 @@
   {
     "name": "h",
     "description": "k",
-    "imageId": "",
+    "imageUrl": "",
     "preparationLength": 1,
     "finalAmount": 1,
     "ingredients": [
@@ -602,7 +602,7 @@
   {
     "name": "k",
     "description": "g",
-    "imageId": "",
+    "imageUrl": "",
     "preparationLength": 1,
     "finalAmount": 1,
     "ingredients": [
@@ -617,7 +617,7 @@
   {
     "name": "h",
     "description": "x",
-    "imageId": "",
+    "imageUrl": "",
     "preparationLength": 1,
     "finalAmount": 1,
     "ingredients": [
@@ -632,7 +632,7 @@
   {
     "name": "n",
     "description": "f",
-    "imageId": "",
+    "imageUrl": "",
     "preparationLength": 1,
     "finalAmount": 1,
     "ingredients": [
@@ -647,7 +647,7 @@
   {
     "name": "j",
     "description": "h",
-    "imageId": "",
+    "imageUrl": "",
     "preparationLength": 1,
     "finalAmount": 1,
     "ingredients": [
@@ -662,7 +662,7 @@
   {
     "name": "k",
     "description": "j",
-    "imageId": "",
+    "imageUrl": "",
     "preparationLength": 1,
     "finalAmount": 1,
     "ingredients": [
@@ -677,7 +677,7 @@
   {
     "name": "t",
     "description": "z",
-    "imageId": "",
+    "imageUrl": "",
     "preparationLength": 1,
     "finalAmount": 1,
     "ingredients": [
@@ -692,7 +692,7 @@
   {
     "name": "m",
     "description": "b",
-    "imageId": "",
+    "imageUrl": "",
     "preparationLength": 1,
     "finalAmount": 1,
     "ingredients": [
@@ -707,7 +707,7 @@
   {
     "name": "b",
     "description": "m",
-    "imageId": "",
+    "imageUrl": "",
     "preparationLength": 1,
     "finalAmount": 1,
     "ingredients": [
@@ -722,7 +722,7 @@
   {
     "name": "m",
     "description": "t",
-    "imageId": "",
+    "imageUrl": "",
     "preparationLength": 1,
     "finalAmount": 1,
     "ingredients": [
@@ -737,7 +737,7 @@
   {
     "name": "1",
     "description": "2",
-    "imageId": "",
+    "imageUrl": "",
     "preparationLength": 1,
     "finalAmount": 1,
     "ingredients": [
@@ -752,7 +752,7 @@
   {
     "name": "v",
     "description": "c",
-    "imageId": "",
+    "imageUrl": "",
     "preparationLength": 1,
     "finalAmount": 1,
     "ingredients": [
@@ -767,7 +767,7 @@
   {
     "name": "1",
     "description": "2",
-    "imageId": "",
+    "imageUrl": "",
     "preparationLength": 1,
     "finalAmount": 1,
     "ingredients": [
@@ -782,7 +782,7 @@
   {
     "name": "j",
     "description": "h",
-    "imageId": "",
+    "imageUrl": "",
     "preparationLength": 1,
     "finalAmount": 1,
     "ingredients": [
@@ -797,7 +797,7 @@
   {
     "name": "l",
     "description": "j",
-    "imageId": "",
+    "imageUrl": "",
     "preparationLength": 1,
     "finalAmount": 1,
     "ingredients": [
@@ -812,7 +812,7 @@
   {
     "name": "g",
     "description": "h",
-    "imageId": "",
+    "imageUrl": "",
     "preparationLength": 1,
     "finalAmount": 1,
     "ingredients": [
@@ -827,7 +827,7 @@
   {
     "name": "m",
     "description": "v",
-    "imageId": "",
+    "imageUrl": "",
     "preparationLength": 1,
     "finalAmount": 1,
     "ingredients": [
@@ -842,7 +842,7 @@
   {
     "name": " d",
     "description": "s",
-    "imageId": "",
+    "imageUrl": "",
     "preparationLength": 1,
     "finalAmount": 1,
     "ingredients": [
@@ -857,7 +857,7 @@
   {
     "name": "g",
     "description": "n",
-    "imageId": "",
+    "imageUrl": "",
     "preparationLength": 1,
     "finalAmount": 1,
     "ingredients": [
@@ -872,7 +872,7 @@
   {
     "name": "l",
     "description": "g",
-    "imageId": "",
+    "imageUrl": "",
     "preparationLength": 1,
     "finalAmount": 1,
     "ingredients": [
@@ -887,7 +887,7 @@
   {
     "name": "b",
     "description": "v",
-    "imageId": "",
+    "imageUrl": "",
     "preparationLength": 1,
     "finalAmount": 1,
     "ingredients": [
@@ -902,7 +902,7 @@
   {
     "name": "j on clicking submit button",
     "description": "Enable Disable Submit Button Based on Validation\nby Vincy. Last modified on July 12th, 2022.\nNow we are going to see about how to enable or disable form submit button based on the form validation result. In a previous example, we have seen form validation using PHP on clicking submit button.\n\nWe have an example with an HTML form with disabled submit button. And then, we are enabling it by validating form fields using jQuery.",
-    "imageId": "",
+    "imageUrl": "",
     "preparationLength": 1,
     "finalAmount": 1,
     "ingredients": [

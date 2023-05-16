@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import ConfirmationDialog from './ConfirmationDialog';
+import ConfirmationDialog from '../ConfirmationDialog';
 import axios from 'axios';
-import CallStateModal from "./CallStateModal";
-import RecipeEditor from './recipe/RecipeEditor';
+import CallStateModal from "../CallStateModal";
+import RecipeEditor from './RecipeEditor';
 import { ListGroup, Col } from 'react-bootstrap';
 
 function RecipeModal({ recipe, ingredients, reload }) {
@@ -15,6 +15,7 @@ function RecipeModal({ recipe, ingredients, reload }) {
     const [openAddRecipeModal, setOpenModal] = useState(false);
 
     const [ showAddRecipeConfirmDialog, setShowAddRecipeConfirmDialog] = useState(false)
+    const [ServingsNumber, setServingsNumber] = useState(recipe.finalAmount);
 
     const [serverReply, setServerReply] = useState({
         state: "pending",
@@ -29,20 +30,23 @@ function RecipeModal({ recipe, ingredients, reload }) {
             if (ingredientHelp === undefined) {
                 return;
             }
-
+            
             RecipeModalDisplayIngredients.push({
                 name: ingredientHelp.name,
-                amount: ingredient.amount.toString(),
-                units:  ingredient.units
+                amount: ingredient.amount.toString()/recipe.finalAmount,
+                units:  ingredient.units,
+                
             }
             )
         }
         
         );
         
-    function returnList(RecipeModalDisplayIngredients) {
+    function returnList(RecipeModalDisplayIngredients, ServingsNumber) {
 
         let returnListArray = [];
+
+        if (ServingsNumber === undefined) {
 
         for (let i = 0; i < RecipeModalDisplayIngredients.length; i++) {
             returnListArray.push(
@@ -51,12 +55,27 @@ function RecipeModal({ recipe, ingredients, reload }) {
                     {RecipeModalDisplayIngredients[i].name}
                 </Col>
                 <Col>
-                    {RecipeModalDisplayIngredients[i].amount.toString() + "" + RecipeModalDisplayIngredients[i].units}
+                    {RecipeModalDisplayIngredients[i].amount.toString()*recipe.finalAmount + "" + RecipeModalDisplayIngredients[i].units}
                 </Col>
-            </ListGroup.Item>
+            </ListGroup.Item> 
                 );
         }
 
+    } else {
+
+        for (let i = 0; i < RecipeModalDisplayIngredients.length; i++) {
+            returnListArray.push(
+            <ListGroup.Item as="li" key={[i]}>
+                <Col>
+                    {RecipeModalDisplayIngredients[i].name}
+                </Col>
+                <Col>
+                    {(RecipeModalDisplayIngredients[i].amount.toString()*ServingsNumber).toFixed(1) + "" + RecipeModalDisplayIngredients[i].units}
+                </Col>
+            </ListGroup.Item> 
+                );
+        }
+    }
 
         return returnListArray;
         
@@ -72,12 +91,25 @@ function RecipeModal({ recipe, ingredients, reload }) {
                 </Modal.Header>
                 <Modal.Body>
                     <div style={{ display: 'flex', flexDirection: 'row'}}>
-                        <div style={{ flex: '1' , backgroundColor: 'blue', width: '33%'}}></div>
+                    <div><img src={recipe.imageUrl} style={{ flex: '1' , backgroundColor: 'blue', width: '400px', height: '400px'}}></img></div>
                         <div style={{ marginLeft: '5px', backgroundColor:'#FFFFFF', width:'66%'}}>
                             <h1 style={{textAlign: "center"}}>{recipe.name}</h1>
                             <ListGroup as="ul" style={{marginTop: '5%'}}>
-                                {returnList(RecipeModalDisplayIngredients)}
+                                {returnList(RecipeModalDisplayIngredients, ServingsNumber)}
                             </ListGroup>
+
+                            <div style={{marginTop:'20px'}}>
+                                <label style={{marginLeft:'10px'}}>Počet porcí</label>
+                                <input 
+                                    type="number" 
+                                    className="col-sm-2 col-form-label" 
+                                    id="UserDefinedServingsNumber" 
+                                    onChange={e => {setServingsNumber(e.target.value)}} 
+                                    value={ServingsNumber} style={{marginLeft:'10px'}} 
+                                    placeholder={recipe.finalAmount}>
+                                </input>
+                            </div>
+
                             <p style={{marginTop: '5%'}}>{recipe.description}</p>
                             </div>
                     </div>
