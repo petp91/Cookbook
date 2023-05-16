@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Form } from 'react-bootstrap';
 import SearchInputGroup from './SearchInputGroup';
+import MenuAccount from './menu/MenuAccount';
 import '../layout/NavBar.css';
 
 const CustomNavbar = () => {
@@ -45,8 +46,7 @@ const CustomNavbar = () => {
         <Form onSubmit={searchSubmitHandler} className='mt-3 mb-1 mt-lg-0 mb-lg-0'>
           <SearchInputGroup value={searchInput} onChangeHandler={setSearchInput} />
         </Form>
-        <button>Login</button>
-        <button>Register</button>
+        <MenuAccount />
       </div>
     </nav>
   );
