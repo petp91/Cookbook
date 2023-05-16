@@ -38,10 +38,11 @@ footer p {
 @media screen and (max-width: 600px) {
   .footer-links {
     flex-wrap: wrap;
+    justify-content: center; /* Center links on mobile */
   }
 
   .footer-links a {
-    margin-right: 0;
+    margin-right: 10px; /* Decrease margin between links on mobile */
     margin-bottom: 10px;
   }
 

@@ -1,7 +1,7 @@
 import Card from 'react-bootstrap/Card';
 import RecipeModal from './RecipeModal'
 
-import CardPicture from '../../assets/CardPicture.jpg'
+import CardPicture from '../../assets/CardPicture.png'
 import '../../layout/MenuCard-style.css';
 
 const RecipeCard = ({ recipe, ingredients, reload }) => {
