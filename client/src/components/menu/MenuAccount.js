@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Button, Form, Modal, Nav, NavDropdown, Dropdown, NavItem, NavLink } from 'react-bootstrap'
 import FormGroup from '../FormGroup';
-import Ingredients from './Ingedients';
+import OwnerIngredientsList from './OwnerIngredientsList';
 
 const MenuAccount = () => {
     const [loggedInUsername, setLoggedInUsername] = useState(null);
@@ -48,7 +48,7 @@ const MenuAccount = () => {
                         <Dropdown.Toggle as={NavLink}>Logged in as <b>{loggedInUsername}</b></Dropdown.Toggle>
                         {/* old Dropdown.Toggle attributes: as='a' className='nav-link' role='button' tabIndex={0} href='#' */}
                         <Dropdown.Menu>
-                            <Ingredients />
+                            <OwnerIngredientsList />
                             <NavDropdown.Item variant="log menu" onClick={logoutHandler}>Logout</NavDropdown.Item>
                         </Dropdown.Menu>
                     </Dropdown>
