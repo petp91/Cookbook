@@ -5,6 +5,7 @@
     align-content: space-between;
     height: 6.8rem;
     overflow: hidden;
+    height: 130px;
 }
 
 .recipeCard .card-title{
@@ -18,14 +19,12 @@
 
 .recipeCard {
     width: 250px;
-    height: 350px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     background: #fff;
     transition: all 0.5s ease;
     cursor: pointer;
     user-select: none;
     z-index: 10;
-    overflow: hidden
 }
 
 .recipeCard:hover {
@@ -34,9 +33,6 @@
 }
 
 .recipeCard img {
-    width: 40%;
-    height: 50%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 10px;
+    height: 120px;
+    object-fit: cover;
 }

@@ -7,6 +7,8 @@ import CallStateModal from "../CallStateModal";
 import RecipeEditor from './RecipeEditor';
 import { ListGroup, Col } from 'react-bootstrap';
 
+import Logo from '../../assets/logo-512px.png';
+
 function RecipeModal({ recipe, ingredients, reload }) {
     const [show, setShow] = useState(false);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -91,7 +93,9 @@ function RecipeModal({ recipe, ingredients, reload }) {
                 </Modal.Header>
                 <Modal.Body>
                     <div style={{ display: 'flex', flexDirection: 'row'}}>
-                    <div><img src={recipe.imageUrl} style={{ flex: '1' , backgroundColor: 'blue', width: '400px', height: '400px'}}></img></div>
+                        <div>
+                            <img src={recipe.imageUrl || Logo} style={{ flex: '1', width: '400px', height: '400px', objectFit: 'cover'}}></img>
+                        </div>
                         <div style={{ marginLeft: '5px', backgroundColor:'#FFFFFF', width:'66%'}}>
                             <h1 style={{textAlign: "center"}}>{recipe.name}</h1>
                             <ListGroup as="ul" style={{marginTop: '5%'}}>
