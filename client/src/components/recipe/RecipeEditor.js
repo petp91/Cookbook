@@ -42,6 +42,7 @@ const RecipeEditor = ({ ingredients, recipe, show, onHide, reload }) => {
                 recipeState = {
                     name: '',
                     description: '',
+                    imageUrl: '',
                     preparationLength: '',
                     finalAmount: '',
                     ingredientRows: [ newIngredientRowObj() ]
@@ -52,9 +53,24 @@ const RecipeEditor = ({ ingredients, recipe, show, onHide, reload }) => {
                 let ingredientRows = [];
 
                 recipe.ingredients.forEach(ingredient => {
-                    console.log(ingredient);
+                    
 
                     let ingredientid = ingredients.find(e => e._id == ingredient.id);
+
+                    if (ingredientid === undefined) {
+
+                        ingredientRows.push({
+                            key: Math.floor(Math.random()*10e12),
+                            selected: [],
+                            isLoading: false,
+                            amount: ingredient.amount.toString(),
+                            units:  ingredient.units
+                        })
+                        console.log(ingredientRows);
+                
+                        return;
+
+                    }
 
                     ingredientRows.push({
                         key: Math.floor(Math.random()*10e12),
@@ -69,6 +85,7 @@ const RecipeEditor = ({ ingredients, recipe, show, onHide, reload }) => {
                 recipeState = {
                     name: recipe.name,
                     description: recipe.description,
+                    imageUrl: recipe.imageUrl,
                     preparationLength: recipe.preparationLength.toString(),
                     finalAmount: recipe.finalAmount.toString(),
                     ingredientRows: ingredientRows
@@ -94,7 +111,7 @@ const RecipeEditor = ({ ingredients, recipe, show, onHide, reload }) => {
         return({
             "name": (formState.name),
             "description": (formState.description),
-            "imageId": "",
+            "imageUrl": (formState.imageUrl),
             "preparationLength": (+ formState.preparationLength),
             "finalAmount": (+ formState.finalAmount),
             "ingredients": (ingredientArray)
@@ -167,7 +184,15 @@ const RecipeEditor = ({ ingredients, recipe, show, onHide, reload }) => {
                         rows={5}
                         value={formState.description} required
                         setValue={val => setFormState({...formState, description: val})}
+                    />      
+                    <FormGroup
+                        label='Image'
+                        type='url'
+                        placeholder='Image url'
+                        value={formState.imageUrl} 
+                        setValue={val => setFormState({...formState, imageUrl: val})}
                     />
+                            
                     <div className="mt-3">
                         <Row className='gx-1'>
                             <Col className='ps-0' xs={7}>

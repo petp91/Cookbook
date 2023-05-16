@@ -1,0 +1,175 @@
+/* Mobile Styles */
+.home-page {
+    text-align: center;
+  }
+  
+  .hero {
+    background-color: #f1f1f1;
+    padding: 60px 0;
+  }
+  
+  .title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+  
+  .subtitle {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 30px;
+  }
+  
+  .cta-button {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: #0d6efd;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .cta-button:hover {
+    background-color: #d7d7d7;
+    color: #666;
+  }
+  
+  .features {
+    display: flex;
+    justify-content: center;
+    margin: 30px 0;
+    flex-wrap: wrap;
+  }
+  
+  .feature {
+    flex-basis: 50%;
+    padding: 0 15px;
+    margin-bottom: 20px;
+  }
+  
+  .feature i {
+    font-size: 36px;
+    color: #ff5e3a;
+    margin-bottom: 15px;
+  }
+  
+  .feature-title {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 8px;
+  }
+  
+  .feature-description {
+    font-size: 14px;
+    color: #666;
+  }
+  
+  .testimonial {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px;
+  }
+  
+  .testimonial-title {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .testimonial-table {
+    display: table;
+    width: 100%;
+  }
+  
+  .testimonial-row {
+    display: table-row;
+  }
+  
+  .testimonial-cell {
+    display: table-cell;
+    padding: 10px;
+  }
+  
+  .testimonial-content {
+    background-color: #f2f2f2;
+    padding: 15px;
+    border-radius: 5px;
+  }
+  
+  .quote {
+    font-size: 14px;
+    margin-bottom: 5px;
+  }
+  
+  .author {
+    font-size: 12px;
+    font-style: italic;
+  }
+  
+  /* Desktop Styles */
+  @media (min-width: 768px) {
+    .title {
+      font-size: 32px;
+      margin-bottom: 20px;
+    }
+  
+    .subtitle {
+      font-size: 18px;
+      margin-bottom: 40px;
+    }
+  
+    .cta-button {
+      font-size: 16px;
+      padding: 12px 24px;
+    }
+  
+    .features {
+      margin: 40px 0;
+    }
+  
+    .feature {
+      flex-basis: 33.33%;
+      padding: 0 20px;
+    }
+  
+    .feature i {
+      font-size: 48px;
+      margin-bottom: 20px;
+    }
+  
+    .feature-title {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+  
+    .feature-description {
+      font-size: 16px;
+    }
+  
+    .testimonial-title {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+    
+    .pizza-pictures {
+      display: flex;
+      justify-content: center;
+      margin-top: 30px;
+    }
+    
+    .pizza-picture {
+      width: 200px;
+      height: 200px;
+      margin: 0 10px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+    
+  }
+  
