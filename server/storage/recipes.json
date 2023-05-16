@@ -885,21 +885,6 @@
     "_id": "d2220b857bfe44c4"
   },
   {
-    "name": "c",
-    "description": "l",
-    "imageId": "",
-    "preparationLength": 1,
-    "finalAmount": 1,
-    "ingredients": [
-      {
-        "id": "",
-        "amount": 10,
-        "units": "g"
-      }
-    ],
-    "_id": "6341392c2438c4a4"
-  },
-  {
     "name": "b",
     "description": "v",
     "imageId": "",
@@ -913,21 +898,6 @@
       }
     ],
     "_id": "44e93e8b3d957320"
-  },
-  {
-    "name": "h",
-    "description": "g",
-    "imageId": "",
-    "preparationLength": 1,
-    "finalAmount": 1,
-    "ingredients": [
-      {
-        "id": "",
-        "amount": 10,
-        "units": "g"
-      }
-    ],
-    "_id": "fd43cfc4b10c9978"
   },
   {
     "name": "j on clicking submit button",
