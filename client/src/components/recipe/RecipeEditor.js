@@ -21,6 +21,11 @@ const newIngredientRowObj = () => {
 
 const RecipeEditor = ({ recipe, ingredients, show, onHide, reload }) => {
     const [ingredientsState, setIngredientsState] = useState(ingredients);
+    // update ingredientsState when ingredients load
+    if (ingredientsState.length === 0 && ingredients.length !== 0) {
+        setIngredientsState(ingredients);
+    }
+
     const [formState, setFormState] = useState(recipeToState(recipe));
 
     const [serverCall, setServerCall] = useState({
@@ -52,8 +57,8 @@ const RecipeEditor = ({ recipe, ingredients, show, onHide, reload }) => {
                 // find the specific ingredient in a list of all ingredients
                 let matchedIngredient = ingredientsState.find(e => e._id === ingredient.id);
 
-                // if the ingredient doesn't exist
                 if (matchedIngredient === undefined) {
+                    // if the ingredient doesn't exist
                     ingredientRows.push({
                         key: Math.floor(Math.random()*10e12),
                         selected: [],
@@ -62,6 +67,7 @@ const RecipeEditor = ({ recipe, ingredients, show, onHide, reload }) => {
                         units:  ingredient.units
                     });
                 } else {
+                    // if the ingredient exists
                     ingredientRows.push({
                         key: Math.floor(Math.random()*10e12),
                         selected: [matchedIngredient],
