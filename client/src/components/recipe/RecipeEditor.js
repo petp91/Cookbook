@@ -6,151 +6,143 @@ import FormGroup from '../FormGroup';
 import CallStateModal from "../CallStateModal";
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 
-const units = ['unit1', 'unit2', 'unit3', 'unit4', 'unit5'];
+const units = ['ml', 'ks', 'g'];
 
-const newIngredientRowObj = (recipe, ingredients) => {
-
+const newIngredientRowObj = () => {
     return {
         key: Math.floor(Math.random()*10e12),
         selected: [],
         isLoading: false,
         name: '',
         amount: '0',
-        units: units[3]
+        units: units[0]
     }
 };
 
-const RecipeEditor = ({ ingredients, recipe, show, onHide, reload }) => {
-    const [formState, setFormState] = useState(recipeToState(recipe));
+const RecipeEditor = ({ recipe, ingredients, show, onHide, reload }) => {
     const [ingredientsState, setIngredientsState] = useState(ingredients);
+    // update ingredientsState when ingredients load
+    if (ingredientsState.length === 0 && ingredients.length !== 0) {
+        setIngredientsState(ingredients);
+    }
 
-    console.log(JSON.stringify(formState, null, 4));
+    const [formState, setFormState] = useState(recipeToState(recipe));
 
-    const [ serverReply, setServerReply] = useState({
-        state: "pending",
-    })
-
-    const [ showAddRecipeConfirmDialog, setShowAddRecipeConfirmDialog] = useState(false)
-
+    const [serverCall, setServerCall] = useState({
+        state: "pending"
+    });
+    
+    const [showSaveRecipeCall, setShowSaveRecipeCall] = useState(false);
+    
+    //console.log(JSON.stringify(formState, null, 4));
 
     function recipeToState(recipe) {
-
         let recipeState;
 
-            if(recipe === undefined) {
+        if(recipe === undefined) {
+            // if recipe is undefined, set state to be empty
+            recipeState = {
+                name: '',
+                description: '',
+                imageUrl: '',
+                preparationLength: '',
+                finalAmount: '',
+                ingredientRows: [ newIngredientRowObj() ]
+            }
+        } else {
+            let ingredientRows = [];
 
-                recipeState = {
-                    name: '',
-                    description: '',
-                    imageUrl: '',
-                    preparationLength: '',
-                    finalAmount: '',
-                    ingredientRows: [ newIngredientRowObj() ]
-                    }
+            // iterate over ingredients in the recipe
+            recipe.ingredients.forEach(ingredient => {
+                // find the specific ingredient in a list of all ingredients
+                let matchedIngredient = ingredientsState.find(e => e._id === ingredient.id);
 
-            } else {
-                
-                let ingredientRows = [];
-
-                recipe.ingredients.forEach(ingredient => {
-                    
-
-                    let ingredientid = ingredients.find(e => e._id == ingredient.id);
-
-                    if (ingredientid === undefined) {
-
-                        ingredientRows.push({
-                            key: Math.floor(Math.random()*10e12),
-                            selected: [],
-                            isLoading: false,
-                            amount: ingredient.amount.toString(),
-                            units:  ingredient.units
-                        })
-                        console.log(ingredientRows);
-                
-                        return;
-
-                    }
-
+                if (matchedIngredient === undefined) {
+                    // if the ingredient doesn't exist
                     ingredientRows.push({
                         key: Math.floor(Math.random()*10e12),
-                        selected: [ingredientid],
+                        selected: [],
                         isLoading: false,
                         amount: ingredient.amount.toString(),
                         units:  ingredient.units
-                    })
-                });
-
-
-                recipeState = {
-                    name: recipe.name,
-                    description: recipe.description,
-                    imageUrl: recipe.imageUrl,
-                    preparationLength: recipe.preparationLength.toString(),
-                    finalAmount: recipe.finalAmount.toString(),
-                    ingredientRows: ingredientRows
+                    });
+                } else {
+                    // if the ingredient exists
+                    ingredientRows.push({
+                        key: Math.floor(Math.random()*10e12),
+                        selected: [matchedIngredient],
+                        isLoading: false,
+                        amount: ingredient.amount.toString(),
+                        units:  ingredient.units
+                    });
                 }
-            }
+            });
 
+            // fill in the formState with values from recipe
+            recipeState = {
+                name: recipe.name,
+                description: recipe.description,
+                imageUrl: recipe.imageUrl,
+                preparationLength: recipe.preparationLength.toString(),
+                finalAmount: recipe.finalAmount.toString(),
+                ingredientRows: ingredientRows
+            }
+        }
 
         return recipeState;
     }
 
-    function recipeFromState () {
-
+    function recipeFromState(formState) {
         let ingredientArray = [];
+
+        // iterate over ingredient rows
         for (let x in formState.ingredientRows) {
-            formState.ingredientRows[x].id = formState.ingredientRows[x].selected[0]._id;
-            formState.ingredientRows[x].amount = + formState.ingredientRows[x].amount;
             ingredientArray[x] = {
-                id:  formState.ingredientRows[x].id,
-                amount:  formState.ingredientRows[x].amount,
+                id:  formState.ingredientRows[x].selected[0]._id,
+                amount:  +formState.ingredientRows[x].amount,
                 units: formState.ingredientRows[x].units
             };
         }
+
+        // return a new recipe object
         return({
-            "name": (formState.name),
-            "description": (formState.description),
-            "imageUrl": (formState.imageUrl),
-            "preparationLength": (+ formState.preparationLength),
-            "finalAmount": (+ formState.finalAmount),
-            "ingredients": (ingredientArray)
+            name: formState.name,
+            description: formState.description,
+            imageUrl: formState.imageUrl,
+            preparationLength: +formState.preparationLength,
+            finalAmount: +formState.finalAmount,
+            ingredients: ingredientArray
         });
     }
 
-    const addIngredient = () => {
+    const addIngredientRow = () => {
         formState.ingredientRows.push(newIngredientRowObj());
         setFormState({...formState});
     };
 
     const onSubmit = (event) => {
-        event.preventDefault()
-        if (recipe != undefined) {
-            
+        event.preventDefault();
+
+        if (recipe !== undefined) {
+            // if recipe is not undefined, then update the existing recipe
            axios.put(`http://localhost:8080/api/recipes/${recipe._id}`, recipeFromState(formState))
-                .then((response)=> {
-                    setServerReply({ state: "success"});
-                    console.log('success');
+                .then((response) => {
+                    setServerCall({ state: "success"});
                 })
-                .catch(function (error) {
-                    setServerReply({ state: "error"});
-                    console.log('error');
+                .catch((error) => {
+                    setServerCall({ state: "error"});
                 });
-
-
         } else {
-        
-        axios.post('http://localhost:8080/api/recipes', recipeFromState(formState))
-            .then((response)=> {
-                setServerReply({ state: "success"});
-                console.log('success');
-            })
-            .catch(function (error) {
-                setServerReply({ state: "error"});
-                console.log('error');
-            });
-    };
-}
+            // if the recipe is undefined, then create a new recipe
+            axios.post('http://localhost:8080/api/recipes', recipeFromState(formState))
+                .then((response) => {
+                    setServerCall({ state: "success"});
+                })
+                .catch((error) => {
+                    setServerCall({ state: "error"});
+                });
+        };
+    }
 
     return (
         <Modal
@@ -186,9 +178,9 @@ const RecipeEditor = ({ ingredients, recipe, show, onHide, reload }) => {
                         setValue={val => setFormState({...formState, description: val})}
                     />      
                     <FormGroup
-                        label='Image'
+                        label='Image URL'
                         type='url'
-                        placeholder='Image url'
+                        placeholder='Image URL'
                         value={formState.imageUrl} 
                         setValue={val => setFormState({...formState, imageUrl: val})}
                     />
@@ -274,26 +266,36 @@ const RecipeEditor = ({ ingredients, recipe, show, onHide, reload }) => {
                                 isRemoveBtnDisabled={formState.ingredientRows.length === 1}
                             />
                         ))}
-                        <Button className='mt-4' onClick={addIngredient}>Add ingredient</Button>
-
-                        <Button className='mt-4 float-end'
-                                variant={"success"}
-                                type="submit"
-                                disabled={formState.name === "" || formState.description === "" || formState.preparationLength <1 || formState.finalAmount <1}
-                                onClick={() => setShowAddRecipeConfirmDialog(true)}>Save recipe</Button>
-
-                        <CallStateModal
-                            show={showAddRecipeConfirmDialog}
-                            onCancel={() => {setShowAddRecipeConfirmDialog(false); setServerReply({ state: "pending"})}}
-                            stateOfServer={serverReply.state}
-                            onSuccess={() => {setShowAddRecipeConfirmDialog(false);onHide(true); reload() ; setServerReply({ state: "pending"})}}
-                        >
-                        </CallStateModal>
                     </div>
+
+                    <Button className='mt-4' onClick={addIngredientRow}>Add ingredient</Button>
+
+                    <Button className='mt-4 float-end'
+                        variant={"success"}
+                        type="submit"
+                        disabled={formState.name === "" || formState.description === "" || formState.preparationLength <1 || formState.finalAmount <1}
+                        onClick={() => setShowSaveRecipeCall(true)}
+                    >
+                        Save recipe
+                    </Button>
+
+                    <CallStateModal
+                        show={showSaveRecipeCall}
+                        stateOfServer={serverCall.state}
+                        onSuccess={() => {
+                            setShowSaveRecipeCall(false);
+                            onHide();
+                            reload();
+                            setServerCall({ state: "pending"});
+                        }}
+                        onCancel={() => {
+                            setShowSaveRecipeCall(false);
+                            setServerCall({ state: "pending"});
+                        }}
+                    >
+                    </CallStateModal>
                 </Form>
-
             </Modal.Body>
-
         </Modal>
     )
 }

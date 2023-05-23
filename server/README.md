@@ -5,7 +5,6 @@ DELETE = smazat
 
 ## Recipes
 GET /api/recipes  
-GET /api/recipes?q=\<query\>  
 GET /api/recipes/:id  
 POST /api/recipes  
 PUT /api/recipes/:id  

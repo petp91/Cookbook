@@ -1,41 +1,42 @@
-import React from "react";
+import { Row, Col, Button, Spinner } from "react-bootstrap";
 import RecipeCard from "./RecipeCard";
-import Row from 'react-bootstrap/Row';
-import Container from 'react-bootstrap/Container';
-import Col from 'react-bootstrap/Col';
 
-const RecipeCardsGrid = ({ ingredients, serverCall, reload }) => {
+import Icon from '@mdi/react';
+import { mdiReload } from '@mdi/js';
+
+const RecipeCardsGrid = ({ serverCall, reload }) => {
 
     function serverResponseState() {
         switch (serverCall.state) {
             case "pending":
                 return (
                     <div className="text-center">
-                            <span className="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
-                            ...loading...
+                        <Spinner /> loading...
                     </div>
-
                 );
             case "success":
                 return (
-                    <>
-                            <Row>
-                                {serverCall.data.map((recipe) => {
-                                    return (
-                                        <Col key={recipe._id} className='d-flex justify-content-center' md={6} lg={4} xl={4} xxl={3}>
-                                            <RecipeCard reload={reload} recipe={recipe} ingredients={ingredients}/>
-                                        </Col>
-                                    )
-                                })}
-                            </Row>
-                    </>
+                    <Row>
+                        {serverCall.recipes.map((recipe) => {
+                            return (
+                                <Col key={recipe._id} className='d-flex justify-content-center' md={6} lg={4} xl={4} xxl={3}>
+                                    <RecipeCard
+                                        recipe={recipe}
+                                        ingredients={serverCall.ingredients}
+                                        reload={reload}
+                                    />
+                                </Col>
+                            )
+                        })}
+                    </Row>
                 );
             case "error":
                 return (
                     <div className="text-center">
-                       <button className="btn btn-danger" type="button">
-                          ...server not responding...
-                      </button>
+                        <h2 className="text-danger">Server not responding...</h2>
+                        <Button className="mb-5" onClick={reload}>
+                            <Icon path={mdiReload} size={1} />
+                        </Button>
                     </div>
                 );
             default:

@@ -1,86 +1,69 @@
-import React, { useState } from 'react';
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
-import ConfirmationDialog from '../ConfirmationDialog';
+import { useState } from 'react';
+import { Col, Button, Modal, ListGroup } from 'react-bootstrap';
 import axios from 'axios';
+
+import ConfirmationDialog from '../ConfirmationDialog';
 import CallStateModal from "../CallStateModal";
 import RecipeEditor from './RecipeEditor';
-import { ListGroup, Col } from 'react-bootstrap';
 
 import Logo from '../../assets/logo-512px.png';
 
 function RecipeModal({ recipe, ingredients, reload }) {
     const [show, setShow] = useState(false);
-    const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
     const handleShow = () => setShow(!show);
 
-    const [openAddRecipeModal, setOpenModal] = useState(false);
+    const [showEditRecipeModal, setShowEditRecipeModal] = useState(false);
 
-    const [ showAddRecipeConfirmDialog, setShowAddRecipeConfirmDialog] = useState(false)
-    const [ServingsNumber, setServingsNumber] = useState(recipe.finalAmount);
+    const [serverDeletionState, setServerDeletionState] = useState({ state: "pending" });
+    const [showDeleteCall, setShowDeleteCall] = useState(false);
 
-    const [serverReply, setServerReply] = useState({
-        state: "pending",
-    });
+    const [servingsNumber, setServingsNumber] = useState(recipe.finalAmount);
 
-    let RecipeModalDisplayIngredients = [];
-   
+    let displayIngredients = [];
+    let ingredientsList = ingredients;
+
+    // iterate over ingredients in the recipe
     recipe.ingredients.forEach(ingredient => {
+        // find the specific ingredient in a list of all ingredients
+        let matchedIngredient = ingredientsList.find(e => e._id === ingredient.id);
 
-            let ingredientHelp = ingredients.find(e => e._id == ingredient.id);
-
-            if (ingredientHelp === undefined) {
-                return;
-            }
-            
-            RecipeModalDisplayIngredients.push({
-                name: ingredientHelp.name,
-                amount: ingredient.amount.toString()/recipe.finalAmount,
-                units:  ingredient.units,
-                
-            }
-            )
+        // if the ingredient doesn't exist
+        if (matchedIngredient === undefined) {
+            return;
         }
         
-        );
-        
-    function returnList(RecipeModalDisplayIngredients, ServingsNumber) {
-
+        displayIngredients.push({
+            name: matchedIngredient.name,
+            amount: (ingredient.amount / recipe.finalAmount),
+            units:  ingredient.units
+        });
+    });
+    
+    // this function renders the list of ingredients
+    function getListOfIngredients() {
         let returnListArray = [];
 
-        if (ServingsNumber === undefined) {
+        // iterate over all prepared ingredients
+        for (let i = 0; i < displayIngredients.length; i++) {
+            let displayAmount = displayIngredients[i].amount;
+            if (servingsNumber !== undefined) {
+                displayAmount *= servingsNumber;
+            }
 
-        for (let i = 0; i < RecipeModalDisplayIngredients.length; i++) {
             returnListArray.push(
-            <ListGroup.Item as="li" key={[i]}>
-                <Col>
-                    {RecipeModalDisplayIngredients[i].name}
-                </Col>
-                <Col>
-                    {RecipeModalDisplayIngredients[i].amount.toString()*recipe.finalAmount + "" + RecipeModalDisplayIngredients[i].units}
-                </Col>
-            </ListGroup.Item> 
-                );
+                <ListGroup.Item as="li" key={i}>
+                    <Col>
+                        {displayIngredients[i].name}
+                    </Col>
+                    <Col>
+                        {+displayAmount.toFixed(2) + "" + displayIngredients[i].units}
+                    </Col>
+                </ListGroup.Item> 
+            );
         }
-
-    } else {
-
-        for (let i = 0; i < RecipeModalDisplayIngredients.length; i++) {
-            returnListArray.push(
-            <ListGroup.Item as="li" key={[i]}>
-                <Col>
-                    {RecipeModalDisplayIngredients[i].name}
-                </Col>
-                <Col>
-                    {(RecipeModalDisplayIngredients[i].amount.toString()*ServingsNumber).toFixed(1) + "" + RecipeModalDisplayIngredients[i].units}
-                </Col>
-            </ListGroup.Item> 
-                );
-        }
-    }
 
         return returnListArray;
-        
     }
 
     return (
@@ -89,85 +72,110 @@ function RecipeModal({ recipe, ingredients, reload }) {
 
             <Modal show={show} onHide={handleShow} size="xl">
                 <Modal.Header closeButton>
-                    <Modal.Title>Detaily</Modal.Title>
+                    <Modal.Title>Details</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <div style={{ display: 'flex', flexDirection: 'row'}}>
+                    <div style={{ display: 'flex', flexDirection: 'row' }}>
+                        {/* Left-side (image) */}
                         <div>
-                            <img src={recipe.imageUrl || Logo} style={{ flex: '1', width: '400px', height: '400px', objectFit: 'cover'}}></img>
+                            <img
+                                src={recipe.imageUrl || Logo}
+                                alt=""
+                                style={{ flex: '1', width: '400px', height: '400px', objectFit: 'cover'}}
+                            ></img>
                         </div>
-                        <div style={{ marginLeft: '5px', backgroundColor:'#FFFFFF', width:'66%'}}>
+
+                        {/* Right-side (recipe name, list of ingredients, description) */}
+                        <div style={{ marginLeft: '15px', backgroundColor:'#FFFFFF', width:'66%'}}>
                             <h1 style={{textAlign: "center"}}>{recipe.name}</h1>
-                            <ListGroup as="ul" style={{marginTop: '5%'}}>
-                                {returnList(RecipeModalDisplayIngredients, ServingsNumber)}
+                            <ListGroup as="ul">
+                                {getListOfIngredients()}
                             </ListGroup>
 
                             <div style={{marginTop:'20px'}}>
-                                <label style={{marginLeft:'10px'}}>Počet porcí</label>
-                                <input 
-                                    type="number" 
-                                    className="col-sm-2 col-form-label" 
-                                    id="UserDefinedServingsNumber" 
-                                    onChange={e => {setServingsNumber(e.target.value)}} 
-                                    value={ServingsNumber} style={{marginLeft:'10px'}} 
-                                    placeholder={recipe.finalAmount}>
+                                <label>Počet porcí</label>
+                                <input
+                                    type="number"
+                                    className="col-sm-2 col-form-label"
+                                    id="UserDefinedServingsNumber"
+                                    onChange={e => { setServingsNumber(e.target.value) }}
+                                    value={servingsNumber}
+                                    style={{marginLeft:'10px'}}
+                                    placeholder={recipe.finalAmount}
+                                >
                                 </input>
                             </div>
 
                             <p style={{marginTop: '5%'}}>{recipe.description}</p>
-                            </div>
+                        </div>
                     </div>
+
+                    {/* Bottom buttons */}
                     <div style={{ display: 'flex', flexDirection: 'row'}}>
-
-                    <Button variant="primary" style={{marginTop: '2%', marginLeft:'25%', marginBottom: '2%'}} onClick={() => setOpenModal(true)}>Edit Recipe</Button>
-                    <RecipeEditor reload={reload} show={openAddRecipeModal} recipe={recipe} ingredients={ingredients} onHide={()=> {setOpenModal(false);}}/>
-
-                    <Button variant="primary" style={{marginTop: '2%', marginLeft:'25%', marginBottom: '2%'}} onClick={() => setShowDeleteModal(true)}>Delete</Button>
-                    <ConfirmationDialog
-                        show={showDeleteModal}
-                        onConfirm={() => {
-                        axios.delete(`http://localhost:8080/api/recipes/${recipe._id}`)
-                            .then(() => {
-                                setShow(true);
-                                setServerReply({ state: "success"})
-                            })
-                            .catch(function (error) {
-                                setServerReply({ state: "error"});
-                            });
-
-                        setShowAddRecipeConfirmDialog(true)
-                            setShowDeleteModal(false);
-
-                    }}
-
-                        onCancel={() => setShowDeleteModal(false)}
-                        title='Confirm delete'
-                    >
-                        Are you sure you want to delete this recipe?
-
-                    </ConfirmationDialog>
-
-                        <CallStateModal
-                            show={showAddRecipeConfirmDialog}
-                            onCancel={() => {setShowAddRecipeConfirmDialog(false); setServerReply({ state: "pending"})}}
-                            stateOfServer={serverReply.state}
-                            onSuccess={() => {setShowAddRecipeConfirmDialog(false); setShow(false); reload(); setServerReply({ state: "pending"})}}
+                        <Button
+                            variant="primary"
+                            style={{marginTop: '2%', marginLeft:'25%', marginBottom: '2%'}}
+                            onClick={() => setShowEditRecipeModal(true)}
                         >
-                        </CallStateModal>
+                            Edit Recipe
+                        </Button>
+                        <RecipeEditor
+                            show={showEditRecipeModal}
+                            recipe={recipe}
+                            ingredients={ingredientsList}
+                            onHide={()=> { setShowEditRecipeModal(false) }}
+                            reload={reload}
+                        />
 
-                        
+                        <Button
+                            variant="primary"
+                            style={{marginTop: '2%', marginLeft:'25%', marginBottom: '2%'}}
+                            onClick={() => setShowDeleteConfirmation(true)}
+                        >
+                            Delete
+                        </Button>
+
+                        {/* Confirmation dialog for recipe deletion */}
+                        <ConfirmationDialog
+                            show={showDeleteConfirmation}
+                            title='Confirm delete'
+                            onConfirm={() => {
+                                axios.delete(`http://localhost:8080/api/recipes/${recipe._id}`)
+                                    .then(() => {
+                                        setServerDeletionState({ state: "success"})
+                                    })
+                                    .catch((error) => {
+                                        setServerDeletionState({ state: "error"});
+                                    });
+
+                                setShowDeleteCall(true);
+                                setShowDeleteConfirmation(false);
+                            }}
+                            onCancel={() => setShowDeleteConfirmation(false)}
+                        >
+                            Are you sure you want to delete this recipe?
+                        </ConfirmationDialog>
+
+                        {/* Call state for recipe deletion */}
+                        <CallStateModal
+                            show={showDeleteCall}
+                            stateOfServer={serverDeletionState.state}
+                            onSuccess={() => {
+                                setShowDeleteCall(false);
+                                setShow(false);
+                                reload();
+                                setServerDeletionState({ state: "pending"})
+                            }}
+                            onCancel={() => {
+                                setShowDeleteCall(false);
+                                setServerDeletionState({ state: "pending"})
+                            }}
+                        />
                    </div>
                 </Modal.Body>
-                <Modal.Footer>
-                </Modal.Footer>
             </Modal>
-
-            
         </>
     );
 }
 
 export default RecipeModal;
-
-
-

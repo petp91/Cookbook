@@ -19,13 +19,6 @@ async function getAllRecipes() {
     }
 }
 
-// async function getFilteredRecipes(query) {
-//     let recipes = await getAllRecipes();
-//     return recipes.filter(recipe => {
-//         return recipe.name.toLowerCase().includes(query.toLowerCase());
-//     });
-// }
-
 async function getRecipe(id) {
     let recipes = await getAllRecipes();
 
@@ -89,7 +82,6 @@ async function _write(data) {
 
 module.exports = {
     getAllRecipes,
-    // getFilteredRecipes,
     getRecipe,
     addRecipe,
     updateRecipe,
