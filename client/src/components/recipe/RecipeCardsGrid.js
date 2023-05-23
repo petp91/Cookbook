@@ -4,7 +4,7 @@ import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 
-const RecipeCardsGrid = ({ ingredients, serverCall, reload }) => {
+const RecipeCardsGrid = ({ serverCall, reload }) => {
 
     function serverResponseState() {
         switch (serverCall.state) {
@@ -20,10 +20,10 @@ const RecipeCardsGrid = ({ ingredients, serverCall, reload }) => {
                 return (
                     <>
                             <Row>
-                                {serverCall.data.map((recipe) => {
+                                {serverCall.recipes.map((recipe) => {
                                     return (
                                         <Col key={recipe._id} className='d-flex justify-content-center' md={6} lg={4} xl={4} xxl={3}>
-                                            <RecipeCard reload={reload} recipe={recipe} ingredients={ingredients}/>
+                                            <RecipeCard reload={reload} recipe={recipe} ingredients={serverCall.ingredients}/>
                                         </Col>
                                     )
                                 })}

@@ -8,14 +8,6 @@ import AdvancedSearch from "../components/AdvancedSearch";
 import RecipeCardsGrid from "../components/recipe/RecipeCardsGrid";
 import RecipeEditor from "../components/recipe/RecipeEditor";
 
-const mockIngredients = [
-    {_id: "1", name: "ingredient1"},
-    {_id: "2", name: "ingredient2"},
-    {_id: "3", name: "ingredient3"},
-    {_id: "4", name: "ingredient4"},
-    {_id: "5", name: "ingredient5"}
-];
-
 const RecipesPage = () => {
     const [searchParams] = useSearchParams();
     const query = searchParams.get('q');
@@ -24,21 +16,42 @@ const RecipesPage = () => {
     const [openAddRecipeModal, setOpenModal] = useState(false);
 
     const [serverCall, setServerCall] = useState({
-        state: "pending",data: {}
+        state: "pending",
+        recipes: [],
+        ingredients: []
     });
 
 
     function reload() {
-        setServerCall({ state: "pending", data: {}})
+        setServerCall({
+            state: "pending",
+            recipes: [],
+            ingredients: []
+        });
 
-        axios.get('http://localhost:8080/api/recipes')
-            .then((response)=> {
-                console.log(response);
-                setServerCall({ state: "success", data: response.data});
+        // send requests
+        let promiseRecipes = axios.get('http://localhost:8080/api/recipes');
+        let promiseIngredients = axios.get('http://localhost:8080/api/ingredients');
+
+        // wait for both calls to complete
+        Promise.all([promiseRecipes, promiseIngredients])
+            .then((results) => {
+                // get responses
+                let recipesResp = results[0];
+                let ingredientsResp = results[1];
+
+                // set state to success along with the data
+                setServerCall({
+                    state: "success",
+                    recipes: recipesResp.data,
+                    ingredients: ingredientsResp.data
+                });
             })
-            .catch(function (error) {
-                setServerCall({ state: "error", data: error?.response?.data});
-                console.log(error?.response?.data)
+            .catch((error) => {
+                setServerCall({
+                    state: "error",
+                    error: error?.response?.data
+                });
             });
     }
 
@@ -70,14 +83,14 @@ const RecipesPage = () => {
 
             <RecipeEditor
                 show={openAddRecipeModal}
-                ingredients={mockIngredients}
+                ingredients={serverCall.ingredients} // FIXME: ingredients are empty in the RecipeEditor on first load
                 reload={reload}
                 onHide={()=> {
                     setOpenModal(false);
                 }}
             />
 
-            <RecipeCardsGrid ingredients={mockIngredients} serverCall={serverCall} reload={reload} />
+            <RecipeCardsGrid serverCall={serverCall} reload={reload} />
         </Container>
     );
 };
