@@ -1,12 +1,12 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-//import Menu from "./components/menu/Menu";
+
 import HomePage from "./pages/HomePage";
 import RecipesPage from "./pages/RecipesPage";
 import AboutPage from "./pages/AboutPage";
 import NotFound from "./pages/NotFound";
 
 //NAVBAR
-import Navbar from "./components/NavBar";
+import NavBar from "./components/NavBar";
 import "./layout/NavBar.css";
 
 // FOOTER
@@ -19,10 +19,10 @@ const App = () => {
     return (
         <BrowserRouter>
             <div>
-                <Navbar />
+                <NavBar />
             </div>
             <Routes>
-                <Route path="/" element={ <HomePage/> } />
+                <Route path="/" element={ <HomePage /> } />
                 <Route path="/recipes" element={ <RecipesPage /> } />
                 <Route path="/about" element={ <AboutPage /> } />
                 <Route path="*" element={ <NotFound /> } />

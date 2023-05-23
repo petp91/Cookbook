@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import { Button, Form, Modal, Nav, NavDropdown, Dropdown, NavItem, NavLink, Alert } from 'react-bootstrap'
+
 import FormGroup from '../FormGroup';
 import OwnerIngredientsList from './OwnerIngredientsList';
 import { login } from '../../helpers/account-helper';
-
 
 const MenuAccount = () => {
     const [loggedInUsername, setLoggedInUsername] = useState(null);
@@ -62,6 +62,7 @@ const MenuAccount = () => {
     return (
         <>
             { loggedInUsername ? (
+                // if user is logged in
                 <Nav className='ms-lg-3 align-items-center mt-2 mb-1 mt-lg-0 mb-lg-0'>
                     <Dropdown as={NavItem}>
                         <Dropdown.Toggle as={NavLink}>Logged in as <b>{loggedInUsername}</b></Dropdown.Toggle>
@@ -73,6 +74,7 @@ const MenuAccount = () => {
                     </Dropdown>
                 </Nav>
             ) : (
+                // if user is not logged in
                 <div className='d-flex justify-content-center mt-3 mb-2 mt-lg-0 mb-lg-0'>
                     <Button className='ms-lg-3' onClick={() => setShowLogin(true)}>Login</Button>
                     <Button variant='secondary' className='ms-2' onClick={() => setShowRegister(true)}>Register</Button>

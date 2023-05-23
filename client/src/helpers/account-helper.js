@@ -9,7 +9,10 @@ const accounts = [
 ];
 
 function login(username, password) {
+    // find account based on username
     let account = accounts.find(account => account.username === username.toLowerCase());
+
+    // if the account was found and password matches
     if (account && account.password === password) {
         return {
             success: true,

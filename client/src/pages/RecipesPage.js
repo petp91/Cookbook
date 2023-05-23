@@ -13,7 +13,7 @@ const RecipesPage = () => {
     const query = searchParams.get('q');
     const [showSearch, setShowSearch] = useState(false);
 
-    const [openAddRecipeModal, setOpenModal] = useState(false);
+    const [showAddRecipeModal, setShowAddRecipeModal] = useState(false);
 
     const [serverCall, setServerCall] = useState({
         state: "pending",
@@ -68,12 +68,17 @@ const RecipesPage = () => {
                     variant="btn btn-success"
                     size="lg"
                     onClick={()=> {
-                        setOpenModal(true);
+                        setShowAddRecipeModal(true);
                     }}
                 >
                     Add recipe
                 </Button>
-                <Button onClick={() => { setShowSearch(!showSearch); }} className='float-end'>
+                <Button
+                    onClick={() => {
+                        setShowSearch(!showSearch);
+                    }}
+                    className='float-end'
+                >
                     <Icon path={mdiFilter} size={1} />
                 </Button>
 
@@ -82,11 +87,11 @@ const RecipesPage = () => {
             </div>
 
             <RecipeEditor
-                show={openAddRecipeModal}
+                show={showAddRecipeModal}
                 ingredients={serverCall.ingredients} // FIXME: ingredients are empty in the RecipeEditor on first load
                 reload={reload}
-                onHide={()=> {
-                    setOpenModal(false);
+                onHide={() => {
+                    setShowAddRecipeModal(false);
                 }}
             />
 
