@@ -1,30 +1,20 @@
-import { useState, useEffect } from 'react';
+import { useState, useContext } from 'react';
 import { Button, Modal, ListGroup, CloseButton, NavDropdown } from 'react-bootstrap';
 import axios from 'axios';
 import ConfirmationDialog from '../ConfirmationDialog';
 import CallStateModal from '../CallStateModal';
+import { DataContext } from '../../providers/DataProvider';
 
 import '../../layout/OwnerIngredientsList.css'
 
 const OwnerIngredientsList = () => {
+  const { ingredients, removeIngredientById } = useContext(DataContext);
   const [show, setShow] = useState(false);
-  const [ingredients, setIngredients] = useState([]);
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const [deleteId, setDeleteId] = useState(null);
   const [stateOfServer, setStateOfServer] = useState("");
-
-  // load list of ingredients
-  useEffect(() => {
-    axios.get('http://localhost:8080/api/ingredients')
-      .then(response => {
-        setIngredients(response.data);
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  }, []);
 
   const handleDelete = (id) => {
     setDeleteId(id);
@@ -37,7 +27,7 @@ const OwnerIngredientsList = () => {
     axios.delete(`http://localhost:8080/api/ingredients/${deleteId}`)
       .then(response => {
         console.log('deleted', response);
-        setIngredients(ingredients => ingredients.filter(ingredient => ingredient._id !== deleteId));
+        removeIngredientById(deleteId);
         setShowDeleteConfirmation(false);
         setStateOfServer("success");
       })

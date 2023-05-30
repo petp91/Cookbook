@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { Col, Button, Modal, ListGroup } from 'react-bootstrap';
 import axios from 'axios';
 
@@ -7,8 +7,9 @@ import CallStateModal from "../CallStateModal";
 import RecipeEditor from './RecipeEditor';
 
 import Logo from '../../assets/logo-512px.png';
+import { DataContext } from '../../providers/DataProvider';
 
-function RecipeModal({ recipe, ingredients, reload }) {
+function RecipeModal({ recipe }) {
     const [show, setShow] = useState(false);
     const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
     const handleShow = () => setShow(!show);
@@ -20,8 +21,10 @@ function RecipeModal({ recipe, ingredients, reload }) {
 
     const [servingsNumber, setServingsNumber] = useState(recipe.finalAmount);
 
+    const serverCall = useContext(DataContext);
+
     let displayIngredients = [];
-    let ingredientsList = ingredients;
+    let ingredientsList = serverCall.ingredients;
 
     // iterate over ingredients in the recipe
     recipe.ingredients.forEach(ingredient => {
@@ -122,9 +125,7 @@ function RecipeModal({ recipe, ingredients, reload }) {
                         <RecipeEditor
                             show={showEditRecipeModal}
                             recipe={recipe}
-                            ingredients={ingredientsList}
                             onHide={()=> { setShowEditRecipeModal(false) }}
-                            reload={reload}
                         />
 
                         <Button
@@ -163,7 +164,7 @@ function RecipeModal({ recipe, ingredients, reload }) {
                             onSuccess={() => {
                                 setShowDeleteCall(false);
                                 setShow(false);
-                                reload();
+                                serverCall.reload();
                                 setServerDeletionState({ state: "pending"})
                             }}
                             onCancel={() => {

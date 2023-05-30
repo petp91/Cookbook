@@ -1,10 +1,11 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useContext } from 'react';
 import { Modal, Form, Row, Col, Button, CloseButton } from 'react-bootstrap';
 import { Typeahead, TypeaheadMenu } from 'react-bootstrap-typeahead';
 import axios from "axios";
 import FormGroup from '../FormGroup';
 import CallStateModal from "../CallStateModal";
 import 'react-bootstrap-typeahead/css/Typeahead.css';
+import { DataContext } from '../../providers/DataProvider';
 
 const units = ['ml', 'ks', 'g'];
 
@@ -14,21 +15,19 @@ const newIngredientRowObj = () => {
         selected: [],
         isLoading: false,
         name: '',
-        amount: '0',
+        amount: '1',
         units: units[0]
     }
 };
 
-const RecipeEditor = ({ recipe, ingredients, show, onHide, reload }) => {
-    const [ingredientsState, setIngredientsState] = useState(ingredients);
-    // update ingredientsState when ingredients load
-    if (ingredientsState.length === 0 && ingredients.length !== 0) {
-        setIngredientsState(ingredients);
-    }
+const RecipeEditor = ({ recipe, show, onHide }) => {
+    const dataServerCall = useContext(DataContext);
+    const ingredients = dataServerCall.ingredients;
 
     const [formState, setFormState] = useState(recipeToState(recipe));
+    const [isFormValid, setIsFormValid] = useState(false);
 
-    const [serverCall, setServerCall] = useState({
+    const [saveServerCall, setSaveServerCall] = useState({
         state: "pending"
     });
     
@@ -55,7 +54,7 @@ const RecipeEditor = ({ recipe, ingredients, show, onHide, reload }) => {
             // iterate over ingredients in the recipe
             recipe.ingredients.forEach(ingredient => {
                 // find the specific ingredient in a list of all ingredients
-                let matchedIngredient = ingredientsState.find(e => e._id === ingredient.id);
+                let matchedIngredient = ingredients.find(e => e._id === ingredient.id);
 
                 if (matchedIngredient === undefined) {
                     // if the ingredient doesn't exist
@@ -123,36 +122,55 @@ const RecipeEditor = ({ recipe, ingredients, show, onHide, reload }) => {
     const onSubmit = (event) => {
         event.preventDefault();
 
+        setShowSaveRecipeCall(true)
+
         if (recipe !== undefined) {
             // if recipe is not undefined, then update the existing recipe
            axios.put(`http://localhost:8080/api/recipes/${recipe._id}`, recipeFromState(formState))
                 .then((response) => {
-                    setServerCall({ state: "success"});
+                    setSaveServerCall({ state: "success"});
                 })
                 .catch((error) => {
-                    setServerCall({ state: "error"});
+                    setSaveServerCall({ state: "error"});
                 });
         } else {
             // if the recipe is undefined, then create a new recipe
             axios.post('http://localhost:8080/api/recipes', recipeFromState(formState))
                 .then((response) => {
-                    setServerCall({ state: "success"});
+                    setSaveServerCall({ state: "success"});
                 })
                 .catch((error) => {
-                    setServerCall({ state: "error"});
+                    setSaveServerCall({ state: "error"});
                 });
         };
     }
+
+    const customOnHide = () => {
+        onHide()
+        setFormState(recipeToState(recipe))
+    }
+
+    // form validation
+    const formRef = useRef(null);
+    useEffect(() => {
+        if (formRef.current && formRef.current.checkValidity()) {
+            let ingredientRowsValid = formState.ingredientRows.every(ingredientRow => {
+                return (ingredientRow.selected.length > 0) && (!ingredientRow.isLoading);
+            });
+
+            setIsFormValid(ingredientRowsValid);
+        } else {
+            setIsFormValid(false);
+        }
+    }, [formState, show]);
+
 
     return (
         <Modal
                size="xl"
                fullscreen='lg-down'
                show={show}
-               onHide={() => {
-                   onHide()
-                   setFormState(recipeToState(recipe))
-               }}
+               onHide={customOnHide}
                backdrop="static"
         >
             <Modal.Header closeButton>
@@ -161,13 +179,14 @@ const RecipeEditor = ({ recipe, ingredients, show, onHide, reload }) => {
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <Form validated={true} onSubmit={onSubmit}>
+                <Form ref={formRef} onSubmit={onSubmit}>
                     <FormGroup
                         label='Recipe name'
                         type='text'
                         placeholder='Recipe name'
                         value={formState.name} required
                         setValue={val => setFormState({...formState, name: val})}
+                        validate={true}
                     />
                     <FormGroup
                         label='Description'
@@ -176,13 +195,15 @@ const RecipeEditor = ({ recipe, ingredients, show, onHide, reload }) => {
                         rows={5}
                         value={formState.description} required
                         setValue={val => setFormState({...formState, description: val})}
-                    />      
+                        validate={true}
+                    />
                     <FormGroup
                         label='Image URL'
                         type='url'
                         placeholder='Image URL'
                         value={formState.imageUrl} 
                         setValue={val => setFormState({...formState, imageUrl: val})}
+                        validate={true}
                     />
                             
                     <div className="mt-3">
@@ -194,6 +215,7 @@ const RecipeEditor = ({ recipe, ingredients, show, onHide, reload }) => {
                                     placeholder='Preparation length in minutes'
                                     value={formState.preparationLength} required min={1}
                                     setValue={val => setFormState({...formState, preparationLength: val})}
+                                    validate={true}
                                 />
                             </Col>
                             <Col className xs={5}>
@@ -203,6 +225,7 @@ const RecipeEditor = ({ recipe, ingredients, show, onHide, reload }) => {
                                     placeholder='Final amount in servings'
                                     value={formState.finalAmount} required min={1}
                                     setValue={val => setFormState({...formState, finalAmount: val})}
+                                    validate={true}
                                 />
                             </Col>
                         </Row>
@@ -214,7 +237,7 @@ const RecipeEditor = ({ recipe, ingredients, show, onHide, reload }) => {
                         {formState.ingredientRows.map((rowState, index) => (
                             <IngredientRow
                                 key={rowState.key}
-                                ingredients={ingredientsState}
+                                ingredients={ingredients}
                                 state={rowState}
                                 setState={(newState) => {
                                     // if the ingredient is new
@@ -231,7 +254,7 @@ const RecipeEditor = ({ recipe, ingredients, show, onHide, reload }) => {
                                                 let newIngredient = response.data;
 
                                                 // add the new ingredient to the ingredient list
-                                                setIngredientsState((prevIngredients) => [...prevIngredients, newIngredient]);
+                                                dataServerCall.addIngredient(newIngredient);
 
                                                 // select the new ingredient
                                                 updateState({ selected: [ newIngredient ], isLoading: false});
@@ -273,24 +296,23 @@ const RecipeEditor = ({ recipe, ingredients, show, onHide, reload }) => {
                     <Button className='mt-4 float-end'
                         variant={"success"}
                         type="submit"
-                        disabled={formState.name === "" || formState.description === "" || formState.preparationLength <1 || formState.finalAmount <1}
-                        onClick={() => setShowSaveRecipeCall(true)}
+                        disabled={!isFormValid}
                     >
                         Save recipe
                     </Button>
 
                     <CallStateModal
                         show={showSaveRecipeCall}
-                        stateOfServer={serverCall.state}
+                        stateOfServer={saveServerCall.state}
                         onSuccess={() => {
                             setShowSaveRecipeCall(false);
-                            onHide();
-                            reload();
-                            setServerCall({ state: "pending"});
+                            customOnHide();
+                            dataServerCall.reload();
+                            setSaveServerCall({ state: "pending"});
                         }}
                         onCancel={() => {
                             setShowSaveRecipeCall(false);
-                            setServerCall({ state: "pending"});
+                            setSaveServerCall({ state: "pending"});
                         }}
                     >
                     </CallStateModal>
@@ -322,6 +344,10 @@ const IngredientRow = ({ingredients, state, setState, isLoading, onRemove, isRem
         state.selected = selected;
         setState(state);
     };
+
+    let amount = state.amount;
+    let isAmountValid = amount.length === 0 || Number.isNaN(+amount) || +amount < 1;
+
     return (
         <Row className='gx-1 mt-2 justify-content-center align-items-center'>
             <Col md={7} xs>
@@ -339,7 +365,7 @@ const IngredientRow = ({ingredients, state, setState, isLoading, onRemove, isRem
                     onBlur={() => { !state.selected[0] && typeaheadRef.current.clear(); }}
                     isLoading={isLoading}
                     disabled={isLoading}
-                    // isInvalid={!state.selected[0]}
+                    isInvalid={state.selected.length === 0}
 
                     // re-implemented renderMenu function, just so that we can change the newSelectionPrefix
                     renderMenu={(results, menuProps, props) => (
@@ -354,7 +380,12 @@ const IngredientRow = ({ingredients, state, setState, isLoading, onRemove, isRem
                 />
             </Col>
             <Col md xs={3}>
-                <Form.Control type='number' min={0} value={state.amount} onChange={(event) => setState({...state, amount: event.target.value})} />
+                <Form.Control
+                    type='number'
+                    value={state.amount} min={1} required
+                    onChange={(event) => setState({...state, amount: event.target.value})}
+                    isInvalid={isAmountValid}
+                />
             </Col>
             <Col md xs={4}>
                 <Form.Select value={state.units} onChange={(event) => setState({...state, units: event.target.value})}>
