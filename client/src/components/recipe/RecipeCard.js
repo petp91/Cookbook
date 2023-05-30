@@ -4,7 +4,7 @@ import RecipeModal from './RecipeModal'
 import CardPicture from '../../assets/CardPicture.png'
 import '../../layout/MenuCard-style.css';
 
-const RecipeCard = ({ recipe, ingredients, reload }) => {
+const RecipeCard = ({ recipe }) => {
     return (
         <Card className="recipeCard text-center m-4">
             <Card.Img variant="top" src={recipe.imageUrl || CardPicture } />
@@ -15,11 +15,7 @@ const RecipeCard = ({ recipe, ingredients, reload }) => {
                     {recipe.description}
                 </Card.Text>
 
-                <RecipeModal
-                    recipe={recipe}
-                    ingredients={ingredients}
-                    reload={reload}
-                />
+                <RecipeModal recipe={recipe} />
             </Card.Body>
         </Card>
     );

@@ -1,7 +1,6 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Button, Container } from "react-bootstrap";
 import { useSearchParams } from "react-router-dom";
-import axios from "axios";
 import Icon from '@mdi/react';
 import { mdiFilter } from '@mdi/js';
 import AdvancedSearch from "../components/AdvancedSearch";
@@ -14,50 +13,6 @@ const RecipesPage = () => {
     const [showSearch, setShowSearch] = useState(false);
 
     const [showAddRecipeModal, setShowAddRecipeModal] = useState(false);
-
-    const [serverCall, setServerCall] = useState({
-        state: "pending",
-        recipes: [],
-        ingredients: []
-    });
-
-
-    function reload() {
-        setServerCall({
-            state: "pending",
-            recipes: [],
-            ingredients: []
-        });
-
-        // send requests
-        let promiseRecipes = axios.get('http://localhost:8080/api/recipes');
-        let promiseIngredients = axios.get('http://localhost:8080/api/ingredients');
-
-        // wait for both calls to complete
-        Promise.all([promiseRecipes, promiseIngredients])
-            .then((results) => {
-                // get responses
-                let recipesResp = results[0];
-                let ingredientsResp = results[1];
-
-                // set state to success along with the data
-                setServerCall({
-                    state: "success",
-                    recipes: recipesResp.data,
-                    ingredients: ingredientsResp.data
-                });
-            })
-            .catch((error) => {
-                setServerCall({
-                    state: "error",
-                    error: error?.response?.data
-                });
-            });
-    }
-
-    useEffect(() => {
-        reload()
-    }, [])
 
     return (
         <Container>
@@ -88,14 +43,12 @@ const RecipesPage = () => {
 
             <RecipeEditor
                 show={showAddRecipeModal}
-                ingredients={serverCall.ingredients} // FIXME: ingredients are empty in the RecipeEditor on first load
-                reload={reload}
                 onHide={() => {
                     setShowAddRecipeModal(false);
                 }}
             />
 
-            <RecipeCardsGrid serverCall={serverCall} reload={reload} />
+            <RecipeCardsGrid />
         </Container>
     );
 };

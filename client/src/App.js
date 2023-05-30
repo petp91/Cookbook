@@ -14,22 +14,25 @@ import Footer from "./components/Footer";
 import "./layout/Footer.css";
 
 import './layout/nested_modals_fix.css';
+import { DataProvider } from "./providers/DataProvider";
 
 const App = () => {
     return (
         <BrowserRouter>
-            <div>
-                <NavBar />
-            </div>
-            <Routes>
-                <Route path="/" element={ <HomePage /> } />
-                <Route path="/recipes" element={ <RecipesPage /> } />
-                <Route path="/about" element={ <AboutPage /> } />
-                <Route path="*" element={ <NotFound /> } />
-            </Routes>
-            <div>
-                <Footer />
-            </div>
+            <DataProvider>
+                <div>
+                    <NavBar />
+                </div>
+                <Routes>
+                    <Route path="/" element={ <HomePage /> } />
+                    <Route path="/recipes" element={ <RecipesPage /> } />
+                    <Route path="/about" element={ <AboutPage /> } />
+                    <Route path="*" element={ <NotFound /> } />
+                </Routes>
+                <div>
+                    <Footer />
+                </div>
+            </DataProvider>
         </BrowserRouter>
     );
 };

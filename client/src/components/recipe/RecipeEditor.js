@@ -1,10 +1,11 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useContext } from 'react';
 import { Modal, Form, Row, Col, Button, CloseButton } from 'react-bootstrap';
 import { Typeahead, TypeaheadMenu } from 'react-bootstrap-typeahead';
 import axios from "axios";
 import FormGroup from '../FormGroup';
 import CallStateModal from "../CallStateModal";
 import 'react-bootstrap-typeahead/css/Typeahead.css';
+import { DataContext } from '../../providers/DataProvider';
 
 const units = ['ml', 'ks', 'g'];
 
@@ -19,16 +20,13 @@ const newIngredientRowObj = () => {
     }
 };
 
-const RecipeEditor = ({ recipe, ingredients, show, onHide, reload }) => {
-    const [ingredientsState, setIngredientsState] = useState(ingredients);
-    // update ingredientsState when ingredients load
-    if (ingredientsState.length === 0 && ingredients.length !== 0) {
-        setIngredientsState(ingredients);
-    }
+const RecipeEditor = ({ recipe, show, onHide }) => {
+    const dataServerCall = useContext(DataContext);
+    const ingredients = dataServerCall.ingredients;
 
     const [formState, setFormState] = useState(recipeToState(recipe));
 
-    const [serverCall, setServerCall] = useState({
+    const [saveServerCall, setSaveServerCall] = useState({
         state: "pending"
     });
     
@@ -55,7 +53,7 @@ const RecipeEditor = ({ recipe, ingredients, show, onHide, reload }) => {
             // iterate over ingredients in the recipe
             recipe.ingredients.forEach(ingredient => {
                 // find the specific ingredient in a list of all ingredients
-                let matchedIngredient = ingredientsState.find(e => e._id === ingredient.id);
+                let matchedIngredient = ingredients.find(e => e._id === ingredient.id);
 
                 if (matchedIngredient === undefined) {
                     // if the ingredient doesn't exist
@@ -127,19 +125,19 @@ const RecipeEditor = ({ recipe, ingredients, show, onHide, reload }) => {
             // if recipe is not undefined, then update the existing recipe
            axios.put(`http://localhost:8080/api/recipes/${recipe._id}`, recipeFromState(formState))
                 .then((response) => {
-                    setServerCall({ state: "success"});
+                    setSaveServerCall({ state: "success"});
                 })
                 .catch((error) => {
-                    setServerCall({ state: "error"});
+                    setSaveServerCall({ state: "error"});
                 });
         } else {
             // if the recipe is undefined, then create a new recipe
             axios.post('http://localhost:8080/api/recipes', recipeFromState(formState))
                 .then((response) => {
-                    setServerCall({ state: "success"});
+                    setSaveServerCall({ state: "success"});
                 })
                 .catch((error) => {
-                    setServerCall({ state: "error"});
+                    setSaveServerCall({ state: "error"});
                 });
         };
     }
@@ -214,7 +212,7 @@ const RecipeEditor = ({ recipe, ingredients, show, onHide, reload }) => {
                         {formState.ingredientRows.map((rowState, index) => (
                             <IngredientRow
                                 key={rowState.key}
-                                ingredients={ingredientsState}
+                                ingredients={ingredients}
                                 state={rowState}
                                 setState={(newState) => {
                                     // if the ingredient is new
@@ -231,7 +229,7 @@ const RecipeEditor = ({ recipe, ingredients, show, onHide, reload }) => {
                                                 let newIngredient = response.data;
 
                                                 // add the new ingredient to the ingredient list
-                                                setIngredientsState((prevIngredients) => [...prevIngredients, newIngredient]);
+                                                dataServerCall.addIngredient(newIngredient);
 
                                                 // select the new ingredient
                                                 updateState({ selected: [ newIngredient ], isLoading: false});
@@ -281,16 +279,16 @@ const RecipeEditor = ({ recipe, ingredients, show, onHide, reload }) => {
 
                     <CallStateModal
                         show={showSaveRecipeCall}
-                        stateOfServer={serverCall.state}
+                        stateOfServer={saveServerCall.state}
                         onSuccess={() => {
                             setShowSaveRecipeCall(false);
                             onHide();
-                            reload();
-                            setServerCall({ state: "pending"});
+                            dataServerCall.reload();
+                            setSaveServerCall({ state: "pending"});
                         }}
                         onCancel={() => {
                             setShowSaveRecipeCall(false);
-                            setServerCall({ state: "pending"});
+                            setSaveServerCall({ state: "pending"});
                         }}
                     >
                     </CallStateModal>
