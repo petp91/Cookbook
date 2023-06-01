@@ -12,8 +12,6 @@ async function AddAbl(req, res) {
             });
             return;
         }
-        
-        // TODO validate that all referenced ingredients actually exist
 
         let ingredient = await ingredientDao.addIngredient(req.body);
         res.status(201).send(ingredient);

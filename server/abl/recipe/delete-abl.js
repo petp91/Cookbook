@@ -4,7 +4,7 @@ async function DeleteAbl(req, res) {
     try {
         const id = req.params.id;
         
-        let deletedRecipe = await recipeDao.deleteRecipes(id);
+        let deletedRecipe = await recipeDao.deleteRecipe(id);
         if (deletedRecipe) {
             res.send(deletedRecipe);
         } else {

@@ -17,8 +17,10 @@ const schema = {
                 properties: {
                     id: { type: 'string' },
                     amount: { type: 'number', minimum: 1 },
-                    // TODO: validate units
-                    units: { type: 'string' }
+                    units: {
+                        type: 'string',
+                        enum: ['ml', 'ks', 'g']
+                    }
                 },
                 required: [ 'id', 'amount', 'units' ]
             }

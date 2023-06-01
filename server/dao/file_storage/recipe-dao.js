@@ -56,7 +56,7 @@ async function updateRecipe(id, updatedRecipe) {
     return recipe;
 }
 
-async function deleteRecipes(id) {
+async function deleteRecipe(id) {
     let recipes = await getAllRecipes();
 
     // find index of the recipe to delete
@@ -85,5 +85,5 @@ module.exports = {
     getRecipe,
     addRecipe,
     updateRecipe,
-    deleteRecipes
+    deleteRecipe
 }
