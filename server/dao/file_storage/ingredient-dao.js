@@ -19,13 +19,6 @@ async function getAllIngredients() {
     }
 }
 
-// async function getFilteredingredients(query) {
-//     let ingredients = await getAllingredients();
-//     return ingredients.filter(ingredient => {
-//         return ingredient.name.toLowerCase().includes(query.toLowerCase());
-//     });
-// }
-
 async function getIngredient(id) {
     let ingredients = await getAllIngredients();
 
@@ -86,12 +79,10 @@ async function _write(data) {
     await writeFile(JSON_FILE_PATH, json);
 }
 
-
 module.exports = {
-    getAllIngredients: getAllIngredients,
-    // getFilteredingredients,
-    getIngredient: getIngredient,
-    addIngredient: addIngredient,
-    updateIngredient: updateIngredient,
-    deleteIngredient: deleteIngredient
+    getAllIngredients,
+    getIngredient,
+    addIngredient,
+    updateIngredient,
+    deleteIngredient
 }

@@ -6,7 +6,7 @@ async function UpdateAbl(req, res) {
     try {
         const id = req.params.id;
         let updatedIngredient = req.body;
-        // we don't care about _id on the recipe object, we only care about the id in req.params
+        // we don't care about _id on the ingredient object, we only care about the id in req.params
         // this will prevent a validation error
         delete updatedIngredient._id;
 
@@ -18,8 +18,6 @@ async function UpdateAbl(req, res) {
             });
             return;
         }
-
-        // TODO validate that all referenced ingredients actually exist
 
         let ingredient = await ingredientDao.updateIngredient(id, updatedIngredient);
         if (ingredient) {

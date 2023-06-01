@@ -14,6 +14,7 @@ async function AddAbl(req, res) {
         }
         
         // TODO validate that all referenced ingredients actually exist
+        // don't forget to document it in Application Model book
 
         let recipe = await recipeDao.addRecipe(req.body);
         res.status(201).send(recipe);

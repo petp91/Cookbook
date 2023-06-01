@@ -20,6 +20,7 @@ async function UpdateAbl(req, res) {
         }
 
         // TODO validate that all referenced ingredients actually exist
+        // don't forget to document it in Application Model book
 
         let recipe = await recipeDao.updateRecipe(id, updatedRecipe);
         if (recipe) {

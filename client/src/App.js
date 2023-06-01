@@ -5,16 +5,12 @@ import RecipesPage from "./pages/RecipesPage";
 import AboutPage from "./pages/AboutPage";
 import NotFound from "./pages/NotFound";
 
-//NAVBAR
-import NavBar from "./components/NavBar";
-import "./layout/NavBar.css";
+import NavBar from "./components/menu/NavBar";
+import Footer from "./components/menu/Footer";
 
-// FOOTER
-import Footer from "./components/Footer";
-import "./layout/Footer.css";
+import { DataProvider } from "./providers/DataProvider";
 
 import './layout/nested_modals_fix.css';
-import { DataProvider } from "./providers/DataProvider";
 
 const App = () => {
     return (
