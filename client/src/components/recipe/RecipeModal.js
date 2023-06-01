@@ -141,7 +141,7 @@ function RecipeModal({ recipe }) {
                             show={showDeleteConfirmation}
                             title='Confirm delete'
                             onConfirm={() => {
-                                axios.delete(`http://localhost:8080/api/recipes/${recipe._id}`)
+                                axios.delete(`${process.env.REACT_APP_BACKEND}/api/recipes/${recipe._id}`)
                                     .then(() => {
                                         setServerDeletionState({ state: "success"})
                                     })

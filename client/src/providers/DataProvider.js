@@ -42,8 +42,8 @@ const DataProvider = ({ children }) => {
         });
     
         // send requests
-        let promiseRecipes = axios.get('http://localhost:8080/api/recipes');
-        let promiseIngredients = axios.get('http://localhost:8080/api/ingredients');
+        let promiseRecipes = axios.get(`${process.env.REACT_APP_BACKEND}/api/recipes`);
+        let promiseIngredients = axios.get(`${process.env.REACT_APP_BACKEND}/api/ingredients`);
     
         // wait for both calls to complete
         Promise.all([promiseRecipes, promiseIngredients])

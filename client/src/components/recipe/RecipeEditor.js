@@ -126,7 +126,7 @@ const RecipeEditor = ({ recipe, show, onHide }) => {
 
         if (recipe !== undefined) {
             // if recipe is not undefined, then update the existing recipe
-           axios.put(`http://localhost:8080/api/recipes/${recipe._id}`, recipeFromState(formState))
+           axios.put(`${process.env.REACT_APP_BACKEND}/api/recipes/${recipe._id}`, recipeFromState(formState))
                 .then((response) => {
                     setSaveServerCall({ state: "success"});
                 })
@@ -135,7 +135,7 @@ const RecipeEditor = ({ recipe, show, onHide }) => {
                 });
         } else {
             // if the recipe is undefined, then create a new recipe
-            axios.post('http://localhost:8080/api/recipes', recipeFromState(formState))
+            axios.post(`${process.env.REACT_APP_BACKEND}/api/recipes`, recipeFromState(formState))
                 .then((response) => {
                     setSaveServerCall({ state: "success"});
                 })
@@ -249,7 +249,7 @@ const RecipeEditor = ({ recipe, show, onHide }) => {
                                         newState.isLoading = true;
                             
                                         // call the API to create a new ingredient
-                                        axios.post('http://localhost:8080/api/ingredients', { name: ingredientName })
+                                        axios.post(`${process.env.REACT_APP_BACKEND}/api/ingredients`, { name: ingredientName })
                                             .then((response) => {
                                                 let newIngredient = response.data;
 

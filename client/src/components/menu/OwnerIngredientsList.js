@@ -24,7 +24,7 @@ const OwnerIngredientsList = () => {
   const handleDeleteConfirm = () => {
     setStateOfServer("pending");
 
-    axios.delete(`http://localhost:8080/api/ingredients/${deleteId}`)
+    axios.delete(`${process.env.REACT_APP_BACKEND}/api/ingredients/${deleteId}`)
       .then(response => {
         console.log('deleted', response);
         removeIngredientById(deleteId);
