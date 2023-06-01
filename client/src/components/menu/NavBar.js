@@ -2,10 +2,10 @@ import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { Form } from 'react-bootstrap';
 
-import SearchInputGroup from './SearchInputGroup';
-import MenuAccount from './menu/MenuAccount';
+import SearchInputGroup from '../SearchInputGroup';
+import MenuAccount from './MenuAccount';
 
-import '../layout/NavBar.css';
+import '../../layout/NavBar.css';
 
 const NavBar = () => {
   const navigate = useNavigate();
