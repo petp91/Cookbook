@@ -19,7 +19,8 @@ const MenuAccount = () => {
     const defaultRegisterData = {
         username: '',
         email: '',
-        password: ''
+        password: '',
+        passwordRepeated: ''
     };
     const [loginFormData, setLoginFormData] = useState(defaultLoginData);
     const [registerFormData, setRegisterFormData] = useState(defaultRegisterData);
@@ -145,6 +146,14 @@ const MenuAccount = () => {
                                 placeholder='Enter password'
                                 value={registerFormData.password}
                                 setValue={val => setRegisterFormData({...registerFormData, password: val})}
+                            />
+                            <FormGroup
+                                controlId='formBasicPasswordRepeated'
+                                label='Repeated password'
+                                type='password'
+                                placeholder='Repeat password'
+                                value={registerFormData.passwordRepeated}
+                                setValue={val => setRegisterFormData({...registerFormData, passwordRepeated: val})}
                             />
                     </Modal.Body>
                     <Modal.Footer>
