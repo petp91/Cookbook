@@ -22,11 +22,7 @@ const RecipesPage = () => {
 
     if (query) {
         recipes = recipes.filter((recipe) => {
-            if (recipe.name.toLowerCase().includes(query.toLowerCase())) {
-                return true;
-            } else {
-                return false;
-            }
+            return recipe.name.toLowerCase().includes(query.toLowerCase());
         });
     }
 
