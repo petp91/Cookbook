@@ -8,6 +8,7 @@ import NotFound from "./pages/NotFound";
 import NavBar from "./components/menu/NavBar";
 import Footer from "./components/menu/Footer";
 
+import { UserProvider } from "./providers/UserProvider";
 import { DataProvider } from "./providers/DataProvider";
 
 import './layout/nested_modals_fix.css';
@@ -15,20 +16,22 @@ import './layout/nested_modals_fix.css';
 const App = () => {
     return (
         <BrowserRouter>
-            <DataProvider>
-                <div>
-                    <NavBar />
-                </div>
-                <Routes>
-                    <Route path="/" element={ <HomePage /> } />
-                    <Route path="/recipes" element={ <RecipesPage /> } />
-                    <Route path="/about" element={ <AboutPage /> } />
-                    <Route path="*" element={ <NotFound /> } />
-                </Routes>
-                <div>
-                    <Footer />
-                </div>
-            </DataProvider>
+            <UserProvider>
+                <DataProvider>
+                    <div>
+                        <NavBar />
+                    </div>
+                    <Routes>
+                        <Route path="/" element={ <HomePage /> } />
+                        <Route path="/recipes" element={ <RecipesPage /> } />
+                        <Route path="/about" element={ <AboutPage /> } />
+                        <Route path="*" element={ <NotFound /> } />
+                    </Routes>
+                    <div>
+                        <Footer />
+                    </div>
+                </DataProvider>
+            </UserProvider>
         </BrowserRouter>
     );
 };
