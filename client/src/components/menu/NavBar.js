@@ -14,7 +14,7 @@ const NavBar = () => {
   const searchSubmitHandler = (event) => {
     event.preventDefault();
     setSearchInput('');
-    navigate(`/recipes?q=${searchInput}`);
+    navigate(`/recipes?query=${searchInput}`);
   };
 
   return (

@@ -6,7 +6,7 @@ const SearchInputGroup = ({ value, onChangeHandler }) => {
     return (
         <InputGroup>
             <FormControl type='text' placeholder='Search for a recipe' value={value} onChange={e => onChangeHandler(e.target.value)}/>
-            <Button className='pt-1 pb-1 ps-2 pe-2' variant='secondary' type='submit'>
+            <Button className='pt-1 pb-1 ps-2 pe-2' type='submit'>
                 <Icon path={mdiMagnify} size={1} />
             </Button>
         </InputGroup>

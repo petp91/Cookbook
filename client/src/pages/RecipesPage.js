@@ -14,7 +14,7 @@ const RecipesPage = () => {
     const { canAddRecipe } = useContext(UserContext);
     let { recipes } = useContext(DataContext);
     const [searchParams] = useSearchParams();
-    const query = searchParams.get('q');
+    const query = searchParams.get('query');
     const [showSearch, setShowSearch] = useState(false);
 
     const [showAddRecipeModal, setShowAddRecipeModal] = useState(false);
@@ -59,7 +59,7 @@ const RecipesPage = () => {
                     <Icon path={mdiFilter} size={1} />
                 </Button>
 
-                <AdvancedSearch show={showSearch} defaultQuery={query} />
+                <AdvancedSearch show={showSearch} />
                 {query && <h2>Results for "{query}"</h2>}
             </div>
 
