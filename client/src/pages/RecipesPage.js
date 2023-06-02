@@ -8,14 +8,27 @@ import AdvancedSearch from "../components/AdvancedSearch";
 import RecipeCardsGrid from "../components/recipe/RecipeCardsGrid";
 import RecipeEditor from "../components/recipe/RecipeEditor";
 import { UserContext } from "../providers/UserProvider";
+import { DataContext } from "../providers/DataProvider";
 
 const RecipesPage = () => {
     const { canAddRecipe } = useContext(UserContext);
+    let { recipes } = useContext(DataContext);
     const [searchParams] = useSearchParams();
     const query = searchParams.get('q');
     const [showSearch, setShowSearch] = useState(false);
 
     const [showAddRecipeModal, setShowAddRecipeModal] = useState(false);
+
+
+    if (query) {
+        recipes = recipes.filter((recipe) => {
+            if (recipe.name.toLowerCase().includes(query.toLowerCase())) {
+                return true;
+            } else {
+                return false;
+            }
+        });
+    }
 
     return (
         <Container>
@@ -57,7 +70,7 @@ const RecipesPage = () => {
                 }}
             />
 
-            <RecipeCardsGrid />
+            <RecipeCardsGrid recipes={recipes} />
         </Container>
     );
 };

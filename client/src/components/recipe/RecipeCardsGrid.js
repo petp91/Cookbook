@@ -6,7 +6,7 @@ import Icon from '@mdi/react';
 import { mdiReload } from '@mdi/js';
 import { DataContext } from '../../providers/DataProvider';
 
-const RecipeCardsGrid = () => {
+const RecipeCardsGrid = ({ recipes }) => {
     const serverCall = useContext(DataContext);
 
     function serverResponseState() {
@@ -20,7 +20,7 @@ const RecipeCardsGrid = () => {
             case "success":
                 return (
                     <Row>
-                        {serverCall.recipes.map((recipe) => {
+                        {recipes.map((recipe) => {
                             return (
                                 <Col key={recipe._id} className='d-flex justify-content-center' md={6} lg={4} xl={4} xxl={3}>
                                     <RecipeCard recipe={recipe} />
