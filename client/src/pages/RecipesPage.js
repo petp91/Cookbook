@@ -1,13 +1,16 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Button, Container } from "react-bootstrap";
 import { useSearchParams } from "react-router-dom";
 import Icon from '@mdi/react';
 import { mdiFilter } from '@mdi/js';
+
 import AdvancedSearch from "../components/AdvancedSearch";
 import RecipeCardsGrid from "../components/recipe/RecipeCardsGrid";
 import RecipeEditor from "../components/recipe/RecipeEditor";
+import { UserContext } from "../providers/UserProvider";
 
 const RecipesPage = () => {
+    const { canAddRecipe } = useContext(UserContext);
     const [searchParams] = useSearchParams();
     const query = searchParams.get('q');
     const [showSearch, setShowSearch] = useState(false);
@@ -19,15 +22,21 @@ const RecipesPage = () => {
             <h1 className='container-fluid d-flex justify-content-center'>Recipe Page</h1>
 
             <div className="m-4">
-                <Button
-                    variant="btn btn-success"
-                    size="lg"
-                    onClick={()=> {
-                        setShowAddRecipeModal(true);
-                    }}
-                >
-                    Add recipe
-                </Button>
+
+                {/* show Add recipe button if user has permission */}
+                { canAddRecipe && 
+                    <Button
+                        variant="btn btn-success"
+                        size="lg"
+                        onClick={()=> {
+                            setShowAddRecipeModal(true);
+                        }}
+                    >
+                        Add recipe
+                    </Button>
+                }
+
+                {/* Toggle filters button */}
                 <Button
                     onClick={() => {
                         setShowSearch(!showSearch);

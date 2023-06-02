@@ -6,10 +6,13 @@ import ConfirmationDialog from '../ConfirmationDialog';
 import CallStateModal from "../CallStateModal";
 import RecipeEditor from './RecipeEditor';
 
-import Logo from '../../assets/logo-512px.png';
 import { DataContext } from '../../providers/DataProvider';
+import { UserContext } from '../../providers/UserProvider';
+
+import Logo from '../../assets/logo-512px.png';
 
 function RecipeModal({ recipe }) {
+    const { canEditRecipe, canDeleteRecipe } = useContext(UserContext);
     const [show, setShow] = useState(false);
     const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
     const handleShow = () => setShow(!show);
@@ -115,26 +118,33 @@ function RecipeModal({ recipe }) {
 
                     {/* Bottom buttons */}
                     <div style={{ display: 'flex', flexDirection: 'row'}}>
-                        <Button
-                            variant="primary"
-                            style={{marginTop: '2%', marginLeft:'25%', marginBottom: '2%'}}
-                            onClick={() => setShowEditRecipeModal(true)}
-                        >
-                            Edit Recipe
-                        </Button>
+                        {/* show Edit recipe button if user has permission */}
+                        { canEditRecipe &&
+                            <Button
+                                variant="primary"
+                                style={{marginTop: '2%', marginLeft:'25%', marginBottom: '2%'}}
+                                onClick={() => setShowEditRecipeModal(true)}
+                            >
+                                Edit Recipe
+                            </Button>
+                        }
+
                         <RecipeEditor
                             show={showEditRecipeModal}
                             recipe={recipe}
                             onHide={()=> { setShowEditRecipeModal(false) }}
                         />
 
-                        <Button
-                            variant="primary"
-                            style={{marginTop: '2%', marginLeft:'25%', marginBottom: '2%'}}
-                            onClick={() => setShowDeleteConfirmation(true)}
-                        >
-                            Delete
-                        </Button>
+                        {/* show Delete recipe button if user has permission */}
+                        { canDeleteRecipe &&
+                            <Button
+                                variant="primary"
+                                style={{marginTop: '2%', marginLeft:'25%', marginBottom: '2%'}}
+                                onClick={() => setShowDeleteConfirmation(true)}
+                            >
+                                Delete
+                            </Button>
+                        }
 
                         {/* Confirmation dialog for recipe deletion */}
                         <ConfirmationDialog

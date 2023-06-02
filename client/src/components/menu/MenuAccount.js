@@ -1,12 +1,14 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { Button, Form, Modal, Nav, NavDropdown, Dropdown, NavItem, NavLink, Alert } from 'react-bootstrap'
 
 import FormGroup from '../FormGroup';
 import OwnerIngredientsList from './OwnerIngredientsList';
+
 import { login } from '../../helpers/account-helper';
+import { UserContext } from '../../providers/UserProvider';
 
 const MenuAccount = () => {
-    const [loggedInUsername, setLoggedInUsername] = useState(null);
+    const { user, setUser, canDeleteIngredient } = useContext(UserContext);
     const [loginFailed, setLoginFailed] = useState(false);
 
     const [showLogin, setShowLogin] = useState(false);
@@ -30,8 +32,8 @@ const MenuAccount = () => {
 
         let result = login(loginFormData.username, loginFormData.password);
         if (result.success) {
-            // TODO set account context here
-            setLoggedInUsername(result.username);
+            delete result.success;
+            setUser(result);
 
             hideLogin();
         } else {
@@ -46,7 +48,7 @@ const MenuAccount = () => {
         setRegisterFormData(defaultRegisterData);
     };
     const logoutHandler = e => {
-        setLoggedInUsername(null);
+        setUser(null);
     };
 
     const hideLogin = () => {
@@ -62,14 +64,14 @@ const MenuAccount = () => {
 
     return (
         <>
-            { loggedInUsername ? (
+            { user ? (
                 // if user is logged in
                 <Nav className='ms-lg-3 align-items-center mt-2 mb-1 mt-lg-0 mb-lg-0'>
                     <Dropdown as={NavItem}>
-                        <Dropdown.Toggle as={NavLink}>Logged in as <b>{loggedInUsername}</b></Dropdown.Toggle>
+                        <Dropdown.Toggle as={NavLink}>Logged in as <b>{user.username}</b></Dropdown.Toggle>
                         {/* old Dropdown.Toggle attributes: as='a' className='nav-link' role='button' tabIndex={0} href='#' */}
                         <Dropdown.Menu>
-                            <OwnerIngredientsList />
+                            { canDeleteIngredient && <OwnerIngredientsList /> }
                             <NavDropdown.Item variant="log menu" onClick={logoutHandler}>Logout</NavDropdown.Item>
                         </Dropdown.Menu>
                     </Dropdown>
