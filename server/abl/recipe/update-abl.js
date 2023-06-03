@@ -1,4 +1,5 @@
 const recipeDao = require('../../dao/file_storage/recipe-dao');
+const ingredientDao = require('../../dao/file_storage/ingredient-dao');
 const recipeSchema = require('../../schema/recipe-schema');
 const helpers = require('../../helper/common-helper');
 
@@ -19,8 +20,20 @@ async function UpdateAbl(req, res) {
             return;
         }
 
-        // TODO validate that all referenced ingredients actually exist
-        // don't forget to document it in Application Model book
+        const allIngredients = await ingredientDao.getAllIngredients();
+
+        // validate that all ingredients exist
+        for (let recipeIngredient of updatedRecipe.ingredients) {
+            let matchedIngredient = allIngredients.find((ingredient) => ingredient._id === recipeIngredient.id);
+
+            // if it was not found
+            if (matchedIngredient === undefined) {
+                res.status(400).send({
+                    errors: [ `ingredient with id ${recipeIngredient.id} does not exist in a database` ]
+                });
+                return;
+            }
+        }
 
         let recipe = await recipeDao.updateRecipe(id, updatedRecipe);
         if (recipe) {
