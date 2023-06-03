@@ -10,6 +10,8 @@ import RecipeEditor from "../components/recipe/RecipeEditor";
 import { UserContext } from "../providers/UserProvider";
 import { DataContext } from "../providers/DataProvider";
 
+import '../layout/RecipePage.css';
+
 const RecipesPage = () => {
     const { canAddRecipe } = useContext(UserContext);
     let { recipes } = useContext(DataContext);
@@ -29,36 +31,36 @@ const RecipesPage = () => {
     return (
         <Container>
             <h1 className='container-fluid d-flex justify-content-center'>Recipe Page</h1>
+            <div className="container-top-btn">
+                <div className="m-4">
 
-            <div className="m-4">
+                    {/* show Add recipe button if user has permission */}
+                    {canAddRecipe &&
+                        <Button
+                            variant="btn btn-success"
+                            size="lg"
+                            onClick={() => {
+                                setShowAddRecipeModal(true);
+                            }}
+                        >
+                            Add recipe
+                        </Button>
+                    }
 
-                {/* show Add recipe button if user has permission */}
-                { canAddRecipe && 
+                    {/* Toggle filters button */}
                     <Button
-                        variant="btn btn-success"
-                        size="lg"
-                        onClick={()=> {
-                            setShowAddRecipeModal(true);
+                        onClick={() => {
+                            setShowSearch(!showSearch);
                         }}
+                        className='float-end'
                     >
-                        Add recipe
+                        <Icon path={mdiFilter} size={1} />
                     </Button>
-                }
 
-                {/* Toggle filters button */}
-                <Button
-                    onClick={() => {
-                        setShowSearch(!showSearch);
-                    }}
-                    className='float-end'
-                >
-                    <Icon path={mdiFilter} size={1} />
-                </Button>
-
-                <AdvancedSearch show={showSearch} />
-                {query && <h2>Results for "{query}"</h2>}
+                    <AdvancedSearch show={showSearch} />
+                    {query && <h2>Results for "{query}"</h2>}
+                </div>
             </div>
-
             <RecipeEditor
                 show={showAddRecipeModal}
                 onHide={() => {

@@ -343,5 +343,40 @@
       }
     ],
     "_id": "82a9ae100f392439"
+  },
+  {
+    "name": "Test Pizza",
+    "description": "Pizza ke smazání.",
+    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRaAZeAvb0SQKr1EYdQaszQMMEmnQcnUyWaCw&usqp=CAU",
+    "preparationLength": 90,
+    "finalAmount": 1,
+    "ingredients": [
+      {
+        "id": "fc1fb9b9f4766e63",
+        "amount": 150,
+        "units": "g"
+      },
+      {
+        "id": "c70f74d430932054",
+        "amount": 100,
+        "units": "ml"
+      },
+      {
+        "id": "f02fc2f5d73abeb8",
+        "amount": 100,
+        "units": "g"
+      },
+      {
+        "id": "197d1ac57738f812",
+        "amount": 25,
+        "units": "g"
+      },
+      {
+        "id": "1fb3aa7708b7100a",
+        "amount": 30,
+        "units": "ml"
+      }
+    ],
+    "_id": "01063b9053bd1603"
   }
 ]

@@ -25,9 +25,11 @@ const NavBar = () => {
         <li><NavLink to='/about' className='nav-link'>About</NavLink></li>
       </ul>
       <div className="nav-form">
-        <Form onSubmit={searchSubmitHandler} className='mt-3 mb-1 mt-lg-0 mb-lg-0'>
-          <SearchInputGroup value={searchInput} onChangeHandler={setSearchInput} />
+        <div className='nav-form-search'>
+        <Form onSubmit={searchSubmitHandler}>
+          <SearchInputGroup className='nav-form-search-btn' value={searchInput} onChangeHandler={setSearchInput} />
         </Form>
+        </div>
         <MenuAccount />
       </div>
     </nav>
