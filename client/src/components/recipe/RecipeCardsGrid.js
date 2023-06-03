@@ -32,7 +32,9 @@ const RecipeCardsGrid = ({ recipes }) => {
             case "error":
                 return (
                     <div className="text-center">
-                        <h2 className="text-danger">Server not responding...</h2>
+                        <h2 className="text-danger">
+                            { serverCall.error?.errors ? serverCall.error.errors[0] : "Server not responding..."}
+                        </h2>
                         <Button className="mb-5" onClick={serverCall.reload}>
                             <Icon path={mdiReload} size={1} />
                         </Button>
