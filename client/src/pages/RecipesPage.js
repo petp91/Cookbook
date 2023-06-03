@@ -63,7 +63,7 @@ const RecipesPage = () => {
 
 
     return (
-        <Container>
+        <Container className="pb-4">
             <h1 className='container-fluid d-flex justify-content-center'>Recipe Page</h1>
             <div className="container-top-btn">
                 <div className="m-4">
