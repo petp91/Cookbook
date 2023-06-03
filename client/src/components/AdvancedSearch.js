@@ -80,6 +80,7 @@ const AdvancedSearch = ({ show }) => {
                                         <FormGroup
                                             label="Min. preparation length (minutes)"
                                             type="number"
+                                            min="1"
                                             value={searchData.minPrepLength}
                                             setValue={(value) => {
                                                 setSearchData({...searchData, minPrepLength: value});
@@ -90,6 +91,7 @@ const AdvancedSearch = ({ show }) => {
                                         <FormGroup
                                             label="Max. preparation length (minutes)"
                                             type="number"
+                                            min="1"
                                             value={searchData.maxPrepLength}
                                             setValue={(value) => {
                                                 setSearchData({...searchData, maxPrepLength: value});
