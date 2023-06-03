@@ -7,6 +7,8 @@ import OwnerIngredientsList from './OwnerIngredientsList';
 import { login } from '../../helpers/account-helper';
 import { UserContext } from '../../providers/UserProvider';
 
+import '../../layout/NavBar.css';
+
 const MenuAccount = () => {
     const { user, setUser, canDeleteIngredient } = useContext(UserContext);
     const [loginFailed, setLoginFailed] = useState(false);
@@ -66,7 +68,7 @@ const MenuAccount = () => {
         <>
             { user ? (
                 // if user is logged in
-                <Nav className='ms-lg-3 align-items-center mt-2 mb-1 mt-lg-0 mb-lg-0'>
+                <Nav className='nav-form-log-btn'>
                     <Dropdown as={NavItem}>
                         <Dropdown.Toggle as={NavLink}>Logged in as <b>{user.username}</b></Dropdown.Toggle>
                         {/* old Dropdown.Toggle attributes: as='a' className='nav-link' role='button' tabIndex={0} href='#' */}
@@ -78,9 +80,9 @@ const MenuAccount = () => {
                 </Nav>
             ) : (
                 // if user is not logged in
-                <div className='d-flex justify-content-center mt-3 mb-2 mt-lg-0 mb-lg-0'>
-                    <Button className='ms-lg-3' onClick={() => setShowLogin(true)}>Login</Button>
-                    <Button variant='secondary' className='ms-2' onClick={() => setShowRegister(true)}>Register</Button>
+                <div className='nav-form-log-btn'>
+                    <Button  onClick={() => setShowLogin(true)}>Login</Button>
+                    <Button  variant='secondary'  onClick={() => setShowRegister(true)}>Register</Button>
                 </div>
             )}
 
