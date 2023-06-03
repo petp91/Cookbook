@@ -90,6 +90,7 @@ const RecipesPage = () => {
                     >
                         <Icon path={mdiFilter} size={1} />
                     </Button>
+                    <div className="clearfix"></div>
 
                     <AdvancedSearch show={showSearch} />
                     {query && <h2>Results for "{query}"</h2>}
