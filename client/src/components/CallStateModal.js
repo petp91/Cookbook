@@ -1,6 +1,8 @@
 import {Modal, Button, Spinner} from "react-bootstrap";
 
 const CallStateModal = (props) => {
+    const error = props.error || "Server not responding";
+
     function serverResponseState() {
         switch (props.stateOfServer) {
             case "pending":
@@ -26,8 +28,7 @@ const CallStateModal = (props) => {
                     <>
                         <Modal.Body>
                             <div className="text-center text-danger">
-                                <h3>Server not responding</h3>
-                                <h3>Not done!</h3>
+                                <h3>{error}</h3>
                             </div>
                         </Modal.Body>
                         <Modal.Footer>

@@ -15,6 +15,7 @@ const OwnerIngredientsList = () => {
   const handleShow = () => setShow(true);
   const [deleteId, setDeleteId] = useState(null);
   const [stateOfServer, setStateOfServer] = useState("");
+  const [serverError, setServerError] = useState(null);
 
   const handleDelete = (id) => {
     setDeleteId(id);
@@ -22,18 +23,19 @@ const OwnerIngredientsList = () => {
   }
 
   const handleDeleteConfirm = () => {
+    setShowDeleteConfirmation(false);
+
     setStateOfServer("pending");
+    setServerError(null);
 
     axios.delete(`${process.env.REACT_APP_BACKEND}/api/ingredients/${deleteId}`)
       .then(response => {
-        console.log('deleted', response);
         removeIngredientById(deleteId);
-        setShowDeleteConfirmation(false);
         setStateOfServer("success");
       })
       .catch(error => {
-        console.log(error);
         setStateOfServer("error");
+        setServerError(error?.response?.data?.errors?.[0]);
       })
   }
 
@@ -109,6 +111,7 @@ const OwnerIngredientsList = () => {
       <CallStateModal
         show={stateOfServer === "pending" || stateOfServer === "success" || stateOfServer === "error"}
         stateOfServer={stateOfServer}
+        error={serverError}
         onSuccess={() => setStateOfServer("")}
         onCancel={() => setStateOfServer("")}
       />
