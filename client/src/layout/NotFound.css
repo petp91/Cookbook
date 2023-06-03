@@ -1,0 +1,20 @@
+.vertical-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.container-notFound {
+  max-width: 80%;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+}
+
+@media (max-width: 1050px) {
+  .container-notFound {
+      max-width: 90%;
+      padding: 10px;
+  }
+}

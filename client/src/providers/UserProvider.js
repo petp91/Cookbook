@@ -3,6 +3,7 @@ import { createContext, useState } from "react"
 const UserContext = createContext();
 
 function getUserFromStorage() {
+    // retrieve logged in user from storage
     return JSON.parse(window.sessionStorage.getItem('user'));
 }
 
@@ -11,6 +12,8 @@ function UserProvider({ children }) {
 
     function setUser(user) {
         setUserState(user);
+
+        // store logged in user in storage
         if (user) {
             window.sessionStorage.setItem('user', JSON.stringify(user));
         } else {

@@ -6,9 +6,10 @@
     height: 6.8rem;
     overflow: hidden;
     height: 130px;
+    white-space: pre-line;
 }
 
-.recipeCard .card-title{
+.recipeCard .card-title {
     font-size: 0.9rem;
     font-weight: bold;
     padding: 0.5rem;

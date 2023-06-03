@@ -54,10 +54,10 @@ const AdvancedSearch = ({ show }) => {
 
     return (
         <div className="pt-3">
-            <Collapse in={show}>
-                <Form onSubmit={submitHandler}>
-                    <Row className="justify-content-center">
-                        <Col xs={12} lg={10}>
+            <Row className="justify-content-center">
+                <Col xs={12} lg={10}>
+                    <Collapse in={show}>
+                        <Form onSubmit={submitHandler}>
                             <Alert variant="secondary" className="pt-4 ps-4 pe-4">
 
                                 {/* Search input */}
@@ -80,6 +80,7 @@ const AdvancedSearch = ({ show }) => {
                                         <FormGroup
                                             label="Min. preparation length (minutes)"
                                             type="number"
+                                            min="1"
                                             value={searchData.minPrepLength}
                                             setValue={(value) => {
                                                 setSearchData({...searchData, minPrepLength: value});
@@ -90,6 +91,7 @@ const AdvancedSearch = ({ show }) => {
                                         <FormGroup
                                             label="Max. preparation length (minutes)"
                                             type="number"
+                                            min="1"
                                             value={searchData.maxPrepLength}
                                             setValue={(value) => {
                                                 setSearchData({...searchData, maxPrepLength: value});
@@ -117,10 +119,10 @@ const AdvancedSearch = ({ show }) => {
                                 <Button type="submit" className="mt-4 float-end">Search</Button>
                                 <div className="clearfix"></div>
                             </Alert>
-                        </Col>
-                    </Row>
-                </Form>
-            </Collapse>
+                        </Form>
+                    </Collapse>
+                </Col>
+            </Row>
         </div>
     )
 }

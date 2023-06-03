@@ -1,5 +1,5 @@
 import { useState, useContext } from 'react';
-import { Button, Modal, ListGroup, NavDropdown } from 'react-bootstrap';
+import { Button, Modal, ListGroup, NavDropdown, Spinner } from 'react-bootstrap';
 import axios from 'axios';
 import ConfirmationDialog from '../ConfirmationDialog';
 import CallStateModal from '../CallStateModal';
@@ -11,13 +11,14 @@ import { mdiTrashCanOutline } from '@mdi/js';
 import '../../layout/OwnerIngredientsList.css'
 
 const OwnerIngredientsList = () => {
-  const { ingredients, removeIngredientById } = useContext(DataContext);
+  const { ingredients, removeIngredientById, state, error } = useContext(DataContext);
   const [show, setShow] = useState(false);
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const [deleteId, setDeleteId] = useState(null);
   const [stateOfServer, setStateOfServer] = useState("");
+  const [serverError, setServerError] = useState(null);
 
   const handleDelete = (id) => {
     setDeleteId(id);
@@ -25,24 +26,63 @@ const OwnerIngredientsList = () => {
   }
 
   const handleDeleteConfirm = () => {
+    setShowDeleteConfirmation(false);
+
     setStateOfServer("pending");
+    setServerError(null);
 
     axios.delete(`${process.env.REACT_APP_BACKEND}/api/ingredients/${deleteId}`)
       .then(response => {
-        console.log('deleted', response);
         removeIngredientById(deleteId);
-        setShowDeleteConfirmation(false);
         setStateOfServer("success");
       })
       .catch(error => {
-        console.log(error);
         setStateOfServer("error");
+        setServerError(error?.response?.data?.errors?.[0]);
       })
   }
 
   const handleDeleteCancel = () => {
     setShowDeleteConfirmation(false);
   }
+
+  const renderIngredients = () => {
+    switch (state) {
+      case "pending":
+        return (
+          <div className="text-center">
+            <Spinner />
+          </div>
+        );
+      case "success":
+        if (ingredients.length === 0) {
+          return (
+            <div className="text-center">
+              <p>No ingredients added yet.</p>
+            </div>
+          );
+        } else {
+          return (
+            <ListGroup>
+              {ingredients.map(ingredient => (
+                <ListGroup.Item key={ingredient._id}>
+                  {ingredient.name}
+                  <Icon className="closeBtn" onClick={() => handleDelete(ingredient._id)} path={mdiTrashCanOutline} size={1} />
+                </ListGroup.Item>
+              ))}
+            </ListGroup>
+          );
+        }
+      case "error":
+        return (
+          <h3 className="text-danger text-center">
+              { error?.errors ? error.errors[0] : "Server not responding..."}
+          </h3>
+        );
+      default:
+        return null;
+    }
+  };
 
   return (
     <>
@@ -53,19 +93,7 @@ const OwnerIngredientsList = () => {
           <Modal.Title>Ingredients</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {ingredients.length === 0 ? (
-            <p>No ingredients added yet.</p>
-          ) : (
-            // display the list of ingredients
-            <ListGroup>
-              {ingredients.map(ingredient => (
-                <ListGroup.Item key={ingredient._id}>
-                  {ingredient.name}    
-                  <Icon className="closeBtn" onClick={() => handleDelete(ingredient._id)} path={mdiTrashCanOutline} size={1} />
-                </ListGroup.Item>
-              ))}
-            </ListGroup>
-          )}
+          {renderIngredients()}
         </Modal.Body>
         <Modal.Footer>
           <Button onClick={handleClose}>
@@ -86,6 +114,7 @@ const OwnerIngredientsList = () => {
       <CallStateModal
         show={stateOfServer === "pending" || stateOfServer === "success" || stateOfServer === "error"}
         stateOfServer={stateOfServer}
+        error={serverError}
         onSuccess={() => setStateOfServer("")}
         onCancel={() => setStateOfServer("")}
       />
