@@ -93,6 +93,10 @@
 
 /* Desktop Styles */
 @media (min-width: 1050px) {
+  .home-body{
+    margin-left: 10%;
+    margin-right: 10%;
+  }
   .title {
     font-size: 32px;
     margin-bottom: 20px;
