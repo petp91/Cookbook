@@ -14,6 +14,7 @@
   margin-right: auto;
   margin-bottom: 0;
   padding: 0;
+  margin-left: 10%
 }
 
 .nav-links li {
@@ -27,6 +28,7 @@
   font-weight: 600;
   letter-spacing: 1px;
   transition: all 0.3s ease;
+  
 }
 
 .nav-links li a:hover {
@@ -44,6 +46,7 @@
 .nav-form {
   display: flex;
   align-items: center;
+  margin-right: 10%;
 }
 
 .nav-form input[type="text"] {
@@ -76,7 +79,7 @@
   color: #d7d7d7;
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 1050px) {
   .navbar {
     flex-direction: column;
     align-items: stretch;
@@ -88,6 +91,7 @@
     margin-bottom: 10px;
     flex-direction: column;
     align-items: center;
+    margin-left: 0;
   }
 
   .nav-links li {
@@ -98,6 +102,7 @@
   .nav-form {
     flex-direction: column;
     align-items: center;
+    margin-right: 0;
   }
 
   .nav-form-search-btn button {
@@ -113,3 +118,9 @@
   }
 
 }
+
+/* @media screen and (min-width: 900) {
+  .nav-links {
+    margin-left: 200px
+  }
+} */
