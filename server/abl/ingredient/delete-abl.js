@@ -17,15 +17,7 @@ async function DeleteAbl(req, res) {
                 return;
             }
 
-            
-
-
-        })
-
-        
-        console.log(matchedIngredient);
-
-
+        });
 
         if (matchedIngredient === undefined) {
 
@@ -39,7 +31,6 @@ async function DeleteAbl(req, res) {
                 });
             }
         } else {
-            console.error("Ingredient is currently used in a recipe, deletion failed");
             res.status(400).send({
                 errors: ["Ingredient is currently used in a recipe, deletion failed"]
             });
