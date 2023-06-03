@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import { Button, Container } from "react-bootstrap";
 import { useSearchParams } from "react-router-dom";
 import Icon from '@mdi/react';
-import { mdiFilter } from '@mdi/js';
+import { mdiFilter} from '@mdi/js';
 
 import AdvancedSearch from "../components/AdvancedSearch";
 import RecipeCardsGrid from "../components/recipe/RecipeCardsGrid";
@@ -17,16 +17,50 @@ const RecipesPage = () => {
     let { recipes } = useContext(DataContext);
     const [searchParams] = useSearchParams();
     const query = searchParams.get('query');
+    const minPrepLength = searchParams.get('minPrepLength');
+    const maxPrepLength = searchParams.get('maxPrepLength');
+    const sort = searchParams.get('sort')
     const [showSearch, setShowSearch] = useState(false);
 
     const [showAddRecipeModal, setShowAddRecipeModal] = useState(false);
-
 
     if (query) {
         recipes = recipes.filter((recipe) => {
             return recipe.name.toLowerCase().includes(query.toLowerCase());
         });
     }
+
+    if (maxPrepLength !== undefined || minPrepLength !== undefined) {
+        recipes = recipes.filter((recipe) => {
+            return (recipe.preparationLength >= (minPrepLength || 0) && recipe.preparationLength <= (maxPrepLength || Infinity));
+        });
+    }
+
+    function sortByNameAsc (a, b) {
+        const nameA = a.name.toLowerCase();
+        const nameB = b.name.toLowerCase();
+      
+        return nameA.localeCompare(nameB, "cs", { sensitivity: "base" });
+    }
+
+    if (sort === 'nameAsc') {
+        recipes.sort(sortByNameAsc);
+    }
+    if (sort === 'nameDesc') {
+        recipes.sort(sortByNameAsc).reverse()
+    }
+
+    function sortByPrepLengthAsc(a, b) {
+        return a.preparationLength - b.preparationLength;
+      }
+    
+    if (sort === 'prepLengthAsc') {
+        recipes.sort(sortByPrepLengthAsc);
+      }
+    if (sort === 'prepLengthDesc') {
+        recipes.sort(sortByPrepLengthAsc).reverse();
+      }
+
 
     return (
         <Container>
