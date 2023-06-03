@@ -1,9 +1,12 @@
 import { useState, useContext } from 'react';
-import { Button, Modal, ListGroup, CloseButton, NavDropdown } from 'react-bootstrap';
+import { Button, Modal, ListGroup, NavDropdown } from 'react-bootstrap';
 import axios from 'axios';
 import ConfirmationDialog from '../ConfirmationDialog';
 import CallStateModal from '../CallStateModal';
 import { DataContext } from '../../providers/DataProvider';
+import Icon from '@mdi/react';
+import { mdiTrashCanOutline } from '@mdi/js';
+
 
 import '../../layout/OwnerIngredientsList.css'
 
@@ -57,8 +60,8 @@ const OwnerIngredientsList = () => {
             <ListGroup>
               {ingredients.map(ingredient => (
                 <ListGroup.Item key={ingredient._id}>
-                  {ingredient.name}
-                  <CloseButton className="closeBtn" onClick={() => handleDelete(ingredient._id)} />
+                  {ingredient.name}    
+                  <Icon className="closeBtn" onClick={() => handleDelete(ingredient._id)} path={mdiTrashCanOutline} size={1} />
                 </ListGroup.Item>
               ))}
             </ListGroup>
