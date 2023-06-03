@@ -14,7 +14,7 @@ import '../layout/RecipePage.css';
 
 const RecipesPage = () => {
     const { canAddRecipe } = useContext(UserContext);
-    let { recipes } = useContext(DataContext);
+    let { state, recipes } = useContext(DataContext);
     const [searchParams] = useSearchParams();
     const query = searchParams.get('query');
     const minPrepLength = searchParams.get('minPrepLength');
@@ -24,43 +24,45 @@ const RecipesPage = () => {
 
     const [showAddRecipeModal, setShowAddRecipeModal] = useState(false);
 
-    if (query) {
-        recipes = recipes.filter((recipe) => {
-            return recipe.name.toLowerCase().includes(query.toLowerCase());
-        });
-    }
-
-    if (maxPrepLength !== undefined || minPrepLength !== undefined) {
-        recipes = recipes.filter((recipe) => {
-            return (recipe.preparationLength >= (minPrepLength || 0) && recipe.preparationLength <= (maxPrepLength || Infinity));
-        });
-    }
-
-    function sortByNameAsc (a, b) {
-        const nameA = a.name.toLowerCase();
-        const nameB = b.name.toLowerCase();
-      
-        return nameA.localeCompare(nameB, "cs", { sensitivity: "base" });
-    }
-
-    if (sort === 'nameAsc') {
-        recipes.sort(sortByNameAsc);
-    }
-    if (sort === 'nameDesc') {
-        recipes.sort(sortByNameAsc).reverse()
-    }
-
-    function sortByPrepLengthAsc(a, b) {
-        return a.preparationLength - b.preparationLength;
-      }
+    // filter only when recipes are loaded
+    if (state === 'success') {
+        if (query) {
+            recipes = recipes.filter((recipe) => {
+                return recipe.name.toLowerCase().includes(query.toLowerCase());
+            });
+        }
     
-    if (sort === 'prepLengthAsc') {
-        recipes.sort(sortByPrepLengthAsc);
-      }
-    if (sort === 'prepLengthDesc') {
-        recipes.sort(sortByPrepLengthAsc).reverse();
-      }
-
+        if (maxPrepLength || minPrepLength) {
+            recipes = recipes.filter((recipe) => {
+                return (recipe.preparationLength >= (minPrepLength || 0) && recipe.preparationLength <= (maxPrepLength || Infinity));
+            });
+        }
+    
+        function sortByNameAsc (a, b) {
+            const nameA = a.name.toLowerCase();
+            const nameB = b.name.toLowerCase();
+          
+            return nameA.localeCompare(nameB, "cs", { sensitivity: "base" });
+        }
+    
+        if (sort === 'nameAsc') {
+            recipes.sort(sortByNameAsc);
+        }
+        if (sort === 'nameDesc') {
+            recipes.sort(sortByNameAsc).reverse()
+        }
+    
+        function sortByPrepLengthAsc(a, b) {
+            return a.preparationLength - b.preparationLength;
+          }
+        
+        if (sort === 'prepLengthAsc') {
+            recipes.sort(sortByPrepLengthAsc);
+          }
+        if (sort === 'prepLengthDesc') {
+            recipes.sort(sortByPrepLengthAsc).reverse();
+          }
+    }
 
     return (
         <Container className="pb-4">
