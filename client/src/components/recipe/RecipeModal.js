@@ -81,7 +81,7 @@ function RecipeModal({ recipe }) {
                     <Modal.Title>Details</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <div style={{ display: 'flex', flexDirection: 'row' }}>
+                    <div style={{ display: 'flex', flexDirection: 'row', flexwidth: '100%', justifyContent: 'center' , flexWrap: 'wrap'}}>
                         {/* Left-side (image) */}
                         <div>
                             <img
@@ -92,20 +92,20 @@ function RecipeModal({ recipe }) {
                         </div>
 
                         {/* Right-side (recipe name, list of ingredients, description) */}
-                        <div style={{ marginLeft: '15px', backgroundColor:'#FFFFFF', width:'66%'}}>
+                        <div style={{ marginLeft: '15px', backgroundColor:'#FFFFFF', width:'62%'}}>
                             <h1 style={{textAlign: "center"}}>{recipe.name}</h1>
                             <ListGroup as="ul">
                                 {getListOfIngredients()}
                             </ListGroup>
 
-                            <div style={{marginTop:'20px'}}>
-                                <label>Počet porcí</label>
+                            <div style={{marginTop:'20px', flexFlow: 'column wrap'}}>
+                                <label>Number of servings:</label>
                                 <input
                                     type="number"
-                                    className="col-sm-2 col-form-label"
+                                    className="col-sm-6 col-lg-3 col-xl-2 col-form-label"
                                     id="UserDefinedServingsNumber"
-                                    onChange={e => { setServingsNumber(e.target.value) }}
-                                    value={servingsNumber}
+                                    onChange={e => {if (e.target.value > 0) {setServingsNumber(e.target.value)}}}
+                                    value={servingsNumber} required={1}
                                     style={{marginLeft:'10px'}}
                                     placeholder={recipe.finalAmount}
                                 >
@@ -117,12 +117,12 @@ function RecipeModal({ recipe }) {
                     </div>
 
                     {/* Bottom buttons */}
-                    <div style={{ display: 'flex', flexDirection: 'row'}}>
+                    <div style={{ display: 'flex', flexDirection: 'row' , justifyContent: 'center'}}>
                         {/* show Edit recipe button if user has permission */}
                         { canEditRecipe &&
                             <Button
                                 variant="primary"
-                                style={{marginTop: '2%', marginLeft:'25%', marginBottom: '2%'}}
+                                style={{marginTop: '2%', marginBottom: '2%'}}
                                 onClick={() => setShowEditRecipeModal(true)}
                             >
                                 Edit Recipe
