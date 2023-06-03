@@ -68,7 +68,6 @@ function RecipeModal({ recipe }) {
                 </ListGroup.Item> 
             );
         }
-
         return returnListArray;
     }
 
@@ -96,6 +95,12 @@ function RecipeModal({ recipe }) {
                             <h1 style={{textAlign: "center"}}>{recipe.name}</h1>
                             <ListGroup as="ul">
                                 {getListOfIngredients()}
+                            </ListGroup>
+
+                            <ListGroup as="ul" style={{width: '50%', marginTop: '25px'}}>
+                            <ListGroup.Item as="li">
+                                <Col >{"Preparation Length: " + recipe.preparationLength + " Minutes"}</Col>
+                            </ListGroup.Item>
                             </ListGroup>
 
                             <div style={{marginTop:'20px', flexFlow: 'column wrap'}}>
