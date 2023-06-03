@@ -117,7 +117,7 @@ function RecipeModal({ recipe }) {
                                 </input>
                             </div>
 
-                            <p style={{marginTop: '5%'}}>{recipe.description}</p>
+                            <p style={{marginTop: '5%', whiteSpace: 'pre-line'}}>{recipe.description}</p>
                         </div>
                     </div>
 
