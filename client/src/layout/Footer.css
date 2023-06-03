@@ -35,7 +35,7 @@ footer p {
   margin: 0;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 1050px) {
   .footer-links {
     flex-wrap: wrap;
     justify-content: center; /* Center links on mobile */
