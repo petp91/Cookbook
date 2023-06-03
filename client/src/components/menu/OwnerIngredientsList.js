@@ -1,5 +1,5 @@
 import { useState, useContext } from 'react';
-import { Button, Modal, ListGroup, CloseButton, NavDropdown } from 'react-bootstrap';
+import { Button, Modal, ListGroup, CloseButton, NavDropdown, Spinner } from 'react-bootstrap';
 import axios from 'axios';
 import ConfirmationDialog from '../ConfirmationDialog';
 import CallStateModal from '../CallStateModal';
@@ -8,7 +8,7 @@ import { DataContext } from '../../providers/DataProvider';
 import '../../layout/OwnerIngredientsList.css'
 
 const OwnerIngredientsList = () => {
-  const { ingredients, removeIngredientById } = useContext(DataContext);
+  const { ingredients, removeIngredientById, state, error } = useContext(DataContext);
   const [show, setShow] = useState(false);
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
   const handleClose = () => setShow(false);
@@ -41,6 +41,44 @@ const OwnerIngredientsList = () => {
     setShowDeleteConfirmation(false);
   }
 
+  const renderIngredients = () => {
+    switch (state) {
+      case "pending":
+        return (
+          <div className="text-center">
+            <Spinner />
+          </div>
+        );
+      case "success":
+        if (ingredients.length === 0) {
+          return (
+            <div className="text-center">
+              <p>No ingredients added yet.</p>
+            </div>
+          );
+        } else {
+          return (
+            <ListGroup>
+              {ingredients.map(ingredient => (
+                <ListGroup.Item key={ingredient._id}>
+                  {ingredient.name}
+                  <CloseButton className="closeBtn" onClick={() => handleDelete(ingredient._id)} />
+                </ListGroup.Item>
+              ))}
+            </ListGroup>
+          );
+        }
+      case "error":
+        return (
+          <h3 className="text-danger text-center">
+              { error?.errors ? error.errors[0] : "Server not responding..."}
+          </h3>
+        );
+      default:
+        return null;
+    }
+  };
+
   return (
     <>
       <NavDropdown.Item onClick={handleShow}>Ingredients</NavDropdown.Item>
@@ -50,19 +88,7 @@ const OwnerIngredientsList = () => {
           <Modal.Title>Ingredients</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {ingredients.length === 0 ? (
-            <p>No ingredients added yet.</p>
-          ) : (
-            // display the list of ingredients
-            <ListGroup>
-              {ingredients.map(ingredient => (
-                <ListGroup.Item key={ingredient._id}>
-                  {ingredient.name}
-                  <CloseButton className="closeBtn" onClick={() => handleDelete(ingredient._id)} />
-                </ListGroup.Item>
-              ))}
-            </ListGroup>
-          )}
+          {renderIngredients()}
         </Modal.Body>
         <Modal.Footer>
           <Button onClick={handleClose}>
