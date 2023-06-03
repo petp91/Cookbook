@@ -235,6 +235,11 @@
         "id": "b8c55f234035edbb",
         "amount": 80,
         "units": "g"
+      },
+      {
+        "id": "eccde1f42cebdb61",
+        "amount": 50,
+        "units": "g"
       }
     ],
     "_id": "0586c0e4549e1b72"
@@ -292,7 +297,7 @@
         "units": "ml"
       },
       {
-        "id": "eccde1f42cebdb61",
+        "id": "eccde1f42cebdb69",
         "amount": 50,
         "units": "g"
       },
